@@ -78,10 +78,13 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .y{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
 .m{margin-top:-8px;font-size:13.5px;color:var(--muted)}
 
-.series{margin-top:88px}
-.series-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;align-items:baseline;margin-bottom:20px}
-.series-head .t{grid-column:1 / 7;font-size:19px;font-weight:700}
-.series-head .m{grid-column:7 / 13;justify-self:end;margin:0}
+/* 여러 편으로 된 작업: 상세 화면 안에서 편 고르기 */
+.eps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ep{display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;color:var(--fg);font:inherit;text-align:left;cursor:pointer;opacity:.45;transition:opacity .2s ease;min-width:0}
+.ep:hover,.ep[aria-pressed="true"]{opacity:1}
+.ep[aria-pressed="true"] .thumb img{filter:none}
+.ep .et{font-size:13px;line-height:1.4}
+.ep[aria-pressed="true"] .et{font-weight:600}
 
 /* ---------- index view ---------- */
 .index{display:none}
@@ -93,7 +96,7 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .index:hover .index-row{opacity:.3}
 .index .index-row:hover{opacity:1}
 body.view-index .index{display:block}
-body.view-index #workGrid, body.view-index #seriesWrap, body.view-index #films{display:none}
+body.view-index #workGrid{display:none}
 .peek{position:fixed;left:0;top:0;width:320px;aspect-ratio:16/9;pointer-events:none;z-index:8;background:var(--tile);overflow:hidden;opacity:0;transition:opacity .15s ease}
 .peek img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .peek.on{opacity:1}
@@ -110,11 +113,12 @@ body.view-index #workGrid, body.view-index #seriesWrap, body.view-index #films{d
 .about h3{margin:0 0 16px;font-size:13px;font-weight:500;color:var(--muted)}
 .about ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:14.5px}
 .about li span{display:block;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.about li small{display:block;margin-top:2px;color:var(--muted);font-size:13px}
 
 .doc{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:20px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line)}
 .doc:first-child{padding-top:0}
-.doc .ko{grid-column:1 / 4;font-weight:700;font-size:clamp(20px,2vw,26px);letter-spacing:-.025em;line-height:1.2}
-.doc .en{display:block;font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;margin-top:4px}
+.doc .ko{grid-column:1 / 4;font-weight:600;font-size:17px;letter-spacing:-.01em;line-height:1.35}
+.doc .en{display:block;font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;margin-top:2px}
 .doc .ds{grid-column:4 / 8;font-size:14px;color:var(--muted)}
 .doc .btn{grid-column:8 / 10;justify-self:end}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 20px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:inherit;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
@@ -254,6 +258,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   dialog{width:100vw;max-height:100vh;height:100%}
   .d-in{padding:20px var(--gut-r) 32px var(--gut)}
   .stills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .eps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion: reduce){.thumb img,.index-row,.peek{transition:none}a.tile:hover img{transform:none}}
 
@@ -289,34 +294,24 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
     <div class="hero-meta">
       <div class="who" id="who"></div>
       <p class="say" id="introText"></p>
-      <div class="go">
-        <a class="u" href="#documents">이력서 · 포트폴리오 받기 →</a>
-        <span id="heroMail" style="color:var(--muted)"></span>
-      </div>
+      <div class="go"><span id="heroMail" style="color:var(--muted)"></span></div>
     </div>
   </div>
 
   <section id="work" class="wrap">
     <div class="sec-head">
-      <h2>Selected Work</h2>
-      <span class="note">광고 · 뮤직비디오 · 콘서트 필름</span>
+      <h2>Work</h2>
       <div class="tools" role="group" aria-label="보기 방식">
         <button class="toggle" type="button" data-view="grid" aria-pressed="true">Grid</button>
         <button class="toggle" type="button" data-view="index" aria-pressed="false">Index</button>
       </div>
     </div>
     <div class="grid cols" id="workGrid"></div>
-    <div id="seriesWrap"></div>
     <div class="index" id="indexList"></div>
   </section>
 
-  <section id="films" class="wrap">
-    <div class="sec-head"><h2>Films</h2><span class="note">YeahFilm 자체 제작</span></div>
-    <div class="grid cols" id="filmGrid"></div>
-  </section>
-
   <section id="archive" class="wrap">
-    <div class="sec-head"><h2>Archive</h2><span class="note">그 밖의 참여 작업</span></div>
+    <div class="sec-head"><h2>Archive</h2></div>
     <div class="split"><div class="body" id="archiveList"></div></div>
   </section>
 
@@ -326,7 +321,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   </section>
 
   <section id="documents" class="wrap">
-    <div class="sec-head"><h2>Download</h2><span class="note">사이트 내용으로 자동 작성되는 PDF</span></div>
+    <div class="sec-head"><h2>Download</h2></div>
     <div class="split"><div class="body" id="docList"></div></div>
   </section>
 </main>
@@ -344,9 +339,9 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   <div class="doc-bar wrap">
     <a class="back" href="#documents">← 사이트로</a>
     <nav class="doc-tabs" aria-label="문서 선택">
-      <a href="#resume" data-doc="resume">이력서</a>
-      <a href="#career" data-doc="career">경력기술서</a>
-      <a href="#portfolio" data-doc="portfolio">포트폴리오</a>
+      <a href="#resume" data-doc="resume">Resume</a>
+      <a href="#career" data-doc="career">Career</a>
+      <a href="#portfolio" data-doc="portfolio">Portfolio</a>
     </nav>
     <div id="docAction"></div>
   </div>
@@ -360,6 +355,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
       <button class="d-close" id="dClose" type="button">닫기 ✕</button>
     </div>
     <div class="player" id="dPlayer"></div>
+    <div class="eps" id="dEps" hidden></div>
     <p class="d-desc" id="dDesc"></p>
     <p class="d-label">Stills</p>
     <div class="stills" id="dStills"></div>
@@ -378,23 +374,21 @@ const ytUrl = id => "https://www.youtube.com/watch?v=" + id;
 const YTQ = ["maxresdefault", "sddefault", "hqdefault"];
 const ytThumb = id => "https://i.ytimg.com/vi/" + id + "/" + YTQ[0] + ".jpg";
 const linkOf = w => w.yt ? ytUrl(w.yt) : (w.href || "");
-const imageOf = w => w.thumb || (w.stills && w.stills[0]) || (w.yt ? ytThumb(w.yt) : "");
+const imageOf = w => w.thumb || (w.stills && w.stills[0]) || (w.yt ? ytThumb(w.yt) : "")
+  || (w.episodes ? (w.episodes.map(e => imageOf(e)).find(Boolean) || "") : "");
 const join = a => a.filter(Boolean).join(" · ");
 let framed = false;
 try { framed = window.self !== window.top; } catch (e) { framed = true; }
 
 const DOCS = [
-  { id: "resume", ko: "이력서", en: "Resume", desc: "학력, 경력, 수상, 자격을 A4 한 장으로", page: "@page{size:A4;margin:16mm 17mm}" },
-  { id: "career", ko: "경력기술서", en: "Career Description", desc: "작업별 담당 업무와 결과", page: "@page{size:A4;margin:16mm 17mm}" },
-  { id: "portfolio", ko: "포트폴리오", en: "Portfolio", desc: "작업별 소개와 스틸컷, 가로 A4", page: "@page{size:A4 landscape;margin:13mm 15mm}" }
+  { id: "resume", ko: "이력서", en: "Resume", desc: (S.downloads || {}).resume || "", page: "@page{size:A4;margin:16mm 17mm}" },
+  { id: "career", ko: "경력기술서", en: "Career Description", desc: (S.downloads || {}).career || "", page: "@page{size:A4;margin:16mm 17mm}" },
+  { id: "portfolio", ko: "포트폴리오", en: "Portfolio", desc: (S.downloads || {}).portfolio || "", page: "@page{size:A4 landscape;margin:13mm 15mm}" }
 ];
 
-/* 시리즈의 각 편을 하나의 작업처럼 다루기 */
-const episode = (s, ep) => ({ ...s, ...ep, client: join([s.client, s.title]), year: s.year, period: s.period });
-const lookup = ref => {
-  const [set, i, j] = ref.split(":");
-  return set === "series" ? episode(S.series[i], S.series[i].episodes[j]) : S[set][i];
-};
+const lookup = ref => { const [set, i] = ref.split(":"); return S[set][i]; };
+/* 여러 편으로 된 작업은 장르 옆에 편 수를 붙임 */
+const fmt = w => w.episodes ? w.format + " " + w.episodes.length + "편" : w.format;
 function stepDown(img) {
   const m = img.src.match(/i\.ytimg\.com\/vi\/([^/]+)\/(\w+)\.jpg/);
   const k = m ? YTQ.indexOf(m[2]) : -1;
@@ -433,26 +427,13 @@ function renderSite() {
   const L = S.layout || {};
   const big = (w, n) => w.size === "big" && colsOf(n) >= 2 ? "big" : "";
   $("workGrid").setAttribute("style", colsStyle(L.work));
-  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, w.format, w.role]), big(w, L.work))).join("");
-
-  $("seriesWrap").innerHTML = S.series.map((s, si) => `
-    <div class="series">
-      <div class="series-head"><div class="t">${esc(join([s.client, s.title]))}</div><div class="m">${esc(join([s.format + " " + s.episodes.length + "편", s.role, s.year]))}</div></div>
-      <div class="grid cols" style="${colsStyle(L.series)}">${s.episodes.map((ep, ei) => tile(ep, `series:${si}:${ei}`, "", big(ep, L.series))).join("")}</div>
-    </div>`).join("");
-
-  $("filmGrid").setAttribute("style", colsStyle(L.films));
-  $("filmGrid").innerHTML = S.films.map((w, i) => tile(w, "films:" + i, join([w.format, w.role]), big(w, L.films))).join("");
+  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, fmt(w), w.role]), big(w, L.work))).join("");
 
   /* Index 보기: 모든 작업을 한 줄씩 */
-  const all = [
-    ...S.work.map((w, i) => ["work:" + i, w]),
-    ...S.series.flatMap((s, si) => s.episodes.map((ep, ei) => [`series:${si}:${ei}`, episode(s, ep)])),
-    ...S.films.map((w, i) => ["films:" + i, { ...w, client: "YeahFilm" }])
-  ];
+  const all = S.work.map((w, i) => ["work:" + i, w]);
   $("indexList").innerHTML = all.map(([ref, w]) => `
     <a class="index-row tile-link" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}" data-img="${esc(imageOf(w))}">
-      <span class="c1">${esc(w.year)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(w.format)}</span>
+      <span class="c1">${esc(w.year)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(fmt(w))}</span>
     </a>`).join("");
 
   $("archiveList").innerHTML = S.archive.map(a => {
@@ -461,17 +442,17 @@ function renderSite() {
   }).join("");
 
   const about = [
-    ["Education", S.education.map(e => ["", join([e.school, e.major])])],
+    ["Education", S.education.map(e => ["", join([e.school, e.major]), [e.second && e.second + " (복수전공)", e.gpa && "GPA " + e.gpa]])],
     ["Awards", S.awards.map(a => [a.year, a.name + " · " + a.detail.split(" · ")[0]])],
     ["Certificates", S.certificates.filter(c => c.onSite).map(c => ["", c.detail && c.detail.endsWith("점") ? c.name + " " + c.detail.replace("점", "") : c.name])]
   ];
   $("aboutGrid").innerHTML = about.map(([h, items]) =>
-    `<div><h3>${h}</h3><ul>${items.map(([y, t]) => `<li>${y ? `<span>${esc(y)}</span>` : ""}${esc(t)}</li>`).join("")}</ul></div>`).join("");
+    `<div><h3>${h}</h3><ul>${items.map(([y, t, subs]) => `<li>${y ? `<span>${esc(y)}</span>` : ""}${esc(t)}${(subs || []).filter(Boolean).map(s => `<small>${esc(s)}</small>`).join("")}</li>`).join("")}</ul></div>`).join("");
 
-  const label = framed ? "미리보기" : "PDF 받기";
+  const label = framed ? "Preview" : "Download";
   $("docList").innerHTML = DOCS.map(d => `
     <div class="doc">
-      <div class="ko">${d.ko}<span class="en">${d.en}</span></div>
+      <div class="ko">${d.en}<span class="en">${d.ko}</span></div>
       <div class="ds">${d.desc}</div>
       <a class="btn" href="#${d.id}" data-print="1">${label} <span aria-hidden="true">↓</span></a>
     </div>`).join("");
@@ -510,8 +491,28 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
 const dlg = $("detail"), dPlayer = $("dPlayer"), dStills = $("dStills");
 function openDetail(w) {
   $("dTitle").textContent = w.title;
-  $("dMeta").textContent = join([w.client, w.format, w.role, w.period || w.year]);
-  $("dDesc").textContent = w.desc || "[이 작업을 한두 줄로 소개하는 자리]";
+  $("dMeta").textContent = join([w.client, fmt(w), w.role, w.period || w.year]);
+  const eps = $("dEps");
+  if (w.episodes) {
+    eps.hidden = false;
+    eps.innerHTML = w.episodes.map(ep => {
+      const img = imageOf(ep);
+      return `<button class="ep" type="button" aria-pressed="false"><div class="thumb"><span class="ph">${esc(ep.platform || "")}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span></button>`;
+    }).join("");
+    noImgOnError(eps);
+    const btns = [...eps.querySelectorAll(".ep")];
+    const pick = k => { btns.forEach((b, n) => b.setAttribute("aria-pressed", String(n === k))); showMedia(w.episodes[k], w); };
+    btns.forEach((b, k) => b.addEventListener("click", () => pick(k)));
+    pick(0);
+  } else {
+    eps.hidden = true; eps.innerHTML = "";
+    showMedia(w, w);
+  }
+  peek.classList.remove("on");
+  dlg.showModal(); dlg.scrollTop = 0;
+}
+function showMedia(w, parent) {
+  $("dDesc").textContent = w.desc || parent.desc || "[이 작업을 한두 줄로 소개하는 자리]";
   const link = linkOf(w);
   if (w.yt && !framed) {
     dPlayer.innerHTML = `<iframe title="${esc(w.title)}" src="https://www.youtube-nocookie.com/embed/${esc(w.yt)}?rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
@@ -525,8 +526,6 @@ function openDetail(w) {
   const list = (w.stills && w.stills.length) ? w.stills.slice(0, 4) : [null, null, null, null];
   dStills.style.setProperty("--n", list.length === 3 ? 3 : 2);
   dStills.innerHTML = list.map((src, i) => `<div class="still">${src ? `<img alt="${esc(w.title)} 스틸 ${i + 1}" src="${esc(src)}">` : `<span class="ph">Still 0${i + 1}</span>`}</div>`).join("");
-  peek.classList.remove("on");
-  dlg.showModal(); dlg.scrollTop = 0;
 }
 document.addEventListener("click", e => {
   const a = e.target.closest("a[data-ref]");
@@ -542,11 +541,7 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 const todo = t => `<span class="todo">${t}</span>`;
 const rRow = (d, main, x) => `<div class="r-row"><span class="d">${esc(d)}</span><span>${main}</span><span class="x">${esc(x || "")}</span></div>`;
 const rSec = (h, rows) => `<div class="r-sec"><h3>${h}</h3><div class="r-rows">${rows}</div></div>`;
-const allProjects = () => [
-  ...S.work,
-  ...S.series.map(s => ({ ...s, title: s.title + " (" + s.episodes.length + "편)" })),
-  ...S.films.map(f => ({ ...f, client: f.client || "YeahFilm" }))
-];
+const allProjects = () => S.work.map(p => p.episodes ? { ...p, title: p.title + " (" + p.episodes.length + "편)" } : p);
 
 function resumeDoc() {
   return `<article class="sheet">
@@ -556,7 +551,7 @@ function resumeDoc() {
       <div></div>
       <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}<br>${esc(S.siteUrl)}</div>
     </div>
-    ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}`)).join(""))}
+    ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
@@ -576,8 +571,7 @@ function careerEntry(p) {
 function careerDoc() {
   return `<article class="sheet">
     <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}<br>${esc(S.phone)}</div></div>
-    <div class="c-group"><h3>주요 작업</h3><div>${[...S.work, ...S.series].map(careerEntry).join("")}</div></div>
-    <div class="c-group"><h3>자체 제작</h3><div>${S.films.map(f => careerEntry({ ...f, client: "YeahFilm" })).join("")}</div></div>
+    <div class="c-group"><h3>주요 작업</h3><div>${S.work.map(careerEntry).join("")}</div></div>
     <div class="c-group c-list"><h3>기타 참여 작업</h3><div class="r-rows">${S.archive.map(a => rRow(a.year, `<b>${esc(a.title)}</b> · ${esc(a.format)}`, a.role)).join("")}</div></div>
   </article>`;
 }
@@ -612,7 +606,7 @@ function portfolioDoc() {
     <div class="n">${esc(S.nameEn).replace(" ", "<br>")}</div>
     <div class="c"><span>${esc(S.name)}</span><span>${esc(S.role)}</span><span>${esc(S.email)}</span><span>${esc(S.siteUrl)}</span></div>
   </div></article>`;
-  return cover + [...S.work, ...S.series, ...S.films].map(portfolioPage).join("");
+  return cover + S.work.map(portfolioPage).join("");
 }
 
 /* ============ 화면 전환 ============ */

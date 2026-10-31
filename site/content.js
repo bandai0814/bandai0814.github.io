@@ -7,8 +7,8 @@
 
    ── 항목별 의미 ─────────────────────────────────────────────
    title     작업 제목
-   client    클라이언트 / 아티스트
-   format    장르 (Music Video, Short-form 등)
+   client    클라이언트 / 아티스트 (자체 제작은 "YeahFilm")
+   format    장르 (M/V, Short-form 등)
    role      내 역할
    period    기간 (예: "2026.06 — 2026.07")
    year      연도 (사이트 썸네일 옆에 표시)
@@ -21,11 +21,15 @@
              images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
    thumb     목록에 보일 대표 이미지를 따로 지정하고 싶을 때 (예: "images/haruki-main.jpg")
              비워두면 스틸컷 첫 장 → 유튜브 썸네일 순서로 자동 선택
+             인스타그램 영상은 썸네일을 자동으로 못 가져오므로 여기에 캡처 이미지를 넣어 주세요
    size      "big" 으로 적으면 그 작업만 가로 2칸 × 세로 2칸 크기로 크게 보임
+   episodes  여러 편으로 된 작업일 때 각 편의 목록 (사이트에는 한 칸으로 보이고,
+             누르면 상세 화면에서 편을 골라 볼 수 있음)
 
    ── 순서 바꾸기 ─────────────────────────────────────────────
    { 부터 } 까지 한 덩어리를 통째로 잘라서 원하는 위치에 붙이면 됩니다.
-   위에 있을수록 사이트에서도 앞에 나옵니다.
+   위에 있을수록 사이트와 문서에서도 앞에 나옵니다.
+   지금은 진행 중인 작업을 맨 위에, 그 아래는 최신순으로 두었습니다.
 
    ── 문법 주의 ───────────────────────────────────────────────
    글자는 항상 "큰따옴표" 안에, 항목 사이에는 쉼표(,)를 꼭 붙입니다.
@@ -40,18 +44,47 @@ window.SITE = {
   // 연락처 — email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
   email: "bandai0814@gmail.com",
   phone: "010-2234-8889",
-  siteUrl: "[사이트 주소]",
+  siteUrl: "bandai0814.github.io/portfolio/site",
 
-  /* ── 배치: 한 줄에 몇 개씩 보일지 (1~6). 숫자가 작을수록 썸네일이 커집니다 ──
+  /* ── 배치: Work에서 한 줄에 몇 개씩 보일지 (1~6). 숫자가 작을수록 썸네일이 커집니다 ──
      휴대폰에서는 자동으로 2개씩(1로 정하면 1개씩) 보입니다. */
   layout: {
-    work: 3,     // Selected Work
-    series: 4,   // 컴포트 키트 같은 시리즈
-    films: 4     // Films
+    work: 3
   },
 
-  /* ── Selected Work: 가장 비중 있는 작업. 첫 번째 작업이 크게 보입니다 ── */
+  /* ── Download 항목 옆에 들어가는 설명 ── */
+  downloads: {
+    resume: "연락처와 병역, 전체 자격 사항까지 담은 한 장",
+    career: "작업마다 맡은 일과 그 결과를 적은 기록",
+    portfolio: "작업 소개와 스틸컷을 한 파일로 묶은 가로형 문서"
+  },
+
+  /* ── Work: 사이트 메인에 썸네일로 보이는 작업 ── */
   work: [
+    {
+      title: "죽은 연인에게로",
+      client: "데이먼스 이어", format: "Concert Live Clip", role: "AD · PD · B CAM",
+      period: "2026.10 — 진행 중", year: "2026", yt: "", note: "공개 예정",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
+      title: "HS접근성 프로젝트",
+      client: "LG전자", format: "Short-form", role: "AD · PD",
+      period: "2026.07 — 2026.09", year: "2026",
+      desc: "", tasks: [], result: "",
+      episodes: [
+        { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DcubnUGgZAH/", platform: "Instagram", thumb: "", desc: "", stills: [] },
+        { title: "냉장고 회전선반편", href: "https://www.instagram.com/reel/DcubrVlAYVT/", platform: "Instagram", thumb: "", desc: "", stills: [] },
+        { title: "세탁기 이지핸들편", href: "https://www.instagram.com/reel/Dcubn6CAQku/", platform: "Instagram", thumb: "", desc: "", stills: [] }
+      ]
+    },
+    {
+      title: "BOOGIENOVA",
+      client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
+      period: "2026.07 — 2026.08", year: "2026", yt: "oEJuHemNzgI",
+      desc: "", tasks: [], result: "", stills: []
+    },
     {
       title: "親不孝通りノンフィクション",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
@@ -66,21 +99,21 @@ window.SITE = {
       stills: []
     },
     {
+      title: "파란 열정, 구스토!",
+      client: "YeahFilm", format: "Visual Film", role: "제작",
+      period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
       title: "미해결문제2",
       client: "데이먼스 이어", format: "Concert Live Film", role: "AD · PD",
       period: "2026.04 — 2026.06", year: "2026", yt: "chXvY65Dh_g",
       desc: "", tasks: [], result: "", stills: []
     },
     {
-      title: "BOOGIENOVA",
-      client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
-      period: "2026.07 — 2026.08", year: "2026", yt: "oEJuHemNzgI",
-      desc: "", tasks: [], result: "", stills: []
-    },
-    {
-      title: "죽은 연인에게로",
-      client: "데이먼스 이어", format: "Concert Live Clip", role: "AD · PD · B CAM",
-      period: "2026.10 — 진행 중", year: "2026", yt: "", note: "공개 예정",
+      title: "THIS WAS NEVER THE PLAN",
+      client: "YeahFilm", format: "Cinematic Film", role: "제작",
+      period: "2026.01 — 2026.05", year: "2026", yt: "Ghw7gJlzpe8",
       desc: "", tasks: [], result: "", stills: []
     },
     {
@@ -88,41 +121,29 @@ window.SITE = {
       client: "Personal", format: "AI Cinematic Drama", role: "제작",
       period: "2026", year: "2026", yt: "4peMRX9iVMI",
       desc: "", tasks: [], result: "", stills: []
-    }
-  ],
-
-  /* ── 시리즈: 여러 편으로 된 작업. 편마다 영상과 스틸컷을 따로 넣습니다 ── */
-  series: [
+    },
     {
-      title: "HS접근성 프로젝트",
-      client: "LG전자", format: "Short-form", role: "AD · PD",
-      period: "2026.07 — 2026.09", year: "2026",
-      desc: "", tasks: [], result: "",
-      episodes: [
-        { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DcubnUGgZAH/", platform: "Instagram", desc: "", stills: [] },
-        { title: "냉장고 회전선반편", href: "https://www.instagram.com/reel/DcubrVlAYVT/", platform: "Instagram", desc: "", stills: [] },
-        { title: "세탁기 이지핸들편", href: "https://www.instagram.com/reel/Dcubn6CAQku/", platform: "Instagram", desc: "", stills: [] },
-        { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", desc: "", stills: [] }
-      ]
+      title: "눈 감고 일하기",
+      client: "YeahFilm", format: "Documentary", role: "제작",
+      period: "2025.09 — 2025.11", year: "2025", yt: "jYrDcXYjAgI",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
+      title: "미지의 세계를 포용하며",
+      client: "YeahFilm", format: "Poetic Documentary", role: "공동 프로듀서",
+      period: "2024.09 — 2024.11", year: "2024", yt: "vuvPIMzL4xg",
+      desc: "", tasks: [], result: "", stills: []
     }
-  ],
-
-  /* ── Films: YeahFilm 자체 제작 ── */
-  films: [
-    { title: "파란 열정, 구스토!", format: "Visual Film", role: "제작", period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ", desc: "", tasks: [], result: "", stills: [] },
-    { title: "THIS WAS NEVER THE PLAN", format: "Cinematic Film", role: "제작", period: "2026.01 — 2026.05", year: "2026", yt: "Ghw7gJlzpe8", desc: "", tasks: [], result: "", stills: [] },
-    { title: "눈 감고 일하기", format: "Documentary", role: "제작", period: "2025.09 — 2025.11", year: "2025", yt: "jYrDcXYjAgI", desc: "", tasks: [], result: "", stills: [] },
-    { title: "미지의 세계를 포용하며", format: "Poetic Documentary", role: "공동 프로듀서", period: "2024.09 — 2024.11", year: "2024", yt: "vuvPIMzL4xg", desc: "", tasks: [], result: "", stills: [] }
   ],
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "ILLIT ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "YuHyTD3a3s" },
     { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (진행 중)" },
+    { year: "2026", title: "ILLIT ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "YuHyTD3a3s" },
     { year: "2026", title: "백아연 〈들어봐〉", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
+    { year: "2026", title: "올빼미 연맹", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
     { year: "2026", title: "내러티브룸 The spaghetty story", format: "Teaser Film", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
     { year: "2026", title: "SHAUN 〈일기장〉", format: "Music Video", role: "카메라팀", yt: "O0diKBGKvMQ" },
-    { year: "2026", title: "올빼미 연맹", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
     { year: "2025", title: "GATSBY 〈바람은 그를 비껴갔다〉", format: "Short-form · 공모전 동상", role: "기획 · 연출", href: "https://youtube.com/shorts/Hc3jACbADNg" },
     { year: "2024", title: "글리코상은 어디에", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
     { year: "2024", title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
@@ -131,10 +152,14 @@ window.SITE = {
 
   /* ── 학력 · 수상 · 자격 · 병역 ── */
   education: [
-    { period: "2021.03 — 2027.02", school: "아주대학교", major: "문화콘텐츠학과" }
+    {
+      period: "2021.03 — 2027.02", school: "아주대학교", major: "문화콘텐츠학과",
+      second: "문화산업과 커뮤니케이션 전공",   // 복수전공 (없으면 "")
+      gpa: "4.37 / 4.5"                          // 학점 (안 보이게 하려면 "")
+    }
   ],
   awards: [
-    { year: "2026", name: "우수상", detail: "국민연금공단 기초연금 홍모 공모전 · AI 영상 제작(참여)" },
+    { year: "2026", name: "우수상", detail: "국민연금공단 기초연금 홍보 공모전 · AI 영상 제작(참여)" },
     { year: "2025", name: "국회의원상", detail: "경기 라디오방송콘텐츠 창작대전 · 팀장" },
     { year: "2025", name: "동상", detail: "갸스비 숏폼 영상 공모전 · 기획, 연출" },
     { year: "2024", name: "최우수상", detail: "아주대 문화콘텐츠학과 공모전" },
