@@ -61,7 +61,8 @@ section{padding-block:clamp(88px,10vw,140px) 0}
 .grid{display:grid;gap:56px 20px}
 .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grid.two .feature{grid-column:1 / -1}
-.grid.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 20px}
+.grid.cols{grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));grid-auto-flow:row dense;gap:40px 20px}
+.grid.cols .big{grid-column:span 2;grid-row:span 2}
 .tile{display:flex;flex-direction:column;gap:12px;min-width:0}
 .thumb{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--tile);overflow:hidden}
 .feature .thumb{aspect-ratio:21/9}
@@ -72,7 +73,8 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .t{font-weight:600;font-size:17px;line-height:1.35;min-width:0}
 .feature .t{font-size:clamp(20px,2vw,26px);font-weight:700;letter-spacing:-.02em}
-.four .t{font-size:15px}
+.cols .t{font-size:15px}
+.cols .big .t{font-size:clamp(18px,1.6vw,22px);font-weight:700;letter-spacing:-.02em}
 .y{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
 .m{margin-top:-8px;font-size:13.5px;color:var(--muted)}
 
@@ -228,7 +230,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   .sec-head .note{display:none}
   .sec-head .tools{grid-column:7 / 13}
   .split > .body{grid-column:1 / 13}
-  .grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid.cols{grid-template-columns:repeat(var(--cols-s,2),minmax(0,1fr))}
   .about{grid-template-columns:1fr;gap:36px}
   .index-row .c1{grid-column:1 / 3}
   .index-row .c2{grid-column:3 / 13}
@@ -303,14 +305,14 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
         <button class="toggle" type="button" data-view="index" aria-pressed="false">Index</button>
       </div>
     </div>
-    <div class="grid four" id="workGrid"></div>
+    <div class="grid cols" id="workGrid"></div>
     <div id="seriesWrap"></div>
     <div class="index" id="indexList"></div>
   </section>
 
   <section id="films" class="wrap">
     <div class="sec-head"><h2>Films</h2><span class="note">YeahFilm 자체 제작</span></div>
-    <div class="grid four" id="filmGrid"></div>
+    <div class="grid cols" id="filmGrid"></div>
   </section>
 
   <section id="archive" class="wrap">
@@ -371,9 +373,11 @@ const S = window.SITE;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const ytUrl = id => "https://www.youtube.com/watch?v=" + id;
-const ytThumb = id => "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+/* 유튜브 썸네일은 가장 선명한 1280px(maxres)부터 시도하고, 없으면 한 단계씩 낮춤 */
+const YTQ = ["maxresdefault", "sddefault", "hqdefault"];
+const ytThumb = id => "https://i.ytimg.com/vi/" + id + "/" + YTQ[0] + ".jpg";
 const linkOf = w => w.yt ? ytUrl(w.yt) : (w.href || "");
-const imageOf = w => (w.stills && w.stills[0]) || (w.yt ? ytThumb(w.yt) : "");
+const imageOf = w => w.thumb || (w.stills && w.stills[0]) || (w.yt ? ytThumb(w.yt) : "");
 const join = a => a.filter(Boolean).join(" · ");
 let framed = false;
 try { framed = window.self !== window.top; } catch (e) { framed = true; }
@@ -390,7 +394,21 @@ const lookup = ref => {
   const [set, i, j] = ref.split(":");
   return set === "series" ? episode(S.series[i], S.series[i].episodes[j]) : S[set][i];
 };
-const noImgOnError = root => root.querySelectorAll("img").forEach(img => img.addEventListener("error", () => img.remove()));
+function stepDown(img) {
+  const m = img.src.match(/i\.ytimg\.com\/vi\/([^/]+)\/(\w+)\.jpg/);
+  const k = m ? YTQ.indexOf(m[2]) : -1;
+  if (k > -1 && k < YTQ.length - 1) img.src = "https://i.ytimg.com/vi/" + m[1] + "/" + YTQ[k + 1] + ".jpg";
+  else img.remove();
+}
+function wireImg(img) {
+  if (!img) return;
+  img.addEventListener("error", () => stepDown(img));
+  // 고화질 썸네일이 없는 영상은 유튜브가 120px짜리 회색 이미지를 주므로 그때도 한 단계 낮춤
+  img.addEventListener("load", () => { if (img.naturalWidth <= 120 && /i\.ytimg\.com/.test(img.src)) stepDown(img); });
+}
+const noImgOnError = root => root.querySelectorAll("img").forEach(wireImg);
+const colsOf = n => Math.max(1, Math.min(6, parseInt(n, 10) || 4));
+const colsStyle = n => `--cols:${colsOf(n)};--cols-s:${colsOf(n) === 1 ? 1 : 2}`;
 
 /* ============ 사이트 ============ */
 function tile(w, ref, meta, cls) {
@@ -411,15 +429,19 @@ function renderSite() {
   $("mail").textContent = S.email;
   $("copyright").textContent = "© " + new Date().getFullYear() + " " + S.nameEn;
 
-  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, w.format, w.role]), "")).join("");
+  const L = S.layout || {};
+  const big = (w, n) => w.size === "big" && colsOf(n) >= 2 ? "big" : "";
+  $("workGrid").setAttribute("style", colsStyle(L.work));
+  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, w.format, w.role]), big(w, L.work))).join("");
 
   $("seriesWrap").innerHTML = S.series.map((s, si) => `
     <div class="series">
       <div class="series-head"><div class="t">${esc(join([s.client, s.title]))}</div><div class="m">${esc(join([s.format + " " + s.episodes.length + "편", s.role, s.year]))}</div></div>
-      <div class="grid four">${s.episodes.map((ep, ei) => tile(ep, `series:${si}:${ei}`, "", "")).join("")}</div>
+      <div class="grid cols" style="${colsStyle(L.series)}">${s.episodes.map((ep, ei) => tile(ep, `series:${si}:${ei}`, "", big(ep, L.series))).join("")}</div>
     </div>`).join("");
 
-  $("filmGrid").innerHTML = S.films.map((w, i) => tile(w, "films:" + i, join([w.format, w.role]), "")).join("");
+  $("filmGrid").setAttribute("style", colsStyle(L.films));
+  $("filmGrid").innerHTML = S.films.map((w, i) => tile(w, "films:" + i, join([w.format, w.role]), big(w, L.films))).join("");
 
   /* Index 보기: 모든 작업을 한 줄씩 */
   const all = [
@@ -475,7 +497,7 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     if (peek.dataset.src !== src) {
       peek.dataset.src = src;
       peek.innerHTML = `<img alt="" src="${esc(src)}">`;
-      peek.querySelector("img").addEventListener("error", () => { peek.innerHTML = ""; });
+      wireImg(peek.querySelector("img"));
     }
     const x = Math.min(e.clientX + 24, window.innerWidth - 340), y = Math.min(e.clientY + 16, window.innerHeight - 200);
     peek.style.transform = `translate(${x}px, ${y}px)`;
