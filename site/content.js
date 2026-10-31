@@ -102,7 +102,7 @@ window.SITE = {
       tasks: [], credits: "", desc: "", result: "", stills: []
     },
     {
-      title: "親不孝通りノンフィクション",
+      title: "親不孝通りノンフィクション(Haruki's version)",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
       tasks: [
