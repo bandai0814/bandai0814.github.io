@@ -41,10 +41,10 @@ window.SITE = {
   name: "박정우",
   nameEn: "PARK JEONG WOO",
   role: "PD · AD",
-  intro: "짜치지 않는 그림을 알고 있는 최고의 서포터입니다.",
+  intro: "짜치지 않는 직감을 지닌 최고의 서포터입니다.",
 
   // 내가 실제로 하는 일 → 소개 문장 아래 한 줄로 보임 (안 쓰려면 [] 로 비우기)
-  skills: ["프로덕션 운영", "일정 · 예산 관리", "현장 커뮤니케이션", "한 · 일 통역"],
+  skills: ["Production · Client Communication · AI Tools · Japanese"],
 
   // 연락처: email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
   email: "bandai0814@gmail.com",
@@ -112,7 +112,7 @@ window.SITE = {
       stills: []
     },
     {
-      title: "미해결문제2",
+      title: "제 2 미해결문제 第 2 未解決問題 : //",
       client: "데이먼스 이어", format: "Concert Live Film", role: "AD · PD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       tasks: [], credits: "", desc: "", result: "", stills: []
