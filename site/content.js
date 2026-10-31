@@ -11,7 +11,9 @@
    format    장르 (M/V, Short-form 등)
    role      내 역할 → 썸네일 아래에 클라이언트와 함께 보임
    period    기간 (예: "2026.06 – 2026.07", 진행 중이면 "2026.10 – WIP")
-   year      연도 (사이트 썸네일 옆에 표시)
+             → 이력서 · 경력기술서에만 들어가고, 사이트에는 연도만 보임
+   year      연도 (사이트에 표시. period에 WIP가 있으면 "2026 (WIP)"로 보임)
+             Archive 항목은 진행 중이면 wip: true 를 붙이기
    yt        유튜브 영상 ID (youtu.be/ 뒤의 11자리)
    href      유튜브가 아닌 링크 (인스타그램 등)
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
@@ -48,6 +50,7 @@ window.SITE = {
 
   // 연락처: email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
   email: "bandai0814@gmail.com",
+  instagram: "p_wjddn",          // @ 없이 아이디만 (사이트 상단과 이력서에 표시)
   phone: "010-2234-8889",
   siteUrl: "bandai0814.github.io/portfolio/site",
 
@@ -62,7 +65,7 @@ window.SITE = {
      휴대폰에서는 자동으로 2개씩(1로 정하면 1개씩) 보입니다. */
   layout: {
     commercial: 3,
-    original: 3
+    original: 5
   },
 
   /* ── Download 항목 옆에 들어가는 설명 ── */
@@ -155,7 +158,7 @@ window.SITE = {
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (WIP)" },
+    { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
     { year: "2026", title: "ILLIT ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "-YuHyTD3a3s" },
     { year: "2026", title: "백아연 〈들어봐〉", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
     { year: "2026", title: "올빼미 연맹", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
@@ -188,9 +191,9 @@ window.SITE = {
     { name: "JLPT N2(상)", detail: "비즈니스 회화", date: "2024.08", onSite: true },
     { name: "TOEIC(중)", detail: "일상 회화", date: "2026.05", onSite: true },
     { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
-    { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: false },
-    { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: false },
-    { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: false }
+    { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: true },
+    { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: true },
+    { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: true }
   ],
   military: { period: "2022.09 – 2024.06", detail: "공군 군사경찰 병장 만기전역" }
 };

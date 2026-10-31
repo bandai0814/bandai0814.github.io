@@ -45,7 +45,9 @@ nav.main a:hover{color:var(--fg)}
 .hero-meta .who span{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:2px}
 .hero-meta .say{grid-column:4 / 10;margin:0;font-size:clamp(17px,1.6vw,21px);line-height:1.6;max-width:30em;text-wrap:pretty}
 .hero-meta .say p{margin:0}
-.hero-meta .say .skills{margin-top:14px;font-size:14px;color:var(--muted)}
+.hero-meta .say .skills{margin-top:4px;font-size:14px;color:var(--muted)}
+.hero-meta .go.contact{display:grid;grid-template-columns:auto auto;gap:4px 16px;align-items:baseline;justify-items:start}
+.hero-meta .contact .k{color:var(--muted);font-size:13px}
 .hero-meta .say .skills:empty{display:none}
 .hero-meta .go{grid-column:10 / 13;justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:14px}
 
@@ -300,7 +302,6 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 <header>
   <div class="wrap">
     <a class="mark" href="#top" id="mark"></a>
-    <span class="h-role" id="hRole"></span>
     <nav class="main" aria-label="주요 메뉴">
       <a href="#work">Work</a>
       <a href="#about">About</a>
@@ -315,7 +316,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
     <div class="hero-meta">
       <div class="who" id="who"></div>
       <div class="say"><p id="introText"></p><p class="skills" id="skills"></p></div>
-      <div class="go"><span id="heroMail" style="color:var(--muted)"></span></div>
+      <div class="go contact" id="contact"></div>
     </div>
   </div>
 
@@ -354,7 +355,6 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 
 <footer>
   <div class="wrap">
-    <div class="mailbox"><span class="mail" id="mail"></span><button class="copy" id="copyBtn" type="button">복사</button></div>
     <div class="cr" id="copyright"></div>
   </div>
 </footer>
@@ -416,6 +416,8 @@ const DOCS = [
 const lookup = ref => { const [set, i] = ref.split(":"); return S[set][i]; };
 /* 여러 편으로 된 작업은 장르 옆에 편 수를 붙임 */
 const fmt = w => w.episodes ? w.format + " " + w.episodes.length + "편" : w.format;
+/* 사이트에는 기간 대신 연도만, 진행 중이면 "2026 (WIP)" */
+const yr = w => (w.year || "") + ((w.wip || /WIP/.test(w.period || "")) ? " (WIP)" : "");
 /* 상업 작업 → 자체 제작 순으로 전체 작업 */
 const works = () => [...(S.commercial || []), ...(S.original || [])];
 function stepDown(img) {
@@ -439,19 +441,21 @@ function tile(w, ref, meta, cls) {
   const img = imageOf(w);
   return `<a class="tile${cls ? " " + cls : ""}" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}">
     <div class="thumb"><span class="ph">${esc(w.note || w.platform || w.format)}</span>${img ? `<img alt="" loading="lazy" src="${esc(img)}">` : ""}</div>
-    <div class="cap"><div class="t">${esc(w.title)}</div><div class="y">${esc(w.platform || w.year)}</div></div>
+    <div class="cap"><div class="t">${esc(w.title)}</div><div class="y">${esc(w.platform || yr(w))}</div></div>
     ${meta ? `<div class="m">${esc(meta)}</div>` : ""}</a>`;
 }
 
 function renderSite() {
   $("mark").textContent = S.nameEn;
-  $("hRole").textContent = S.role;
   $("word").innerHTML = esc(S.nameEn).replace(" ", "<br>");
   $("who").innerHTML = `${esc(S.name)}<span>${esc(S.role)}</span>`;
   $("introText").textContent = S.intro;
   $("skills").textContent = (S.skills || []).filter(Boolean).join("  ·  ");
-  $("heroMail").textContent = S.email;
-  $("mail").textContent = S.email;
+  /* 연락처: 라벨 + 값 두 줄 */
+  $("contact").innerHTML = [
+    ["Email", S.email, S.email && "mailto:" + S.email],
+    ["Instagram", S.instagram && "@" + S.instagram, S.instagram && "https://www.instagram.com/" + S.instagram + "/"]
+  ].filter(r => r[1]).map(([k, v, h]) => `<span class="k">${k}</span><a class="u" href="${esc(h)}" target="_blank" rel="noopener">${esc(v)}</a>`).join("");
   $("copyright").textContent = "© " + new Date().getFullYear() + " " + S.nameEn;
 
   const L = S.layout || {};
@@ -459,19 +463,19 @@ function renderSite() {
   /* 썸네일 아래에는 클라이언트와 내 역할만 */
   [["comGrid", "commercial"], ["oriGrid", "original"]].forEach(([id, set]) => {
     $(id).setAttribute("style", colsStyle(L[set]));
-    $(id).innerHTML = (S[set] || []).map((w, i) => tile(w, set + ":" + i, join([w.client, w.role]), big(w, L[set]))).join("");
+    $(id).innerHTML = (S[set] || []).map((w, i) => tile(w, set + ":" + i, [w.client, w.role].filter(Boolean).join(" | "), big(w, L[set]))).join("");
   });
 
   /* Index 보기: 모든 작업을 한 줄씩 */
   const all = ["commercial", "original"].flatMap(set => (S[set] || []).map((w, i) => [set + ":" + i, w]));
   $("indexList").innerHTML = all.map(([ref, w]) => `
     <a class="index-row tile-link" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}" data-img="${esc(imageOf(w))}">
-      <span class="c1">${esc(w.year)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(w.role)}</span>
+      <span class="c1">${esc(yr(w))}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(w.role)}</span>
     </a>`).join("");
 
   $("archiveList").innerHTML = S.archive.map(a => {
     const href = linkOf(a);
-    return `<div class="row"><span class="yr">${esc(a.year)}</span><span class="ti">${esc(a.title)}</span><span class="fm">${esc(a.format)}</span><span class="rl">${esc(a.role)}</span>${href ? `<a class="go u" href="${esc(href)}" target="_blank" rel="noopener">Watch ↗</a>` : `<span class="go"></span>`}</div>`;
+    return `<div class="row"><span class="yr">${esc(yr(a))}</span><span class="ti">${esc(a.title)}</span><span class="fm">${esc(a.format)}</span><span class="rl">${esc(a.role)}</span>${href ? `<a class="go u" href="${esc(href)}" target="_blank" rel="noopener">Watch ↗</a>` : `<span class="go"></span>`}</div>`;
   }).join("");
 
   const about = [
@@ -524,7 +528,7 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
 const dlg = $("detail"), dPlayer = $("dPlayer"), dStills = $("dStills");
 function openDetail(w) {
   $("dTitle").textContent = w.title;
-  $("dMeta").textContent = join([w.client, fmt(w), w.period || w.year]);
+  $("dMeta").textContent = join([w.client, fmt(w), yr(w)]);
   /* 내 역할 · 맡은 일 · 함께한 사람: 영상보다 먼저 보이게 */
   const rows = [];
   if (w.role) rows.push(`<div class="lab">Role</div><div class="val role">${esc(w.role)}</div>`);
@@ -589,7 +593,7 @@ function resumeDoc() {
     <div class="r-top">
       <div><div class="r-name">${esc(S.name)}</div><div class="r-sub">${esc(S.role)}</div></div>
       <div></div>
-      <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}<br>${esc(S.siteUrl)}</div>
+      <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br>${esc(S.siteUrl)}</div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
@@ -616,7 +620,7 @@ function careerDoc() {
     <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}<br>${esc(S.phone)}</div></div>
     <div class="c-group"><h3>상업 작업</h3><div>${(S.commercial || []).map(careerEntry).join("")}</div></div>
     <div class="c-group"><h3>자체 제작</h3><div>${(S.original || []).map(careerEntry).join("")}</div></div>
-    <div class="c-group c-list"><h3>기타 참여 작업</h3><div class="r-rows">${S.archive.map(a => rRow(a.year, `<b>${esc(a.title)}</b> · ${esc(a.format)}`, a.role)).join("")}</div></div>
+    <div class="c-group c-list"><h3>기타 참여 작업</h3><div class="r-rows">${S.archive.map(a => rRow(yr(a), `<b>${esc(a.title)}</b> · ${esc(a.format)}`, a.role)).join("")}</div></div>
   </article>`;
 }
 
@@ -692,12 +696,6 @@ function printNow() {
 document.addEventListener("click", e => { if (e.target.closest("a[data-print]") && !framed) autoPrint = true; });
 window.addEventListener("hashchange", route);
 
-$("copyBtn").addEventListener("click", () => {
-  const el = $("mail"), btn = $("copyBtn");
-  const done = () => { btn.textContent = "복사됨"; setTimeout(() => btn.textContent = "복사", 1500); };
-  try { navigator.clipboard.writeText(el.textContent).then(done, () => window.getSelection().selectAllChildren(el)); }
-  catch (err) { window.getSelection().selectAllChildren(el); }
-});
 
 renderSite();
 route();
