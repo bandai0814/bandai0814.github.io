@@ -39,13 +39,13 @@
    ===================================================================== */
 
 window.SITE = {
-  name: "박정우",
+  name: "박 정 우",
   nameEn: "PARK JEONG WOO",
   role: "PD · AD",
   intro: "짜치지 않는 직감을 지닌 최고의 서포터입니다.",
 
   // 내가 실제로 하는 일 → 소개 문장 아래 한 줄로 보임 (안 쓰려면 [] 로 비우기)
-  skills: ["Production · Client Communication · AI Tools · Japanese"],
+  skills: ["Production · Communication · AI Tools"],
 
   // 연락처: email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
   email: "bandai0814@gmail.com",
