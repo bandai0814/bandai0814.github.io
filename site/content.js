@@ -188,13 +188,13 @@ window.SITE = {
   ],
   // onSite: false 인 항목은 사이트에는 안 보이고 이력서에만 들어갑니다
   certificates: [
-    { name: "ACA Premiere Pro", detail: "Adobe", date: "2022", onSite: true },
-    { name: "무인동력비행장치 4종", detail: "DJI Mini 4 Pro 보유 · 운용", date: "2025.01", onSite: true },
-    { name: "JLPT N2(상)", detail: "비즈니스 회화", date: "2024.08", onSite: true },
-    { name: "TOEIC(중)", detail: "일상 회화", date: "2026.05", onSite: true },
-    { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
+    { name: "JLPT N2 (상)", detail: "비즈니스 회화", date: "2024.08", onSite: true },
+    { name: "TOEIC (중)", detail: "일상 회화", date: "2026.05", onSite: true },
     { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: true },
     { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: true },
+    { name: "ACA Premiere Pro", detail: "Adobe", date: "2022", onSite: true },
+    { name: "무인동력비행장치 4종", detail: "DJI Mini 4 Pro 보유 · 운용", date: "2025.01", onSite: true },
+    { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
     { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: true }
   ],
   military: { period: "2022.09 – 2024.06", detail: "공군 군사경찰 병장 만기전역" }
