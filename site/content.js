@@ -27,13 +27,12 @@
              비워두면 스틸컷 첫 장 → 유튜브 썸네일 순서로 자동 선택
              인스타그램 영상은 썸네일을 자동으로 못 가져오므로 여기에 캡처 이미지를 넣어 주세요
    vertical  세로 영상이면 true → 상세 화면에서 잘리지 않고 세로로 보임
-   size      "big" 으로 적으면 그 작업만 가로 2칸 × 세로 2칸 크기로 크게 보임
-   episodes  여러 편으로 된 작업일 때 각 편의 목록
+   episodes  여러 편으로 된 작업일 때 각 편의 목록 (상세 화면에서 편을 골라 볼 수 있음)
 
    ── 순서 바꾸기 ─────────────────────────────────────────────
-   { 부터 } 까지 한 덩어리를 통째로 잘라서 원하는 위치에 붙이면 됩니다.
-   위에 있을수록 사이트와 문서에서도 앞에 나옵니다.
-   지금은 진행 중(WIP)인 작업을 맨 위에, 그 아래는 최신순으로 두었습니다.
+   사이트의 Selected Work는 commercial과 original을 합쳐서
+   진행 중(WIP) → 최근 끝난 작업 순으로 자동 정렬됩니다 (period 기준).
+   이력서 · 경력기술서에서는 이 파일에 적힌 순서대로 나옵니다.
 
    ── 문법 주의 ───────────────────────────────────────────────
    글자는 항상 "큰따옴표" 안에, 항목 사이에는 쉼표(,)를 꼭 붙입니다.
@@ -61,12 +60,6 @@ window.SITE = {
     ""
   ],
 
-  /* ── 배치: 한 줄에 몇 개씩 보일지 (1~6). 숫자가 작을수록 썸네일이 커집니다 ──
-     휴대폰에서는 자동으로 2개씩(1로 정하면 1개씩) 보입니다. */
-  layout: {
-    commercial: 3,
-    original: 5
-  },
 
   /* ── Download 항목 옆에 들어가는 설명 ── */
   downloads: {
@@ -75,13 +68,22 @@ window.SITE = {
     portfolio: "작업 소개와 스틸컷을 한 파일로 묶은 가로형 문서"
   },
 
-  /* ── Commercial: 클라이언트 작업 ── */
+  /* ── Selected Work ①: 클라이언트 작업 (경력기술서에서 '상업 작업'으로 묶임) ── */
   commercial: [
     {
       title: "죽은 연인에게로",
-      client: "데이먼스 이어", format: "Concert Live Clip", role: "AD · PD · B CAM",
-      period: "2026.10 – WIP", year: "2026", yt: "", note: "공개 예정",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      client: "데이먼스 이어", format: "Concert Film", role: "AD · PD · B CAM",
+      period: "2026.10 – WIP", year: "2026", note: "공개 예정",
+      tasks: [], credits: "", desc: "", result: "", stills: [],
+      episodes: [
+        { title: "공연 하이라이트", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 1]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 2]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 3]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 4]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 5]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "풀 라이브 아카이빙", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] }
+      ]
     },
     {
       title: "HS접근성 프로젝트",
@@ -122,7 +124,7 @@ window.SITE = {
     }
   ],
 
-  /* ── Original: YeahFilms · 개인 작업 ── */
+  /* ── Selected Work ②: YeahFilms · 개인 작업 (경력기술서에서 '자체 제작'으로 묶임) ── */
   original: [
     {
       title: "레드아카데미",

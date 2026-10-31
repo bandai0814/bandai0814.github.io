@@ -57,8 +57,6 @@ section{padding-block:clamp(88px,10vw,140px) 0}
 .sec-head h2{grid-column:1 / 4;margin:0;font-size:14px;font-weight:600}
 .sec-head .note{grid-column:4 / 10;font-size:14px;color:var(--muted)}
 .sec-head .tools{grid-column:10 / 13;justify-self:end;display:flex;gap:4px}
-.toggle{background:none;border:0;font:inherit;font-size:14px;color:var(--muted);cursor:pointer;padding:6px 0 6px 14px;min-height:36px}
-.toggle[aria-pressed="true"]{color:var(--fg);font-weight:600}
 .split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
 .split > .body{grid-column:4 / 13;min-width:0}
 
@@ -92,7 +90,7 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .ep[aria-pressed="true"] .et{font-weight:600}
 
 /* ---------- index view ---------- */
-.index{display:none}
+.index{display:block}
 .index-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;align-items:baseline;padding-block:16px;border-bottom:1px solid var(--line);font-size:15px;transition:opacity .2s ease}
 .index-row .c1{grid-column:1 / 2;color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px}
 .index-row .c2{grid-column:2 / 7;font-weight:600;font-size:clamp(16px,1.5vw,19px);letter-spacing:-.015em;min-width:0}
@@ -100,8 +98,6 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .index-row .c4{grid-column:10 / 13;color:var(--muted);text-align:right;min-width:0}
 .index:hover .index-row{opacity:.3}
 .index .index-row:hover{opacity:1}
-body.view-index .index{display:block}
-body.view-index #comGrid, body.view-index #original{display:none}
 .peek{position:fixed;left:0;top:0;width:320px;aspect-ratio:16/9;pointer-events:none;z-index:8;background:var(--tile);overflow:hidden;opacity:0;transition:opacity .15s ease}
 .peek img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .peek.on{opacity:1}
@@ -322,19 +318,9 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 
   <section id="work" class="wrap">
     <div class="sec-head">
-      <h2>Commercial</h2>
-      <div class="tools" role="group" aria-label="보기 방식">
-        <button class="toggle" type="button" data-view="grid" aria-pressed="true">Grid</button>
-        <button class="toggle" type="button" data-view="index" aria-pressed="false">Index</button>
-      </div>
+      <h2>Selected Work</h2>
     </div>
-    <div class="grid cols" id="comGrid"></div>
     <div class="index" id="indexList"></div>
-  </section>
-
-  <section id="original" class="wrap">
-    <div class="sec-head"><h2>Original</h2></div>
-    <div class="grid cols" id="oriGrid"></div>
   </section>
 
   <section id="archive" class="wrap">
@@ -420,6 +406,17 @@ const fmt = w => w.episodes ? w.format + " " + w.episodes.length + "편" : w.for
 const yr = w => (w.year || "") + ((w.wip || /WIP/.test(w.period || "")) ? " (WIP)" : "");
 /* 상업 작업 → 자체 제작 순으로 전체 작업 */
 const works = () => [...(S.commercial || []), ...(S.original || [])];
+/* 사이트 목록 정렬용: period의 마지막 날짜(YYYY.MM), WIP는 맨 위 */
+const endKey = w => {
+  if (/WIP/.test(w.period || "")) return 999999;
+  const d = (w.period || w.year || "").match(/\d{4}(?:\.\d{2})?/g) || [];
+  const last = d[d.length - 1] || "0";
+  const [y, m] = last.split(".");
+  return Number(y) * 100 + Number(m || 0);
+};
+const sortedWorks = () => ["commercial", "original"]
+  .flatMap(set => (S[set] || []).map((w, i) => [set + ":" + i, w]))
+  .map((r, n) => [r, n]).sort((a, b) => endKey(b[0][1]) - endKey(a[0][1]) || a[1] - b[1]).map(x => x[0]);
 function stepDown(img) {
   const m = img.src.match(/i\.ytimg\.com\/vi\/([^/]+)\/(\w+)\.jpg/);
   const k = m ? YTQ.indexOf(m[2]) : -1;
@@ -458,19 +455,11 @@ function renderSite() {
   ].filter(r => r[1]).map(([k, v, h]) => `<span class="k">${k}</span><a class="u" href="${esc(h)}" target="_blank" rel="noopener">${esc(v)}</a>`).join("");
   $("copyright").textContent = "© " + new Date().getFullYear() + " " + S.nameEn;
 
-  const L = S.layout || {};
-  const big = (w, n) => w.size === "big" && colsOf(n) >= 2 ? "big" : "";
-  /* 썸네일 아래에는 클라이언트와 내 역할만 */
-  [["comGrid", "commercial"], ["oriGrid", "original"]].forEach(([id, set]) => {
-    $(id).setAttribute("style", colsStyle(L[set]));
-    $(id).innerHTML = (S[set] || []).map((w, i) => tile(w, set + ":" + i, [w.client, w.role].filter(Boolean).join(" | "), big(w, L[set]))).join("");
-  });
-
-  /* Index 보기: 모든 작업을 한 줄씩 */
-  const all = ["commercial", "original"].flatMap(set => (S[set] || []).map((w, i) => [set + ":" + i, w]));
+  /* Selected Work: commercial + original, 진행 중 → 최근 순 */
+  const all = sortedWorks();
   $("indexList").innerHTML = all.map(([ref, w]) => `
     <a class="index-row tile-link" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}" data-img="${esc(imageOf(w))}">
-      <span class="c1">${esc(yr(w))}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(w.role)}</span>
+      <span class="c1">${esc(yr(w))}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(fmt(w))}</span>
     </a>`).join("");
 
   $("archiveList").innerHTML = S.archive.map(a => {
@@ -496,15 +485,6 @@ function renderSite() {
 
   noImgOnError(document.querySelector("main"));
 }
-
-/* Grid ↔ Index 전환 */
-document.querySelectorAll(".toggle").forEach(b => b.addEventListener("click", () => {
-  const index = b.dataset.view === "index";
-  document.body.classList.toggle("view-index", index);
-  document.querySelectorAll(".toggle").forEach(t => t.setAttribute("aria-pressed", String(t === b)));
-  try { localStorage.setItem("pjw-view", b.dataset.view); } catch (e) {}
-}));
-try { if (localStorage.getItem("pjw-view") === "index") document.querySelector('.toggle[data-view="index"]').click(); } catch (e) {}
 
 /* Index에서 마우스를 올리면 썸네일 미리보기 */
 const peek = $("peek");
@@ -540,7 +520,7 @@ function openDetail(w) {
     eps.hidden = false;
     eps.innerHTML = w.episodes.map(ep => {
       const img = imageOf(ep);
-      return `<button class="ep" type="button" aria-pressed="false"><div class="thumb"><span class="ph">${esc(ep.platform || "")}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span></button>`;
+      return `<button class="ep" type="button" aria-pressed="false"><div class="thumb"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span></button>`;
     }).join("");
     noImgOnError(eps);
     const btns = [...eps.querySelectorAll(".ep")];
@@ -565,7 +545,7 @@ function showMedia(w, parent) {
     dPlayer.innerHTML = `${img ? `<img alt="" src="${esc(img)}">` : ""}<div class="out"><a class="btn" href="${esc(link)}" target="_blank" rel="noopener">${esc(w.platform || "YouTube")}에서 보기 ↗</a></div>`;
     noImgOnError(dPlayer);
   } else {
-    dPlayer.innerHTML = `<div class="out">${esc(w.note || "영상 준비 중")}</div>`;
+    dPlayer.innerHTML = `<div class="out">${esc(w.note || parent.note || "영상 준비 중")}</div>`;
   }
   const list = (w.stills && w.stills.length) ? w.stills.slice(0, 4) : [null, null, null, null];
   dStills.style.setProperty("--n", list.length === 3 ? 3 : 2);
