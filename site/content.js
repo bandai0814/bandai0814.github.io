@@ -34,18 +34,18 @@
 window.SITE = {
   name: "박정우",
   nameEn: "PARK JEONG WOO",
-  role: "AD · PD",
-  intro: "[한두 문장 자기소개를 직접 쓰는 자리]",
+  role: "PD · AD",
+  intro: "많은 생각이 좋은 장면으로 이어지도록, 모든 조건을 조율하는 사람.",
 
   // 연락처 — email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
-  email: "[이메일 주소]",
-  phone: "[연락처]",
+  email: "bandai0814@gmail.com",
+  phone: "010-2234-8889",
   siteUrl: "[사이트 주소]",
 
   /* ── 배치: 한 줄에 몇 개씩 보일지 (1~6). 숫자가 작을수록 썸네일이 커집니다 ──
      휴대폰에서는 자동으로 2개씩(1로 정하면 1개씩) 보입니다. */
   layout: {
-    work: 4,     // Selected Work
+    work: 3,     // Selected Work
     series: 4,   // 컴포트 키트 같은 시리즈
     films: 4     // Films
   },
@@ -54,7 +54,7 @@ window.SITE = {
   work: [
     {
       title: "親不孝通りノンフィクション",
-      client: "Hamano Haruki", format: "Music Video", role: "AD · PD",
+      client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 — 2026.07", year: "2026", yt: "adbLZR_J7jg",
       desc: "",
       tasks: [
@@ -73,7 +73,7 @@ window.SITE = {
     },
     {
       title: "BOOGIENOVA",
-      client: "Yoohee", format: "Music Video", role: "AD · PD · Mixed media Artwork",
+      client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
       period: "2026.07 — 2026.08", year: "2026", yt: "oEJuHemNzgI",
       desc: "", tasks: [], result: "", stills: []
     },
@@ -84,7 +84,7 @@ window.SITE = {
       desc: "", tasks: [], result: "", stills: []
     },
     {
-      title: "레드아카데미 컨셉 필름",
+      title: "레드아카데미",
       client: "Personal", format: "AI Cinematic Drama", role: "제작",
       period: "2026", year: "2026", yt: "4peMRX9iVMI",
       desc: "", tasks: [], result: "", stills: []
@@ -94,7 +94,7 @@ window.SITE = {
   /* ── 시리즈: 여러 편으로 된 작업. 편마다 영상과 스틸컷을 따로 넣습니다 ── */
   series: [
     {
-      title: "컴포트 키트 시리즈",
+      title: "HS접근성 프로젝트",
       client: "LG전자", format: "Short-form", role: "AD · PD",
       period: "2026.07 — 2026.09", year: "2026",
       desc: "", tasks: [], result: "",
@@ -117,7 +117,7 @@ window.SITE = {
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "ILLIT ‘BREAK EVEN’ Teasing Intro", format: "Campaign Film", role: "AD" },
+    { year: "2026", title: "ILLIT ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "YuHyTD3a3s" },
     { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (진행 중)" },
     { year: "2026", title: "백아연 〈들어봐〉", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
     { year: "2026", title: "내러티브룸 The spaghetty story", format: "Teaser Film", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
@@ -126,14 +126,15 @@ window.SITE = {
     { year: "2025", title: "GATSBY 〈바람은 그를 비껴갔다〉", format: "Short-form · 공모전 동상", role: "기획 · 연출", href: "https://youtube.com/shorts/Hc3jACbADNg" },
     { year: "2024", title: "글리코상은 어디에", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
     { year: "2024", title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
-    { year: "2024", title: "KBS 〈스캔들〉 〈수지맞은 우리〉", format: "Drama", role: "촬영보조" }
+    { year: "2024", title: "KBS 〈스캔들〉, 〈수지맞은 우리〉", format: "Drama", role: "촬영보조" }
   ],
 
   /* ── 학력 · 수상 · 자격 · 병역 ── */
   education: [
-    { period: "[입학] — [졸업 예정]", school: "아주대학교", major: "문화콘텐츠학과" }
+    { period: "2021.03 — 2027.02", school: "아주대학교", major: "문화콘텐츠학과" }
   ],
   awards: [
+    { year: "2026", name: "우수상", detail: "국민연금공단 기초연금 홍모 공모전 · AI 영상 제작(참여)" },
     { year: "2025", name: "국회의원상", detail: "경기 라디오방송콘텐츠 창작대전 · 팀장" },
     { year: "2025", name: "동상", detail: "갸스비 숏폼 영상 공모전 · 기획, 연출" },
     { year: "2024", name: "최우수상", detail: "아주대 문화콘텐츠학과 공모전" },
@@ -143,12 +144,12 @@ window.SITE = {
   certificates: [
     { name: "ACA Premiere Pro", detail: "Adobe", date: "2022", onSite: true },
     { name: "무인동력비행장치 4종", detail: "DJI Mini 4 Pro 보유 · 운용", date: "2025.01", onSite: true },
-    { name: "JLPT N2", detail: "172점", date: "2024.08", onSite: true },
-    { name: "TOEIC", detail: "765점", date: "2026.05", onSite: true },
+    { name: "JLPT N2", detail: "비즈니스 회화", date: "2024.08", onSite: true },
+    { name: "TOEIC", detail: "일상 회화", date: "2026.05", onSite: true },
     { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
     { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: false },
     { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: false },
-    { name: "운전면허 2종 보통", detail: "", date: "2021.02", onSite: false }
+    { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: false }
   ],
   military: { period: "2022.09 — 2024.06", detail: "공군 군사경찰 병장 만기전역" }
 };
