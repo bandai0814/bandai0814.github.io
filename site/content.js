@@ -1,0 +1,139 @@
+/* =====================================================================
+   박정우 포트폴리오 사이트 — 내용 파일
+
+   사이트에 보이는 글, 영상, 스틸컷은 전부 이 파일에서 고칩니다.
+   여기를 고치면 사이트와 함께 이력서 · 경력기술서 · 포트폴리오 PDF도
+   자동으로 같이 바뀝니다. index.html은 건드리지 않아도 됩니다.
+
+   ── 항목별 의미 ─────────────────────────────────────────────
+   title     작업 제목
+   client    클라이언트 / 아티스트
+   format    장르 (Music Video, Short-form 등)
+   role      내 역할
+   period    기간 (예: "2026.06 — 2026.07")
+   year      연도 (사이트 썸네일 옆에 표시)
+   yt        유튜브 영상 ID — youtu.be/ 뒤의 11자리
+   href      유튜브가 아닌 링크 (인스타그램 등)
+   desc      작업 소개 한두 줄 → 사이트 상세 화면, 포트폴리오에 들어감
+   tasks     담당 업무 목록 → 경력기술서에 들어감
+   result    결과 / 성과 한 줄 → 경력기술서에 들어감
+   stills    스틸컷 이미지 경로 3~4개 → 사이트 상세 화면, 포트폴리오에 들어감
+             images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
+
+   ── 문법 주의 ───────────────────────────────────────────────
+   글자는 항상 "큰따옴표" 안에, 항목 사이에는 쉼표(,)를 꼭 붙입니다.
+   ===================================================================== */
+
+window.SITE = {
+  name: "박정우",
+  nameEn: "PARK JEONG WOO",
+  role: "AD · PD",
+  intro: "[한두 문장 자기소개를 직접 쓰는 자리]",
+
+  // 연락처 — email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
+  email: "[이메일 주소]",
+  phone: "[연락처]",
+  siteUrl: "[사이트 주소]",
+
+  /* ── Selected Work: 가장 비중 있는 작업. 첫 번째 작업이 크게 보입니다 ── */
+  work: [
+    {
+      title: "親不孝通りノンフィクション",
+      client: "Hamano Haruki", format: "Music Video", role: "AD · PD",
+      period: "2026.06 — 2026.07", year: "2026", yt: "adbLZR_J7jg",
+      desc: "",
+      tasks: [
+        "기획, 예산 관리(약 70만 엔), 콘티 작성",
+        "한국 크루 5인의 후쿠오카 현지 촬영 운영, 연출 보조",
+        "한·일 스태프 간 실시간 통역, 편집 보조"
+      ],
+      result: "아티스트 공식 뮤직비디오로 공개",
+      stills: []
+    },
+    {
+      title: "미해결문제2",
+      client: "데이먼스 이어", format: "Concert Live Film", role: "AD · PD",
+      period: "2026.04 — 2026.06", year: "2026", yt: "chXvY65Dh_g",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
+      title: "BOOGIENOVA",
+      client: "Yoohee", format: "Music Video", role: "AD · PD · Mixed media Artwork",
+      period: "2026.07 — 2026.08", year: "2026", yt: "oEJuHemNzgI",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
+      title: "죽은 연인에게로",
+      client: "데이먼스 이어", format: "Concert Live Clip", role: "AD · PD · B CAM",
+      period: "2026.10 — 진행 중", year: "2026", yt: "", note: "공개 예정",
+      desc: "", tasks: [], result: "", stills: []
+    },
+    {
+      title: "레드아카데미 컨셉 필름",
+      client: "Personal", format: "AI Cinematic Drama", role: "제작",
+      period: "2026", year: "2026", yt: "4peMRX9iVMI",
+      desc: "", tasks: [], result: "", stills: []
+    }
+  ],
+
+  /* ── 시리즈: 여러 편으로 된 작업. 편마다 영상과 스틸컷을 따로 넣습니다 ── */
+  series: [
+    {
+      title: "컴포트 키트 시리즈",
+      client: "LG전자", format: "Short-form", role: "AD · PD",
+      period: "2026.07 — 2026.09", year: "2026",
+      desc: "", tasks: [], result: "",
+      episodes: [
+        { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DcubnUGgZAH/", platform: "Instagram", desc: "", stills: [] },
+        { title: "냉장고 회전선반편", href: "https://www.instagram.com/reel/DcubrVlAYVT/", platform: "Instagram", desc: "", stills: [] },
+        { title: "세탁기 이지핸들편", href: "https://www.instagram.com/reel/Dcubn6CAQku/", platform: "Instagram", desc: "", stills: [] },
+        { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", desc: "", stills: [] }
+      ]
+    }
+  ],
+
+  /* ── Films: YeahFilm 자체 제작 ── */
+  films: [
+    { title: "파란 열정, 구스토!", format: "Visual Film", role: "제작", period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ", desc: "", tasks: [], result: "", stills: [] },
+    { title: "THIS WAS NEVER THE PLAN", format: "Cinematic Film", role: "제작", period: "2026.01 — 2026.05", year: "2026", yt: "Ghw7gJlzpe8", desc: "", tasks: [], result: "", stills: [] },
+    { title: "눈 감고 일하기", format: "Documentary", role: "제작", period: "2025.09 — 2025.11", year: "2025", yt: "jYrDcXYjAgI", desc: "", tasks: [], result: "", stills: [] },
+    { title: "미지의 세계를 포용하며", format: "Poetic Documentary", role: "공동 프로듀서", period: "2024.09 — 2024.11", year: "2024", yt: "vuvPIMzL4xg", desc: "", tasks: [], result: "", stills: [] }
+  ],
+
+  /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
+  archive: [
+    { year: "2026", title: "ILLIT ‘BREAK EVEN’ Teasing Intro", format: "Campaign Film", role: "AD" },
+    { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (진행 중)" },
+    { year: "2026", title: "백아연 〈들어봐〉", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
+    { year: "2026", title: "내러티브룸 The spaghetty story", format: "Teaser Film", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
+    { year: "2026", title: "SHAUN 〈일기장〉", format: "Music Video", role: "카메라팀", yt: "O0diKBGKvMQ" },
+    { year: "2026", title: "올빼미 연맹", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
+    { year: "2025", title: "GATSBY 〈바람은 그를 비껴갔다〉", format: "Short-form · 공모전 동상", role: "기획 · 연출", href: "https://youtube.com/shorts/Hc3jACbADNg" },
+    { year: "2024", title: "글리코상은 어디에", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
+    { year: "2024", title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
+    { year: "2024", title: "KBS 〈스캔들〉 〈수지맞은 우리〉", format: "Drama", role: "촬영보조" }
+  ],
+
+  /* ── 학력 · 수상 · 자격 · 병역 ── */
+  education: [
+    { period: "[입학] — [졸업 예정]", school: "아주대학교", major: "문화콘텐츠학과" }
+  ],
+  awards: [
+    { year: "2025", name: "국회의원상", detail: "경기 라디오방송콘텐츠 창작대전 · 팀장" },
+    { year: "2025", name: "동상", detail: "갸스비 숏폼 영상 공모전 · 기획, 연출" },
+    { year: "2024", name: "최우수상", detail: "아주대 문화콘텐츠학과 공모전" },
+    { year: "2024", name: "학장상", detail: "아주대 인문대학 기초과목 우수 소논문" }
+  ],
+  // onSite: false 인 항목은 사이트에는 안 보이고 이력서에만 들어갑니다
+  certificates: [
+    { name: "ACA Premiere Pro", detail: "Adobe", date: "2022", onSite: true },
+    { name: "무인동력비행장치 4종", detail: "DJI Mini 4 Pro 보유 · 운용", date: "2025.01", onSite: true },
+    { name: "JLPT N2", detail: "172점", date: "2024.08", onSite: true },
+    { name: "TOEIC", detail: "765점", date: "2026.05", onSite: true },
+    { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
+    { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: false },
+    { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: false },
+    { name: "운전면허 2종 보통", detail: "", date: "2021.02", onSite: false }
+  ],
+  military: { period: "2022.09 — 2024.06", detail: "공군 군사경찰 병장 만기전역" }
+};
