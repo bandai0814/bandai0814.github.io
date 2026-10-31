@@ -7,10 +7,10 @@
 
    ── 항목별 의미 ─────────────────────────────────────────────
    title     작업 제목
-   client    클라이언트 / 아티스트 (자체 제작은 "YeahFilm")
+   client    클라이언트 / 아티스트 (자체 제작은 "YeahFilms")
    format    장르 (M/V, Short-form 등)
    role      내 역할
-   period    기간 (예: "2026.06 — 2026.07")
+   period    기간 (예: "2026.06 – 2026.07")
    year      연도 (사이트 썸네일 옆에 표시)
    yt        유튜브 영상 ID — youtu.be/ 뒤의 11자리
    href      유튜브가 아닌 링크 (인스타그램 등)
@@ -29,7 +29,7 @@
    ── 순서 바꾸기 ─────────────────────────────────────────────
    { 부터 } 까지 한 덩어리를 통째로 잘라서 원하는 위치에 붙이면 됩니다.
    위에 있을수록 사이트와 문서에서도 앞에 나옵니다.
-   지금은 진행 중인 작업을 맨 위에, 그 아래는 최신순으로 두었습니다.
+   지금은 진행 중(WIP)인 작업을 맨 위에, 그 아래는 최신순으로 두었습니다.
 
    ── 문법 주의 ───────────────────────────────────────────────
    글자는 항상 "큰따옴표" 안에, 항목 사이에는 쉼표(,)를 꼭 붙입니다.
@@ -64,13 +64,13 @@ window.SITE = {
     {
       title: "죽은 연인에게로",
       client: "데이먼스 이어", format: "Concert Live Clip", role: "AD · PD · B CAM",
-      period: "2026.10 — 진행 중", year: "2026", yt: "", note: "공개 예정",
+      period: "2026.10 – WIP", year: "2026", yt: "", note: "공개 예정",
       desc: "", tasks: [], result: "", stills: []
     },
     {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Short-form", role: "AD · PD",
-      period: "2026.07 — 2026.09", year: "2026",
+      period: "2026.07 – 2026.09", year: "2026",
       desc: "", tasks: [], result: "",
       episodes: [
         { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", thumb: "", desc: "", stills: [] },
@@ -82,13 +82,13 @@ window.SITE = {
     {
       title: "BOOGIENOVA",
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
-      period: "2026.07 — 2026.08", year: "2026", yt: "oEJuHemNzgI",
+      period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
       desc: "", tasks: [], result: "", stills: []
     },
     {
       title: "親不孝通りノンフィクション",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
-      period: "2026.06 — 2026.07", year: "2026", yt: "adbLZR_J7jg",
+      period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
       desc: "",
       tasks: [
         "기획, 예산 관리(약 70만 엔), 콘티 작성",
@@ -100,20 +100,20 @@ window.SITE = {
     },
     {
       title: "파란 열정, 구스토!",
-      client: "YeahFilm", format: "Visual Film", role: "제작",
+      client: "YeahFilms", format: "Visual Film", role: "제작",
       period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ",
       desc: "", tasks: [], result: "", stills: []
     },
     {
       title: "미해결문제2",
       client: "데이먼스 이어", format: "Concert Live Film", role: "AD · PD",
-      period: "2026.04 — 2026.06", year: "2026", yt: "chXvY65Dh_g",
+      period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       desc: "", tasks: [], result: "", stills: []
     },
     {
       title: "THIS WAS NEVER THE PLAN",
-      client: "YeahFilm", format: "Cinematic Film", role: "제작",
-      period: "2026.01 — 2026.05", year: "2026", yt: "Ghw7gJlzpe8",
+      client: "YeahFilms", format: "Cinematic Film", role: "제작",
+      period: "2026.01 – 2026.05", year: "2026", yt: "Ghw7gJlzpe8",
       desc: "", tasks: [], result: "", stills: []
     },
     {
@@ -124,21 +124,21 @@ window.SITE = {
     },
     {
       title: "눈 감고 일하기",
-      client: "YeahFilm", format: "Documentary", role: "제작",
-      period: "2025.09 — 2025.11", year: "2025", yt: "jYrDcXYjAgI",
+      client: "YeahFilms", format: "Documentary", role: "제작",
+      period: "2025.09 – 2025.11", year: "2025", yt: "jYrDcXYjAgI",
       desc: "", tasks: [], result: "", stills: []
     },
     {
       title: "미지의 세계를 포용하며",
-      client: "YeahFilm", format: "Poetic Documentary", role: "공동 프로듀서",
-      period: "2024.09 — 2024.11", year: "2024", yt: "vuvPIMzL4xg",
+      client: "YeahFilms", format: "Poetic Documentary", role: "제작",
+      period: "2024.09 – 2024.11", year: "2024", yt: "vuvPIMzL4xg",
       desc: "", tasks: [], result: "", stills: []
     }
   ],
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (진행 중)" },
+    { year: "2026", title: "LG전자 BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD (WIP)" },
     { year: "2026", title: "ILLIT ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "YuHyTD3a3s" },
     { year: "2026", title: "백아연 〈들어봐〉", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
     { year: "2026", title: "올빼미 연맹", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
@@ -153,15 +153,14 @@ window.SITE = {
   /* ── 학력 · 수상 · 자격 · 병역 ── */
   education: [
     {
-      period: "2021.03 — 2027.02", school: "아주대학교", major: "문화콘텐츠학과",
+      period: "2021.03 – 2027.02", school: "아주대학교", major: "문화콘텐츠학과",
       second: "문화산업과 커뮤니케이션 전공",   // 복수전공 (없으면 "")
       gpa: "4.37 / 4.5"                          // 학점 (안 보이게 하려면 "")
     }
   ],
   awards: [
-    { year: "2026", name: "우수상", detail: "국민연금공단 기초연금 홍보 공모전 · AI 영상 제작(참여)" },
     { year: "2025", name: "국회의원상", detail: "경기 라디오방송콘텐츠 창작대전 · 팀장" },
-    { year: "2025", name: "동상", detail: "갸스비 숏폼 영상 공모전 · 기획, 연출" },
+    { year: "2025", name: "동상", detail: "GATSBY 숏폼 영상 공모전 · 기획, 연출" },
     { year: "2024", name: "최우수상", detail: "아주대 문화콘텐츠학과 공모전" },
     { year: "2024", name: "학장상", detail: "아주대 인문대학 기초과목 우수 소논문" }
   ],
@@ -176,5 +175,5 @@ window.SITE = {
     { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: false },
     { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: false }
   ],
-  military: { period: "2022.09 — 2024.06", detail: "공군 군사경찰 병장 만기전역" }
+  military: { period: "2022.09 – 2024.06", detail: "공군 군사경찰 병장 만기전역" }
 };

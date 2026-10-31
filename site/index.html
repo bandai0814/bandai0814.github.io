@@ -442,7 +442,7 @@ function renderSite() {
   }).join("");
 
   const about = [
-    ["Education", S.education.map(e => ["", join([e.school, e.major]), [e.second && e.second + " (복수전공)", e.gpa && "GPA " + e.gpa]])],
+    ["Education", S.education.map(e => ["", join([e.school, e.major]), [e.second && "복수전공 / " + e.second, e.gpa && "GPA " + e.gpa]])],
     ["Awards", S.awards.map(a => [a.year, a.name + " · " + a.detail.split(" · ")[0]])],
     ["Certificates", S.certificates.filter(c => c.onSite).map(c => ["", c.detail && c.detail.endsWith("점") ? c.name + " " + c.detail.replace("점", "") : c.name])]
   ];
@@ -551,7 +551,7 @@ function resumeDoc() {
       <div></div>
       <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}<br>${esc(S.siteUrl)}</div>
     </div>
-    ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
+    ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
@@ -581,7 +581,7 @@ function portfolioPage(p) {
   const text = `<div class="p-text">
     <div class="ttl">${esc(p.title)}</div>
     <div class="meta">
-      <span>Client</span><span>${esc(p.client || "YeahFilm")}</span>
+      <span>Client</span><span>${esc(p.client || "YeahFilms")}</span>
       <span>Format</span><span>${esc(p.format)}</span>
       <span>Role</span><span>${esc(p.role)}</span>
       <span>Period</span><span>${esc(p.period || p.year)}</span>
