@@ -44,6 +44,9 @@ nav.main a:hover{color:var(--fg)}
 .hero-meta .who{grid-column:1 / 4;font-weight:600;font-size:16px}
 .hero-meta .who span{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:2px}
 .hero-meta .say{grid-column:4 / 10;margin:0;font-size:clamp(17px,1.6vw,21px);line-height:1.6;max-width:30em;text-wrap:pretty}
+.hero-meta .say p{margin:0}
+.hero-meta .say .skills{margin-top:14px;font-size:14px;color:var(--muted)}
+.hero-meta .say .skills:empty{display:none}
 .hero-meta .go{grid-column:10 / 13;justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:14px}
 
 /* ---------- sections ---------- */
@@ -96,7 +99,7 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .index:hover .index-row{opacity:.3}
 .index .index-row:hover{opacity:1}
 body.view-index .index{display:block}
-body.view-index #workGrid{display:none}
+body.view-index #comGrid, body.view-index #original{display:none}
 .peek{position:fixed;left:0;top:0;width:320px;aspect-ratio:16/9;pointer-events:none;z-index:8;background:var(--tile);overflow:hidden;opacity:0;transition:opacity .15s ease}
 .peek img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .peek.on{opacity:1}
@@ -142,6 +145,16 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .d-close:hover{text-decoration:underline;text-underline-offset:3px}
 .player{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--tile);overflow:hidden}
 .player iframe,.player img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.player.v img{object-fit:contain}
+/* 상세 화면: 내 역할과 맡은 일 */
+.part{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px 20px;font-size:15px;line-height:1.65}
+.part:empty{display:none}
+.part .lab{grid-column:1 / 3;font-size:13px;color:var(--muted);padding-top:2px}
+.part .val{grid-column:3 / 13;min-width:0}
+.part .val.role{font-weight:600}
+.part ul{margin:0;padding-left:1.1em}
+.part .val.cr{color:var(--muted);font-size:14px}
+.d-desc:empty{display:none}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
 .d-desc{margin:0;max-width:40em;font-size:16px;line-height:1.75}
 .d-label{margin:8px 0 -12px;font-size:13px;font-weight:500;color:var(--muted)}
@@ -197,6 +210,12 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .c-body dd{margin:0}
 .c-body ul{margin:0;padding-left:4mm}
 .c-body li{margin-bottom:.8mm}
+.r-p{margin:0 0 2.5mm;line-height:1.75}
+.r-p:last-child{margin-bottom:0}
+.p-text .part{display:block;font-size:8.5pt;line-height:1.6}
+.p-text .part b{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2);margin-bottom:1mm}
+.p-text .part ul{margin:0;padding-left:3.5mm}
+.p-text .cr{font-size:7.5pt;color:var(--ink-2)}
 .c-list .r-rows{padding-top:5mm}
 
 /* 포트폴리오 */
@@ -229,6 +248,8 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   nav.main{grid-column:6 / 13}
   .hero-meta .who{grid-column:1 / 13}
   .hero-meta .say{grid-column:1 / 13}
+  .part .lab,.part .val{grid-column:1 / 13}
+  .part .val{margin-top:-6px}
   .hero-meta .go{grid-column:1 / 13;justify-self:start;align-items:flex-start}
   .sec-head h2{grid-column:1 / 7}
   .sec-head .note{display:none}
@@ -293,21 +314,26 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
     <h1 class="word" id="word"></h1>
     <div class="hero-meta">
       <div class="who" id="who"></div>
-      <p class="say" id="introText"></p>
+      <div class="say"><p id="introText"></p><p class="skills" id="skills"></p></div>
       <div class="go"><span id="heroMail" style="color:var(--muted)"></span></div>
     </div>
   </div>
 
   <section id="work" class="wrap">
     <div class="sec-head">
-      <h2>Work</h2>
+      <h2>Commercial</h2>
       <div class="tools" role="group" aria-label="보기 방식">
         <button class="toggle" type="button" data-view="grid" aria-pressed="true">Grid</button>
         <button class="toggle" type="button" data-view="index" aria-pressed="false">Index</button>
       </div>
     </div>
-    <div class="grid cols" id="workGrid"></div>
+    <div class="grid cols" id="comGrid"></div>
     <div class="index" id="indexList"></div>
+  </section>
+
+  <section id="original" class="wrap">
+    <div class="sec-head"><h2>Original</h2></div>
+    <div class="grid cols" id="oriGrid"></div>
   </section>
 
   <section id="archive" class="wrap">
@@ -354,6 +380,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
       <div><h2 id="dTitle"></h2><p class="d-meta" id="dMeta"></p></div>
       <button class="d-close" id="dClose" type="button">닫기 ✕</button>
     </div>
+    <div class="part" id="dPart"></div>
     <div class="player" id="dPlayer"></div>
     <div class="eps" id="dEps" hidden></div>
     <p class="d-desc" id="dDesc"></p>
@@ -389,6 +416,8 @@ const DOCS = [
 const lookup = ref => { const [set, i] = ref.split(":"); return S[set][i]; };
 /* 여러 편으로 된 작업은 장르 옆에 편 수를 붙임 */
 const fmt = w => w.episodes ? w.format + " " + w.episodes.length + "편" : w.format;
+/* 상업 작업 → 자체 제작 순으로 전체 작업 */
+const works = () => [...(S.commercial || []), ...(S.original || [])];
 function stepDown(img) {
   const m = img.src.match(/i\.ytimg\.com\/vi\/([^/]+)\/(\w+)\.jpg/);
   const k = m ? YTQ.indexOf(m[2]) : -1;
@@ -420,20 +449,24 @@ function renderSite() {
   $("word").innerHTML = esc(S.nameEn).replace(" ", "<br>");
   $("who").innerHTML = `${esc(S.name)}<span>${esc(S.role)}</span>`;
   $("introText").textContent = S.intro;
+  $("skills").textContent = (S.skills || []).filter(Boolean).join("  ·  ");
   $("heroMail").textContent = S.email;
   $("mail").textContent = S.email;
   $("copyright").textContent = "© " + new Date().getFullYear() + " " + S.nameEn;
 
   const L = S.layout || {};
   const big = (w, n) => w.size === "big" && colsOf(n) >= 2 ? "big" : "";
-  $("workGrid").setAttribute("style", colsStyle(L.work));
-  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, fmt(w), w.role]), big(w, L.work))).join("");
+  /* 썸네일 아래에는 클라이언트와 내 역할만 */
+  [["comGrid", "commercial"], ["oriGrid", "original"]].forEach(([id, set]) => {
+    $(id).setAttribute("style", colsStyle(L[set]));
+    $(id).innerHTML = (S[set] || []).map((w, i) => tile(w, set + ":" + i, join([w.client, w.role]), big(w, L[set]))).join("");
+  });
 
   /* Index 보기: 모든 작업을 한 줄씩 */
-  const all = S.work.map((w, i) => ["work:" + i, w]);
+  const all = ["commercial", "original"].flatMap(set => (S[set] || []).map((w, i) => [set + ":" + i, w]));
   $("indexList").innerHTML = all.map(([ref, w]) => `
     <a class="index-row tile-link" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}" data-img="${esc(imageOf(w))}">
-      <span class="c1">${esc(w.year)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(fmt(w))}</span>
+      <span class="c1">${esc(w.year)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(w.role)}</span>
     </a>`).join("");
 
   $("archiveList").innerHTML = S.archive.map(a => {
@@ -491,7 +524,13 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
 const dlg = $("detail"), dPlayer = $("dPlayer"), dStills = $("dStills");
 function openDetail(w) {
   $("dTitle").textContent = w.title;
-  $("dMeta").textContent = join([w.client, fmt(w), w.role, w.period || w.year]);
+  $("dMeta").textContent = join([w.client, fmt(w), w.period || w.year]);
+  /* 내 역할 · 맡은 일 · 함께한 사람: 영상보다 먼저 보이게 */
+  const rows = [];
+  if (w.role) rows.push(`<div class="lab">Role</div><div class="val role">${esc(w.role)}</div>`);
+  if (w.tasks && w.tasks.length) rows.push(`<div class="lab">My Part</div><div class="val"><ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`);
+  if (w.credits) rows.push(`<div class="lab">Credits</div><div class="val cr">${esc(w.credits)}</div>`);
+  $("dPart").innerHTML = rows.join("");
   const eps = $("dEps");
   if (w.episodes) {
     eps.hidden = false;
@@ -512,7 +551,8 @@ function openDetail(w) {
   dlg.showModal(); dlg.scrollTop = 0;
 }
 function showMedia(w, parent) {
-  $("dDesc").textContent = w.desc || parent.desc || "[이 작업을 한두 줄로 소개하는 자리]";
+  $("dDesc").textContent = w.desc || parent.desc || "";
+  dPlayer.classList.toggle("v", !!w.vertical);
   const link = linkOf(w);
   if (w.yt && !framed) {
     dPlayer.innerHTML = `<iframe title="${esc(w.title)}" src="https://www.youtube-nocookie.com/embed/${esc(w.yt)}?rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
@@ -541,7 +581,7 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 const todo = t => `<span class="todo">${t}</span>`;
 const rRow = (d, main, x) => `<div class="r-row"><span class="d">${esc(d)}</span><span>${main}</span><span class="x">${esc(x || "")}</span></div>`;
 const rSec = (h, rows) => `<div class="r-sec"><h3>${h}</h3><div class="r-rows">${rows}</div></div>`;
-const allProjects = () => S.work.map(p => p.episodes ? { ...p, title: p.title + " (" + p.episodes.length + "편)" } : p);
+const allProjects = () => works().map(p => p.episodes ? { ...p, title: p.title + " (" + p.episodes.length + "편)" } : p);
 
 function resumeDoc() {
   return `<article class="sheet">
@@ -556,6 +596,9 @@ function resumeDoc() {
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
+    ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
+      ? S.aboutMe.filter(Boolean).map(t => `<p class="r-p">${esc(t)}</p>`).join("")
+      : todo("[content.js의 aboutMe에 두세 문단으로 적으면 여기에 들어갑니다]"))}
   </article>`;
 }
 
@@ -565,13 +608,14 @@ function careerEntry(p) {
   return `<div class="c-entry">
     <div class="c-head"><b>${esc(p.title)}</b><span>${esc(p.period || p.year)}</span></div>
     <div class="c-meta">${esc(join([p.client, p.format, p.role]))}</div>
-    <dl class="c-body">${eps}<dt>담당 업무</dt><dd>${tasks}</dd><dt>결과</dt><dd>${p.result ? esc(p.result) : todo("[result]")}</dd></dl>
+    <dl class="c-body">${eps}<dt>담당 업무</dt><dd>${tasks}</dd>${p.credits ? `<dt>함께한 사람</dt><dd>${esc(p.credits)}</dd>` : ""}<dt>결과</dt><dd>${p.result ? esc(p.result) : todo("[result]")}</dd></dl>
   </div>`;
 }
 function careerDoc() {
   return `<article class="sheet">
     <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}<br>${esc(S.phone)}</div></div>
-    <div class="c-group"><h3>주요 작업</h3><div>${S.work.map(careerEntry).join("")}</div></div>
+    <div class="c-group"><h3>상업 작업</h3><div>${(S.commercial || []).map(careerEntry).join("")}</div></div>
+    <div class="c-group"><h3>자체 제작</h3><div>${(S.original || []).map(careerEntry).join("")}</div></div>
     <div class="c-group c-list"><h3>기타 참여 작업</h3><div class="r-rows">${S.archive.map(a => rRow(a.year, `<b>${esc(a.title)}</b> · ${esc(a.format)}`, a.role)).join("")}</div></div>
   </article>`;
 }
@@ -586,7 +630,9 @@ function portfolioPage(p) {
       <span>Role</span><span>${esc(p.role)}</span>
       <span>Period</span><span>${esc(p.period || p.year)}</span>
     </div>
+    ${p.tasks && p.tasks.length ? `<div class="part"><b>My Part</b><ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>` : ""}
     <div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>
+    ${p.credits ? `<div class="cr">${esc(p.credits)}</div>` : ""}
     ${linkOf(p) ? `<div class="link">${esc(linkOf(p))}</div>` : ""}
   </div>`;
   let media;
@@ -606,7 +652,7 @@ function portfolioDoc() {
     <div class="n">${esc(S.nameEn).replace(" ", "<br>")}</div>
     <div class="c"><span>${esc(S.name)}</span><span>${esc(S.role)}</span><span>${esc(S.email)}</span><span>${esc(S.siteUrl)}</span></div>
   </div></article>`;
-  return cover + S.work.map(portfolioPage).join("");
+  return cover + works().map(portfolioPage).join("");
 }
 
 /* ============ 화면 전환 ============ */
