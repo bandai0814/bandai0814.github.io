@@ -303,7 +303,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
         <button class="toggle" type="button" data-view="index" aria-pressed="false">Index</button>
       </div>
     </div>
-    <div class="grid two" id="workGrid"></div>
+    <div class="grid four" id="workGrid"></div>
     <div id="seriesWrap"></div>
     <div class="index" id="indexList"></div>
   </section>
@@ -411,8 +411,7 @@ function renderSite() {
   $("mail").textContent = S.email;
   $("copyright").textContent = "© " + new Date().getFullYear() + " " + S.nameEn;
 
-  const odd = S.work.length % 2 === 1;
-  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, w.format, w.role]), odd && i === 0 ? "feature" : "")).join("");
+  $("workGrid").innerHTML = S.work.map((w, i) => tile(w, "work:" + i, join([w.client, w.format, w.role]), "")).join("");
 
   $("seriesWrap").innerHTML = S.series.map((s, si) => `
     <div class="series">
