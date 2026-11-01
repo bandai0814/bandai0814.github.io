@@ -146,7 +146,7 @@ window.SITE = {
       title: "파란 열정, 구스토!",
       client: "YeahFilms", format: "Visual Film", role: "제작",
       period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"]
     },
     {
       title: "THIS WAS NEVER THE PLAN",
