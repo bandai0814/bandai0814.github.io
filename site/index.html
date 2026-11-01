@@ -191,6 +191,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .r-row .d{color:var(--ink-2);font-size:8.5pt;font-variant-numeric:tabular-nums}
 .r-row .x{color:var(--ink-2);font-size:8.5pt;text-align:right}
 .r-row b{font-weight:600}
+.r-row .s{display:block;color:var(--ink-2);font-size:8.5pt}
 
 /* 경력기술서 */
 .c-top{display:grid;grid-template-columns:42mm minmax(0,1fr) auto;gap:6mm;align-items:end;padding-bottom:4mm;border-bottom:1pt solid var(--ink)}
@@ -579,7 +580,7 @@ function resumeDoc() {
     ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
-    ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>`, t.issuer)).join("")) : ""}
+    ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>${t.issuer ? `<span class="s">${esc(t.issuer)}</span>` : ""}`)).join("")) : ""}
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
     ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
       ? S.aboutMe.filter(Boolean).map(t => `<p class="r-p">${esc(t)}</p>`).join("")
