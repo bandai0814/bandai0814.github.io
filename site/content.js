@@ -99,9 +99,9 @@ window.SITE = {
       tasks: [], credits: "", desc: "", result: "",
       episodes: [
         { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", vertical: false, thumb: "", desc: "", stills: [] },
-        { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DczlrTuTg1z/", platform: "Instagram", vertical: true, thumb: "", desc: "", stills: [] },
-        { title: "냉장고 회전선반편", href: "https://www.instagram.com/reel/DczlQjWzJxV/", platform: "Instagram", vertical: true, thumb: "", desc: "", stills: [] },
-        { title: "세탁기건조기 이지핸들편", href: "https://www.instagram.com/reel/DczldVDTwHm/", platform: "Instagram", vertical: true, thumb: "", desc: "", stills: [] }
+        { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DczlrTuTg1z/", platform: "Instagram", vertical: true, thumb: "images/lg-microwave.jpg", desc: "", stills: [] },
+        { title: "냉장고 회전선반편", href: "https://www.instagram.com/reel/DczlQjWzJxV/", platform: "Instagram", vertical: true, thumb: "images/lg-fridge.jpg", desc: "", stills: [] },
+        { title: "세탁기&건조기 이지핸들편", href: "https://www.instagram.com/reel/DczldVDTwHm/", platform: "Instagram", vertical: true, thumb: "images/lg-washer.jpg", desc: "", stills: [] }
       ]
     },
     {

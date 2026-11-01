@@ -86,6 +86,7 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 .ep{display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;color:var(--fg);font:inherit;text-align:left;cursor:pointer;opacity:.45;transition:opacity .2s ease;min-width:0}
 .ep:hover,.ep[aria-pressed="true"]{opacity:1}
 .ep[aria-pressed="true"] .thumb img{filter:none}
+.ep .thumb.v img{object-fit:contain}
 .ep .et{font-size:13px;line-height:1.4}
 .ep[aria-pressed="true"] .et{font-weight:600}
 
@@ -548,7 +549,7 @@ function openDetail(w) {
     eps.hidden = false;
     eps.innerHTML = w.episodes.map(ep => {
       const img = imageOf(ep);
-      return `<button class="ep" type="button" aria-pressed="false"><div class="thumb"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span></button>`;
+      return `<button class="ep" type="button" aria-pressed="false"><div class="thumb${ep.vertical ? " v" : ""}"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span></button>`;
     }).join("");
     noImgOnError(eps);
     const btns = [...eps.querySelectorAll(".ep")];
