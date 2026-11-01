@@ -21,7 +21,7 @@
              → 상세 화면에 작게 표시. 내가 하지 않은 파트를 분명히 해 줌
    desc      작업 소개 한두 줄 → 사이트 상세 화면, 포트폴리오에 들어감
    result    결과 / 성과 한 줄 → 경력기술서에 들어감
-   stills    스틸컷 이미지 경로 3개 → 사이트 상세 화면 'Stills' 줄
+   stills    스틸컷 이미지 경로 최대 5개 → 사이트 상세 화면 'Stills' 줄 (장수만큼 한 줄에 나란히)
              첫 번째 사진이 대표 이미지(목록 썸네일, 포트폴리오 PDF 큰 사진)가 됨
              images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
    behind    현장 비하인드 사진 3개 → 'Behind the Scenes' 줄, 포트폴리오 PDF 아래 줄
@@ -108,7 +108,8 @@ window.SITE = {
       title: "BOOGIENOVA",
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "",
+      stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
     {
       title: "親不孝通りノンフィクション(Haruki's version)",

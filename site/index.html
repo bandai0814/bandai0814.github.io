@@ -157,7 +157,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
 .d-desc{margin:0;max-width:40em;font-size:16px;line-height:1.75}
 .d-label{margin:8px 0 0;font-size:13px;font-weight:500;color:var(--muted)}
-.stills{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.stills{display:grid;gap:12px;grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}
 .gal{display:flex;flex-direction:column;gap:24px}
 .gal:empty{display:none}
 .gal-set{display:flex;flex-direction:column;gap:12px}
@@ -578,10 +578,10 @@ function showMedia(w, parent) {
   }
   /* 스틸컷 · 비하인드 · 작업 자료: 넣은 것만 보이고, 각 줄 최대 3장
      (편이 있는 작업은 편에 없으면 작업 전체 사진을 씀) */
-  const take = key => ((w[key] && w[key].length) ? w[key] : (parent[key] || [])).map(pic).filter(p => p && p.src).slice(0, 3);
-  const sets = [["Stills", take("stills"), ""], ["Behind the Scenes", take("behind"), ""], ["Process", take("process"), "doc"]];
+  const take = (key, max) => ((w[key] && w[key].length) ? w[key] : (parent[key] || [])).map(pic).filter(p => p && p.src).slice(0, max);
+  const sets = [["Stills", take("stills", 5), ""], ["Behind the Scenes", take("behind", 3), ""], ["Process", take("process", 3), "doc"]];
   $("dGal").innerHTML = sets.filter(s => s[1].length).map(([label, items, cls]) => `
-    <div class="gal-set"><p class="d-label">${label}</p><div class="stills">${items.map(p => `
+    <div class="gal-set"><p class="d-label">${label}</p><div class="stills" style="--n:${items.length}">${items.map(p => `
       <div class="shot"><button class="still ${cls}" type="button" data-src="${esc(p.src)}" data-cap="${esc(p.caption || "")}" aria-label="${esc((p.caption || w.title) + " 크게 보기")}"><img alt="" loading="lazy" src="${esc(p.src)}"></button>${p.caption ? `<span class="shot-cap">${esc(p.caption)}</span>` : ""}</div>`).join("")}</div></div>`).join("");
   noImgOnError($("dGal"));
 }
@@ -669,9 +669,10 @@ function portfolioPage(p) {
   } else {
     const st = p.stills || [];
     const srcOf = x => pic(x) && pic(x).src;
-    const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean);
-    const rest = (extra.length ? extra : st.slice(1).map(srcOf)).slice(0, 3).concat([null, null, null]).slice(0, 3);
-    media = `${pImg(imageOf(p), "p-main", "대표 이미지")}<div class="p-row">${rest.map((s, i) => pImg(s, "p-sm", "Behind 0" + (i + 1))).join("")}</div>`;
+    const restSt = st.map(srcOf).filter(Boolean).slice(1, 5);
+    const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean).slice(0, 3);
+    const rest = restSt.length ? restSt : (extra.length ? extra : [null, null, null]);
+    media = `${pImg(imageOf(p), "p-main", "대표 이미지")}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
   }
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}</div></div></article>`;
 }
