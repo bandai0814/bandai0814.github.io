@@ -158,7 +158,7 @@ window.SITE = {
       title: "눈 감고 일하기",
       client: "YeahFilms", format: "Documentary", role: "제작",
       period: "2025.09 – 2025.11", year: "2025", yt: "jYrDcXYjAgI",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"]
     },
     {
       title: "미지의 세계를 포용하며",
