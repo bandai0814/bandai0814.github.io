@@ -156,7 +156,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
 .d-desc{margin:0;max-width:40em;font-size:16px;line-height:1.75}
 .d-label{margin:8px 0 -12px;font-size:13px;font-weight:500;color:var(--muted)}
-.stills{display:grid;gap:12px;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.stills{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
 .still{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--tile);overflow:hidden}
 .still img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
@@ -277,7 +277,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   footer .mailbox,footer .cr{grid-column:1 / 13;justify-self:start}
   dialog{width:100vw;max-height:100vh;height:100%}
   .d-in{padding:20px var(--gut-r) 32px var(--gut)}
-  .stills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stills{gap:6px}
   .eps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion: reduce){.thumb img,.index-row,.peek{transition:none}a.tile:hover img{transform:none}}
@@ -373,6 +373,8 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
     <p class="d-desc" id="dDesc"></p>
     <p class="d-label">Stills</p>
     <div class="stills" id="dStills"></div>
+    <p class="d-label">Behind the Scenes</p>
+    <div class="stills" id="dBehind"></div>
   </div>
 </dialog>
 
@@ -548,9 +550,11 @@ function showMedia(w, parent) {
   } else {
     dPlayer.innerHTML = `<div class="out">${esc(w.note || parent.note || "영상 준비 중")}</div>`;
   }
-  const list = (w.stills && w.stills.length) ? w.stills.slice(0, 4) : [null, null, null, null];
-  dStills.style.setProperty("--n", list.length === 3 ? 3 : 2);
-  dStills.innerHTML = list.map((src, i) => `<div class="still">${src ? `<img alt="${esc(w.title)} 스틸 ${i + 1}" src="${esc(src)}">` : `<span class="ph">Still 0${i + 1}</span>`}</div>`).join("");
+  /* 스틸컷 3장, 비하인드 3장 (편이 있는 작업은 편에 없으면 작업 전체 사진을 씀) */
+  const three = (arr, label, alt) => (arr && arr.length ? arr.slice(0, 3) : [null, null, null])
+    .map((src, i) => `<div class="still">${src ? `<img alt="${esc(w.title)} ${alt} ${i + 1}" loading="lazy" src="${esc(src)}">` : `<span class="ph">${label} 0${i + 1}</span>`}</div>`).join("");
+  dStills.innerHTML = three((w.stills && w.stills.length) ? w.stills : parent.stills, "Still", "스틸");
+  $("dBehind").innerHTML = three((w.behind && w.behind.length) ? w.behind : parent.behind, "Behind", "비하인드");
 }
 document.addEventListener("click", e => {
   const a = e.target.closest("a[data-ref]");
@@ -626,8 +630,10 @@ function portfolioPage(p) {
     media = `<div class="p-eps">${p.episodes.map(ep => `<div class="p-ep">${pImg(imageOf(ep), "p-sm", ep.platform)}<b>${esc(ep.title)}</b></div>`).join("")}</div>`;
   } else {
     const st = p.stills || [];
-    const rest = st.slice(1, 4).concat([null, null, null]).slice(0, 3);
-    media = `${pImg(imageOf(p), "p-main", "대표 이미지")}<div class="p-row">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
+    const bh = p.behind || [];
+    const rest = (bh.length ? bh.slice(0, 3) : st.slice(1, 4)).concat([null, null, null]).slice(0, 3);
+    const lab = bh.length ? "Behind 0" : "Still 0";
+    media = `${pImg(imageOf(p), "p-main", "대표 이미지")}<div class="p-row">${rest.map((s, i) => pImg(s, "p-sm", bh.length ? lab + (i + 1) : "Behind 0" + (i + 1))).join("")}</div>`;
   }
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}</div></div></article>`;
 }
