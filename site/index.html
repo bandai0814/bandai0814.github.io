@@ -579,6 +579,7 @@ function resumeDoc() {
     ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
+    ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>`, t.issuer)).join("")) : ""}
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
     ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
       ? S.aboutMe.filter(Boolean).map(t => `<p class="r-p">${esc(t)}</p>`).join("")

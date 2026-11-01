@@ -197,5 +197,10 @@ window.SITE = {
     { name: "한국사능력검정 1급", detail: "국사편찬위원회", date: "2024.06", onSite: true },
     { name: "운전면허 2종 보통", detail: "장거리 운전 가능", date: "2021.02", onSite: true }
   ],
+  // 교육 이수: 이력서에만 들어갑니다 (사이트에는 안 보임)
+  training: [
+    { year: "2026", issuer: "KTL 한국산업기술시험원", name: "공연자 안전교육 (스태프 및 작업자 과정) 수료" },
+    { year: "2025", issuer: "경기평생기술학원", name: "건축도장기능사 자격증 취득 과정 수료" }
+  ],
   military: { period: "2022.09 – 2024.06", detail: "공군 군사경찰 병장 만기전역" }
 };
