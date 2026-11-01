@@ -25,6 +25,10 @@
              첫 번째 사진이 대표 이미지(목록 썸네일, 포트폴리오 PDF 큰 사진)가 됨
              images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
    behind    현장 비하인드 사진 3개 → 'Behind the Scenes' 줄, 포트폴리오 PDF 아래 줄
+   process   내가 만든 작업 자료(콘티, 타임테이블, 기획안 캡처 등) 최대 3개 → 'Process' 줄
+             설명을 붙이려면 { src: "images/haruki-conti.jpg", caption: "촬영 콘티" } 처럼 적기
+             (stills, behind도 같은 방식으로 설명을 붙일 수 있음)
+             사진은 넣은 줄만 사이트에 보이고, 누르면 크게 볼 수 있음
    thumb     목록에 보일 대표 이미지를 따로 지정하고 싶을 때 (예: "images/haruki-main.jpg")
              비워두면 스틸컷 첫 장 → 유튜브 썸네일 순서로 자동 선택
              인스타그램 영상은 썸네일을 자동으로 못 가져오므로 여기에 캡처 이미지를 넣어 주세요
@@ -117,7 +121,8 @@ window.SITE = {
       credits: "", desc: "",
       result: "아티스트 공식 뮤직비디오로 공개",
       stills: [],
-      behind: []
+      behind: [],
+      process: []
     },
     {
       title: "제 2 미해결문제 第 2 未解決問題 : //",
