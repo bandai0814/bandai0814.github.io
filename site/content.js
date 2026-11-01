@@ -140,7 +140,7 @@ window.SITE = {
       title: "레드아카데미",
       client: "Personal", format: "AI Cinematic Drama", role: "제작",
       period: "2026.03 – 2026.07", year: "2026", yt: "4peMRX9iVMI",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/redacademy-1.jpg", "images/redacademy-2.jpg", "images/redacademy-3.jpg", "images/redacademy-4.jpg"]
     },
     {
       title: "파란 열정, 구스토!",
