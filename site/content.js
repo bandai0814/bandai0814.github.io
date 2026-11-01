@@ -21,7 +21,7 @@
              → 상세 화면에 작게 표시. 내가 하지 않은 파트를 분명히 해 줌
    desc      작업 소개 한두 줄 → 사이트 상세 화면, 포트폴리오에 들어감
    result    결과 / 성과 한 줄 → 경력기술서에 들어감
-   stills    스틸컷 이미지 경로 최대 5개 → 사이트 상세 화면 'Stills' 줄 (장수만큼 한 줄에 나란히)
+   stills    스틸컷 이미지 경로 → 사이트 상세 화면 'Stills' (5장까지는 한 줄, 6~10장은 두 줄로 나눠짐)
              대표 이미지는 유튜브 썸네일이 그대로 쓰이고, 유튜브 영상이 없을 때만 첫 번째 사진이 대표가 됨
              images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
    behind    현장 비하인드 사진 3개 → 'Behind the Scenes' 줄, 포트폴리오 PDF 아래 줄
@@ -164,7 +164,7 @@ window.SITE = {
       title: "미지의 세계를 포용하며",
       client: "YeahFilms", format: "Poetic Documentary", role: "제작",
       period: "2024.09 – 2024.11", year: "2024", yt: "vuvPIMzL4xg",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg"]
     }
   ],
 

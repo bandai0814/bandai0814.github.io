@@ -579,10 +579,12 @@ function showMedia(w, parent) {
   /* 스틸컷 · 비하인드 · 작업 자료: 넣은 것만 보이고, 각 줄 최대 3장
      (편이 있는 작업은 편에 없으면 작업 전체 사진을 씀) */
   const take = (key, max) => ((w[key] && w[key].length) ? w[key] : (parent[key] || [])).map(pic).filter(p => p && p.src).slice(0, max);
-  const sets = [["Stills", take("stills", 5), ""], ["Behind the Scenes", take("behind", 3), ""], ["Process", take("process", 3), "doc"]];
+  /* 5장까지는 한 줄, 6장 이상은 두 줄로 나눔 (7장이면 4 + 3) */
+  const rowsOf = items => items.length <= 5 ? [items] : [items.slice(0, Math.ceil(items.length / 2)), items.slice(Math.ceil(items.length / 2))];
+  const sets = [["Stills", take("stills", 10), ""], ["Behind the Scenes", take("behind", 3), ""], ["Process", take("process", 3), "doc"]];
   $("dGal").innerHTML = sets.filter(s => s[1].length).map(([label, items, cls]) => `
-    <div class="gal-set"><p class="d-label">${label}</p><div class="stills" style="--n:${items.length}">${items.map(p => `
-      <div class="shot"><button class="still ${cls}" type="button" data-src="${esc(p.src)}" data-cap="${esc(p.caption || "")}" aria-label="${esc((p.caption || w.title) + " 크게 보기")}"><img alt="" loading="lazy" src="${esc(p.src)}"></button>${p.caption ? `<span class="shot-cap">${esc(p.caption)}</span>` : ""}</div>`).join("")}</div></div>`).join("");
+    <div class="gal-set"><p class="d-label">${label}</p>${rowsOf(items).map(row => `<div class="stills" style="--n:${row.length}">${row.map(p => `
+      <div class="shot"><button class="still ${cls}" type="button" data-src="${esc(p.src)}" data-cap="${esc(p.caption || "")}" aria-label="${esc((p.caption || w.title) + " 크게 보기")}"><img alt="" loading="lazy" src="${esc(p.src)}"></button>${p.caption ? `<span class="shot-cap">${esc(p.caption)}</span>` : ""}</div>`).join("")}</div>`).join("")}</div>`).join("");
   noImgOnError($("dGal"));
 }
 document.addEventListener("click", e => {
