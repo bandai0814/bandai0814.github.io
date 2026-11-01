@@ -80,7 +80,8 @@ window.SITE = {
       title: "죽은 연인에게로",
       client: "데이먼스 이어", format: "Concert Film", role: "AD · PD · B CAM",
       period: "2026.10 – WIP", year: "2026", note: "공개 예정",
-      tasks: [], credits: "", desc: "", result: "", stills: [],
+      thumb: "images/damons-lover-main.jpg",
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-lover-main.jpg"],
       episodes: [
         { title: "공연 하이라이트", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 1]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
