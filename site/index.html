@@ -413,7 +413,7 @@ const ytUrl = id => "https://www.youtube.com/watch?v=" + id;
 const YTQ = ["maxresdefault", "sddefault", "hqdefault"];
 const ytThumb = id => "https://i.ytimg.com/vi/" + id + "/" + YTQ[0] + ".jpg";
 const linkOf = w => w.yt ? ytUrl(w.yt) : (w.href || "");
-const imageOf = w => w.thumb || (w.stills && w.stills[0]) || (w.yt ? ytThumb(w.yt) : "")
+const imageOf = w => w.thumb || (w.yt ? ytThumb(w.yt) : "") || (w.stills && w.stills[0])
   || (w.episodes ? (w.episodes.map(e => imageOf(e)).find(Boolean) || "") : "");
 const join = a => a.filter(Boolean).join(" · ");
 let framed = false;
@@ -669,10 +669,11 @@ function portfolioPage(p) {
   } else {
     const st = p.stills || [];
     const srcOf = x => pic(x) && pic(x).src;
-    const restSt = st.map(srcOf).filter(Boolean).slice(1, 5);
+    const main = imageOf(p);
+    const restSt = st.map(srcOf).filter(s => s && s !== main).slice(0, 4);
     const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean).slice(0, 3);
     const rest = restSt.length ? restSt : (extra.length ? extra : [null, null, null]);
-    media = `${pImg(imageOf(p), "p-main", "대표 이미지")}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
+    media = `${pImg(main, "p-main", "대표 이미지")}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
   }
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}</div></div></article>`;
 }
