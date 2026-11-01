@@ -122,7 +122,7 @@ window.SITE = {
       ],
       credits: "", desc: "",
       result: "아티스트 공식 뮤직비디오로 공개",
-      stills: [],
+      stills: ["images/haruki-1.jpg", "images/haruki-2.jpg", "images/haruki-3.jpg", "images/haruki-4.jpg"],
       behind: [],
       process: []
     },
