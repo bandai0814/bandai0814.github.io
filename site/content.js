@@ -160,15 +160,15 @@ window.SITE = {
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "[LG전자] BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
-    { year: "2026", title: "[ILLIT] ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "-YuHyTD3a3s" },
-    { year: "2026", title: "[백아연] '들어봐'", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
-    { year: "2026", title: "[YeahFilms] '올빼미 연맹'", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
-    { year: "2026", title: "[내러티브룸] The spaghetty story", format: "Teasing Video", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
-    { year: "2026", title: "[SHAUN] '일기장'", format: "Music Video", role: "카메라팀", yt: "O0diKBGKvMQ" },
+    { year: "2026", title: "[LG전자]  BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
+    { year: "2026", title: "[ILLIT]  ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "-YuHyTD3a3s" },
+    { year: "2026", title: "[백아연]  '들어봐'", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
+    { year: "2026", title: "[YeahFilms]  '올빼미 연맹'", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
+    { year: "2026", title: "[내러티브룸]  The spaghetty story", format: "Teasing Video", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
+    { year: "2026", title: "[SHAUN]  '일기장'", format: "Music Video", role: "카메라팀", yt: "O0diKBGKvMQ" },
     { year: "2025", title: "GATSBY 〈바람은 그를 비껴갔다〉", format: "Short-form", role: "기획 · 연출", href: "https://youtube.com/shorts/Hc3jACbADNg" },
-    { year: "2024", title: "[YeahFilms] '글리코상은 어디에'", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
-    { year: "2024", title: "[YeahFilms] 'Big Hill' (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
+    { year: "2024", title: "[YeahFilms]  '글리코상은 어디에'", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
+    { year: "2024", title: "[YeahFilms]  'Big Hill' (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
     { year: "2024", title: "KBS 〈스캔들〉, 〈수지맞은 우리〉", format: "Drama", role: "촬영보조" }
   ],
 
