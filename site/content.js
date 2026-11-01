@@ -152,7 +152,7 @@ window.SITE = {
       title: "THIS WAS NEVER THE PLAN",
       client: "YeahFilms", format: "Cinematic Film", role: "제작",
       period: "2026.01 – 2026.05", year: "2026", yt: "Ghw7gJlzpe8",
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"]
     },
     {
       title: "눈 감고 일하기",
