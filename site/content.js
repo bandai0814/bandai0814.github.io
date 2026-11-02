@@ -34,6 +34,9 @@
              인스타그램 영상은 썸네일을 자동으로 못 가져오므로 여기에 캡처 이미지를 넣어 주세요
    vertical  세로 영상이면 true → 상세 화면에서 잘리지 않고 세로로 보임
    episodes  여러 편으로 된 작업일 때 각 편의 목록 (상세 화면에서 편을 골라 볼 수 있음)
+             편에 feature: true를 붙이면 포트폴리오 PDF에서 위 줄에 크게, 나머지 편은 아래 한 줄로 배치
+             세로 편(vertical: true)은 포트폴리오 PDF에서 9:16 비율로 아래 한 줄에 배치
+   thumbZoom 유튜브 썸네일 위아래에 검은 여백이 있을 때 확대해서 여백을 없앰 (예: 1.125)
 
    ── 순서 바꾸기 ─────────────────────────────────────────────
    사이트의 Selected Work는 commercial과 original을 합쳐서
@@ -83,13 +86,13 @@ window.SITE = {
       thumb: "images/damons-lover-main.jpg",
       tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-lover-main.jpg"],
       episodes: [
-        { title: "공연 하이라이트", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
+        { title: "공연 하이라이트", feature: true, yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 1]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 2]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 3]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 4]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
         { title: "라이브 · [곡명 5]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "풀 라이브 아카이빙", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] }
+        { title: "풀 라이브 아카이빙", feature: true, yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] }
       ]
     },
     {
@@ -139,7 +142,7 @@ window.SITE = {
     {
       title: "레드아카데미",
       client: "Personal", format: "AI Cinematic Drama", role: "제작",
-      period: "2026.03 – 2026.07", year: "2026", yt: "4peMRX9iVMI",
+      period: "2026.03 – 2026.07", year: "2026", yt: "4peMRX9iVMI", thumbZoom: 1.125,
       tasks: [], credits: "", desc: "", result: "", stills: ["images/redacademy-1.jpg", "images/redacademy-2.jpg", "images/redacademy-3.jpg", "images/redacademy-4.jpg"]
     },
     {

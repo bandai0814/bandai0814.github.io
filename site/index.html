@@ -253,6 +253,9 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-main img,.p-sm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .p-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3mm}
 .p-eps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm 3mm}
+.p-media>.p-eps+.p-eps{margin-top:2mm}
+.p-mix{display:flex;flex-direction:column;gap:4mm}
+.p-sm.p-v{aspect-ratio:9/16}
 .p-ep{display:flex;flex-direction:column;gap:1.5mm;font-size:8pt}
 .p-ep b{font-weight:600}
 
@@ -463,7 +466,7 @@ const colsStyle = n => `--cols:${colsOf(n)};--cols-s:${colsOf(n) === 1 ? 1 : 2}`
 function tile(w, ref, meta, cls) {
   const img = imageOf(w);
   return `<a class="tile${cls ? " " + cls : ""}" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}">
-    <div class="thumb"><span class="ph">${esc(w.note || w.platform || w.format)}</span>${img ? `<img alt="" loading="lazy" src="${esc(img)}">` : ""}</div>
+    <div class="thumb"><span class="ph">${esc(w.note || w.platform || w.format)}</span>${img ? `<img alt="" loading="lazy" src="${esc(img)}"${!w.thumb && w.thumbZoom ? ` style="transform:scale(${w.thumbZoom})"` : ""}>` : ""}</div>
     <div class="cap"><div class="t">${esc(w.title)}</div><div class="y">${esc(w.platform || yr(w))}</div></div>
     ${meta ? `<div class="m">${esc(meta)}</div>` : ""}</a>`;
 }
@@ -610,7 +613,6 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 const todo = t => `<span class="todo">${t}</span>`;
 const rRow = (d, main, x) => `<div class="r-row"><span class="d">${esc(d)}</span><span>${main}</span><span class="x">${esc(x || "")}</span></div>`;
 const rSec = (h, rows) => `<div class="r-sec"><h3>${h}</h3><div class="r-rows">${rows}</div></div>`;
-const allProjects = () => works().map(p => p.episodes ? { ...p, title: p.title + " (" + p.episodes.length + "편)" } : p);
 
 function resumeDoc() {
   return `<article class="sheet">
@@ -621,7 +623,7 @@ function resumeDoc() {
       <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br>${esc(S.siteUrl)}</div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
-    ${rSec("경력", allProjects().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.role)).join(""))}
+    ${rSec("경력", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.format + (p.episodes ? " (" + p.episodes.length + "편)" : ""))).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
     ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>${t.issuer ? `<span class="s">${esc(t.issuer)}</span>` : ""}`)).join("")) : ""}
@@ -650,7 +652,7 @@ function careerDoc() {
   </article>`;
 }
 
-const pImg = (src, cls, label) => `<div class="${cls}">${src ? `<img alt="" src="${esc(src)}">` : `<span class="ph-paper">${esc(label)}</span>`}</div>`;
+const pImg = (src, cls, label, zoom) => `<div class="${cls}">${src ? `<img alt="" src="${esc(src)}"${zoom ? ` style="transform:scale(${zoom})"` : ""}>` : `<span class="ph-paper">${esc(label)}</span>`}</div>`;
 function portfolioPage(p) {
   const text = `<div class="p-text">
     <div class="ttl">${esc(p.title)}</div>
@@ -667,7 +669,19 @@ function portfolioPage(p) {
   </div>`;
   let media;
   if (p.episodes) {
-    media = `<div class="p-eps">${p.episodes.map(ep => `<div class="p-ep">${pImg(imageOf(ep), "p-sm", ep.platform)}<b>${esc(ep.title)}</b></div>`).join("")}</div>`;
+    const ep = (e, cls) => `<div class="p-ep">${pImg(imageOf(e), cls || "p-sm", e.platform)}<b>${esc(e.title)}</b></div>`;
+    const grid = (list, cls) => `<div class="p-eps" style="grid-template-columns:repeat(${list.length},minmax(0,1fr))">${list.map(e => ep(e, cls)).join("")}</div>`;
+    const feats = p.episodes.filter(e => e.feature), verts = p.episodes.filter(e => e.vertical);
+    if (feats.length) {
+      /* 대표 편(feature)은 위에 크게, 나머지 편은 아래 한 줄 */
+      media = grid(feats) + grid(p.episodes.filter(e => !e.feature));
+    } else if (verts.length) {
+      /* 가로 편은 위에 크게, 세로(9:16) 편은 아래 한 줄 — 페이지 높이에 맞춰 폭 계산 */
+      const n = verts.length, W = Math.min(179, (163 + 3 * (n - 1) * 16 / (9 * n)) / (9 / 16 + 16 / (9 * n)));
+      media = `<div class="p-mix" style="width:${W.toFixed(1)}mm">${p.episodes.filter(e => !e.vertical).map(e => ep(e, "p-main")).join("")}${grid(verts, "p-sm p-v")}</div>`;
+    } else {
+      media = `<div class="p-eps" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => ep(e)).join("")}</div>`;
+    }
   } else {
     const st = p.stills || [];
     const srcOf = x => pic(x) && pic(x).src;
@@ -675,7 +689,7 @@ function portfolioPage(p) {
     const restSt = st.map(srcOf).filter(s => s && s !== main).slice(0, 4);
     const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean).slice(0, 3);
     const rest = restSt.length ? restSt : (extra.length ? extra : [null, null, null]);
-    media = `${pImg(main, "p-main", "대표 이미지")}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
+    media = `${pImg(main, "p-main", "대표 이미지", !p.thumb && p.thumbZoom)}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
   }
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}</div></div></article>`;
 }
