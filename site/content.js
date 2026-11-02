@@ -93,11 +93,11 @@ window.SITE = {
       picker: true,
       episodes: [
         { title: "하이라이트 필름", feature: true, yt: "i1u8Vcy-J6E", desc: "", stills: [] },
-        { title: "라이브 · [곡명 1]", yt: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 2]", yt: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 3]", yt: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 4]", yt: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 5]", yt: "", desc: "", stills: [] },
+        { title: "라이브 · Gertha Loew", yt: "", desc: "", stills: [] },
+        { title: "라이브 · Auburn/Telepathy", yt: "", desc: "", stills: [] },
+        { title: "라이브 · Erebia", yt: "", desc: "", stills: [] },
+        { title: "라이브 · Blache", yt: "", desc: "", stills: [] },
+        { title: "라이브 · 에게로", yt: "", desc: "", stills: [] },
         { title: "풀 라이브 아카이빙", yt: "", desc: "", stills: [] }
       ]
     },
