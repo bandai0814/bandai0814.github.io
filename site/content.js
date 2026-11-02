@@ -149,7 +149,8 @@ window.SITE = {
           stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
         { title: "미지의 세계를 포용하며", format: "Poetic Documentary", year: "2024", role: "", feature: true, yt: "vuvPIMzL4xg", desc: "",
           stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] },
-        { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "", stills: [] },
+        { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "",
+          stills: ["images/glico-1.jpg", "images/glico-2.jpg", "images/glico-3.jpg", "images/glico-4.jpg"] },
         { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "", stills: [] }
       ]
     }
