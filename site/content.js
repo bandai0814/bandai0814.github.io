@@ -130,7 +130,7 @@ window.SITE = {
         "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
         "촬영 소스 확보를 위한 현장 스크립터 및 동선 정리",
         "후반 작업 결과물 검토·피드백을 통한 편집 보조"
-      ], credits: "", desc: "", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
+      ], credits: "", desc: "서소문성지 역사박물관에서 6일간 열린 데이먼스 이어 단독 콘서트의 라이브 필름. 감독 1명·조연출 2명의 소규모 팀으로, 매일 달라지는 무대 상황에 맞춰 카메라 배치와 구도를 재설계하며 촬영 진행. 공연 중 아티스트 근접이 어려운 환경을 고려해 클로즈업은 리허설, 와이드는 본공연에서 나눠 촬영하는 방식으로 제한된 여건 속 다양한 구도와 특수효과 컷 확보.", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
     }
   ],
 
