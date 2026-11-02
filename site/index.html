@@ -168,7 +168,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .side .cell:hover img{opacity:.85}
 .part.d-about:has(.d-desc:empty){display:none}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
-.d-desc{margin:0;max-width:44em;font-size:15px;line-height:1.75}
+.d-desc{margin:0;max-width:44em;font-size:15px;line-height:1.75;text-align:justify;text-justify:inter-character;white-space:pre-line}
 .d-label{margin:8px 0 0;font-size:13px;font-weight:500;color:var(--muted)}
 .stills{display:grid;gap:12px;grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}
 .gal{display:flex;flex-direction:column;gap:24px}
@@ -263,7 +263,8 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-text .ttl{font-size:20pt;font-weight:700;letter-spacing:-.04em;line-height:1.15}
 .p-text .meta{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:1mm 3mm;font-size:8.5pt;margin-top:2mm}
 .p-text .meta span:nth-child(odd){color:var(--ink-2)}
-.p-text .desc{margin-top:4mm;font-size:9.5pt;line-height:1.75}
+.p-text .desc:has(.todo){text-align:left}
+.p-text .desc{margin-top:4mm;font-size:9pt;line-height:1.75;text-align:justify;text-justify:inter-character;white-space:pre-line}
 .p-text .link{margin-top:auto;font-size:7.5pt;color:var(--ink-2);word-break:break-all}
 .p-media{display:flex;flex-direction:column;gap:3mm;min-width:0}
 .p-main,.p-sm{position:relative;aspect-ratio:16/9;background:#F0F0F0;overflow:hidden}
