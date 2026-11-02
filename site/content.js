@@ -16,6 +16,8 @@
              Archive 항목은 진행 중이면 wip: true 를 붙이기
    yt        유튜브 영상 ID (youtu.be/ 뒤의 11자리)
    href      유튜브가 아닌 링크 (인스타그램 등)
+   files     관련 자료 링크 → 상세 화면 My Part 아래에 보임
+             [{ label: "촬영 타임테이블", url: "https://..." }, { label: "콘티", url: "https://..." }] 처럼 적기
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
    credits   함께한 사람들 (예: "Director 홍길동 · Edit 김OO · DI 이OO")
              → 상세 화면에 작게 표시. 내가 하지 않은 파트를 분명히 해 줌
@@ -80,25 +82,10 @@ window.SITE = {
   /* ── Selected Work ①: 클라이언트 작업 (경력기술서에서 '상업 작업'으로 묶임) ── */
   commercial: [
     {
-      title: "죽은 연인에게로",
-      client: "데이먼스 이어", format: "Concert Film", role: "AD · PD · B CAM",
-      period: "2026.10 – WIP", year: "2026", note: "공개 예정",
-      thumb: "images/damons-lover-main.jpg",
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-lover-main.jpg"],
-      episodes: [
-        { title: "공연 하이라이트", feature: true, yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 1]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 2]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 3]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 4]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "라이브 · [곡명 5]", yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] },
-        { title: "풀 라이브 아카이빙", feature: true, yt: "", platform: "YouTube", thumb: "", desc: "", stills: [] }
-      ]
-    },
-    {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Short-form", role: "AD · PD",
       period: "2026.07 – 2026.09", year: "2026",
+      files: [],
       tasks: [], credits: "", desc: "", result: "",
       episodes: [
         { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", vertical: false, thumb: "", desc: "", stills: [] },
@@ -111,6 +98,7 @@ window.SITE = {
       title: "BOOGIENOVA",
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
+      files: [],
       tasks: [], credits: "", desc: "", result: "",
       stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
@@ -118,6 +106,7 @@ window.SITE = {
       title: "親不孝通りノンフィクション(Haruki's version)",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
+      files: [],
       tasks: [
         "기획, 예산 관리(약 70만 엔), 콘티 작성",
         "한국 크루 5인의 후쿠오카 현지 촬영 운영, 연출 보조",
@@ -131,57 +120,49 @@ window.SITE = {
     },
     {
       title: "제 2 미해결문제 第 2 未解決問題 : //",
-      client: "데이먼스 이어", format: "Concert Live Film", role: "AD · PD",
+      client: "데이먼스 이어", format: "Concert Film", role: "AD · PD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
+      files: [],
       tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
     }
   ],
 
-  /* ── Selected Work ②: YeahFilms · 개인 작업 (경력기술서에서 '자체 제작'으로 묶임) ── */
+  /* ── Selected Work ②: YeahFilms 작업 모음 (경력기술서에서 '자체 제작'으로 묶임) ── */
   original: [
     {
-      title: "레드아카데미",
-      client: "Personal", format: "AI Cinematic Drama", role: "제작",
-      period: "2026.03 – 2026.07", year: "2026", yt: "4peMRX9iVMI", thumbZoom: 1.125,
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/redacademy-1.jpg", "images/redacademy-2.jpg", "images/redacademy-3.jpg", "images/redacademy-4.jpg"]
-    },
-    {
-      title: "파란 열정, 구스토!",
-      client: "YeahFilms", format: "Visual Film", role: "제작",
-      period: "2026.06", year: "2026", yt: "o-jsTZ3KFBQ",
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"]
-    },
-    {
-      title: "THIS WAS NEVER THE PLAN",
-      client: "YeahFilms", format: "Cinematic Film", role: "제작",
-      period: "2026.01 – 2026.05", year: "2026", yt: "Ghw7gJlzpe8",
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"]
-    },
-    {
-      title: "눈 감고 일하기",
-      client: "YeahFilms", format: "Documentary", role: "제작",
-      period: "2025.09 – 2025.11", year: "2025", yt: "jYrDcXYjAgI",
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"]
-    },
-    {
-      title: "미지의 세계를 포용하며",
-      client: "YeahFilms", format: "Poetic Documentary", role: "제작",
-      period: "2024.09 – 2024.11", year: "2024", yt: "vuvPIMzL4xg",
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg"]
+      title: "YeahFilms Originals",
+      client: "YeahFilms", format: "Short Film · Documentary", role: "제작",
+      period: "2024.09 – 2026.06", year: "2024 – 2026",
+      files: [],
+      tasks: [], credits: "", desc: "", result: "",
+      // feature: true = 메인 작업 (포트폴리오 PDF에서 위 줄에 크게), 나머지는 작은 작업
+      // role: 작업마다 내 역할이 다르면 여기에 적기 (상세 화면에서 작업을 고를 때 함께 보임)
+      episodes: [
+        { title: "파란 열정, 구스토!", format: "Visual Film", year: "2026", role: "", feature: true, yt: "o-jsTZ3KFBQ", desc: "",
+          stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"] },
+        { title: "THIS WAS NEVER THE PLAN", format: "Cinematic Film", year: "2026", role: "", feature: true, yt: "Ghw7gJlzpe8", desc: "",
+          stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"] },
+        { title: "눈 감고 일하기", format: "Documentary", year: "2025", role: "", feature: true, yt: "jYrDcXYjAgI", desc: "",
+          stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
+        { title: "미지의 세계를 포용하며", format: "Poetic Documentary", year: "2024", role: "", feature: true, yt: "vuvPIMzL4xg", desc: "",
+          stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg"] },
+        { title: "올빼미 연맹", format: "Concept Short Film", year: "2026", role: "", yt: "MTVKRzYjjp4", desc: "", stills: [] },
+        { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "", stills: [] },
+        { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "", stills: [] }
+      ]
     }
   ],
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
+    { year: "2026", title: "[데이먼스 이어]  죽은 연인에게로", format: "Concert Film", role: "AD · PD · B CAM", wip: true },
+    { year: "2026", title: "[Personal]  레드아카데미", format: "AI Cinematic Drama", role: "제작", yt: "4peMRX9iVMI" },
     { year: "2026", title: "[LG전자]  BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
-    { year: "2026", title: "[ILLIT]  ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "AD", yt: "-YuHyTD3a3s" },
+    { year: "2026", title: "[ILLIT]  ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "기획 · 연출 보조", yt: "-YuHyTD3a3s" },
     { year: "2026", title: "[백아연]  '들어봐'", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
-    { year: "2026", title: "[YeahFilms]  '올빼미 연맹'", format: "Concept Short Film", role: "제작", yt: "MTVKRzYjjp4" },
     { year: "2026", title: "[내러티브룸]  The spaghetty story", format: "Teasing Video", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },
     { year: "2026", title: "[SHAUN]  '일기장'", format: "Music Video", role: "카메라팀", yt: "O0diKBGKvMQ" },
     { year: "2025", title: "GATSBY 〈바람은 그를 비껴갔다〉", format: "Short-form", role: "기획 · 연출", href: "https://youtube.com/shorts/Hc3jACbADNg" },
-    { year: "2024", title: "[YeahFilms]  '글리코상은 어디에'", format: "Cinematic Video Essay", role: "제작", yt: "XlHidpVW4KQ" },
-    { year: "2024", title: "[YeahFilms]  'Big Hill' (Balming Tiger ‘big butt’)", format: "Visual Film", role: "제작", yt: "cGbtNHgaYJs" },
     { year: "2024", title: "KBS 〈스캔들〉, 〈수지맞은 우리〉", format: "Drama", role: "촬영보조" }
   ],
 
