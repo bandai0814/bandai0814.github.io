@@ -571,7 +571,7 @@ function openDetail(w) {
   if (w.focus || (w.tasks && w.tasks.length)) rows.push(`<div class="lab">My Part</div><div class="val">${w.focus ? `<p class="focus">${esc(w.focus)}</p>` : ""}${(w.tasks || []).length ? `<ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`);
   if (w.credits) rows.push(`<div class="lab">Credits</div><div class="val cr">${esc(w.credits)}</div>`);
   const files = (w.files || []).filter(f => f && f.url);
-  if (files.length) rows.push(`<div class="lab">Production Files</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
+  if (files.length) rows.push(`<div class="lab">Work Sample</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
   $("dPart").innerHTML = rows.join("");
   const eps = $("dEps");
   eps.hidden = true; eps.innerHTML = "";

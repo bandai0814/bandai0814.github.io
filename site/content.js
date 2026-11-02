@@ -16,8 +16,8 @@
              Archive 항목은 진행 중이면 wip: true 를 붙이기
    yt        유튜브 영상 ID (youtu.be/ 뒤의 11자리)
    href      유튜브가 아닌 링크 (인스타그램 등)
-   files     관련 자료 링크 → 상세 화면 My Part 아래 'Production Files' 줄에 보임
-             [{ label: "촬영 타임테이블", url: "https://..." }, { label: "콘티", url: "https://..." }] 처럼 적기
+   files     관련 자료 링크 → 상세 화면 My Part 아래 'Work Sample' 줄에 보임
+             [{ label: "담당 작업 폴더", url: "https://..." }] 처럼 적기
    focus     담당 업무 한 줄 요약 (예: "연출 설계 및 현장·후반 작업 지원") → My Part 맨 위에 굵게
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
    credits   함께한 사람들 (예: "Director 홍길동 · Edit 김OO · DI 이OO")
@@ -86,7 +86,7 @@ window.SITE = {
       title: "죽은 연인에게로",
       client: "데이먼스 이어", format: "Concert Film", role: "AD · Camera Op.",
       period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E", note: "공개 예정",
-      files: [{ label: "제작 자료 폴더", url: "https://drive.google.com/drive/folders/1oJXGnBFsk9YAY4lFQMRBJ5XVJq4ZSnOw" }],
+      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1oJXGnBFsk9YAY4lFQMRBJ5XVJq4ZSnOw" }],
       tasks: [], credits: "", desc: "", result: "", stills: [],
       // picker: true = 상세 화면 위쪽에 편 목록을 놓고, 누른 편이 메인 영상으로 나옴
       // 공개되면 각 편의 yt에 영상 ID를 넣기 (비어 있으면 '공개 예정'으로 보임)
@@ -118,7 +118,7 @@ window.SITE = {
       title: "BOOGIENOVA",
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
-      files: [{ label: "제작 자료 폴더", url: "https://drive.google.com/drive/folders/13D7SV24WHl9zgCadTzJ4CSyVxifX7Bb_" }],
+      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/13D7SV24WHl9zgCadTzJ4CSyVxifX7Bb_" }],
       tasks: [], credits: "", desc: "", result: "",
       stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
@@ -142,7 +142,7 @@ window.SITE = {
       title: "제 2 미해결문제 第 2 未解決問題 : //",
       client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
-      files: [{ label: "프리프로덕션 노트", url: "https://fancy-stitch-21b.notion.site/2-Concert-Film-_-pre-40c3acc6dcac8072b135d05b8ff92d06" }],
+      files: [{ label: "담당 작업 폴더", url: "https://fancy-stitch-21b.notion.site/2-Concert-Film-_-pre-40c3acc6dcac8072b135d05b8ff92d06" }],
       focus: "연출 설계 및 현장·후반 작업 지원",
       tasks: [
         "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
