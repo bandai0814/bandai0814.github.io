@@ -152,6 +152,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .part .val{grid-column:3 / 13;min-width:0}
 .part .val.role{font-weight:600}
 .part ul{margin:0;padding-left:1.1em}
+.part .focus{margin:0 0 6px;font-weight:600}
 .part .val.cr{color:var(--muted);font-size:14px}
 .part .files{display:flex;flex-wrap:wrap;gap:6px 20px}
 .part .files a{text-decoration:underline;text-underline-offset:3px}
@@ -246,6 +247,8 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-text .part{display:block;font-size:8.5pt;line-height:1.6}
 .p-text .part b{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2);margin-bottom:1mm}
 .p-text .part ul{margin:0;padding-left:3.5mm}
+.p-text .part .focus{margin:0 0 1mm;font-weight:600;font-size:8.5pt}
+.c-focus{display:block;font-weight:600;margin-bottom:1mm}
 .p-text .cr{font-size:7.5pt;color:var(--ink-2)}
 .c-list .r-rows{padding-top:5mm}
 
@@ -564,7 +567,7 @@ function openDetail(w) {
   /* 내 역할 · 맡은 일 · 함께한 사람: 영상보다 먼저 보이게 */
   const rows = [];
   if (w.role) rows.push(`<div class="lab">Role</div><div class="val role">${esc(w.role)}</div>`);
-  if (w.tasks && w.tasks.length) rows.push(`<div class="lab">My Part</div><div class="val"><ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`);
+  if (w.focus || (w.tasks && w.tasks.length)) rows.push(`<div class="lab">My Part</div><div class="val">${w.focus ? `<p class="focus">${esc(w.focus)}</p>` : ""}${(w.tasks || []).length ? `<ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`);
   if (w.credits) rows.push(`<div class="lab">Credits</div><div class="val cr">${esc(w.credits)}</div>`);
   const files = (w.files || []).filter(f => f && f.url);
   if (files.length) rows.push(`<div class="lab">Files</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
@@ -689,7 +692,7 @@ function resumeDoc() {
 }
 
 function careerEntry(p) {
-  const tasks = p.tasks && p.tasks.length ? `<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : todo("[content.js의 tasks에 담당 업무를 적으면 여기에 들어갑니다]");
+  const tasks = p.tasks && p.tasks.length ? `${p.focus ? `<b class="c-focus">${esc(p.focus)}</b>` : ""}<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : todo("[content.js의 tasks에 담당 업무를 적으면 여기에 들어갑니다]");
   const eps = p.episodes ? `<dt>구성</dt><dd>${esc(p.episodes.map(e => e.title).join(", "))}</dd>` : "";
   return `<div class="c-entry">
     <div class="c-head"><b>${esc(p.title)}</b><span>${esc(p.period || p.year)}</span></div>
@@ -716,7 +719,7 @@ function portfolioPage(p) {
       <span>Role</span><span>${esc(p.role)}</span>
       <span>Period</span><span>${esc(p.period || p.year)}</span>
     </div>
-    ${p.tasks && p.tasks.length ? `<div class="part"><b>My Part</b><ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>` : ""}
+    ${p.tasks && p.tasks.length ? `<div class="part"><b>My Part</b>${p.focus ? `<p class="focus">${esc(p.focus)}</p>` : ""}<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>` : ""}
     <div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>
     ${p.credits ? `<div class="cr">${esc(p.credits)}</div>` : ""}
     ${linkOf(p) ? `<div class="link">${esc(linkOf(p))}</div>` : ""}

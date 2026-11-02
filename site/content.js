@@ -18,6 +18,7 @@
    href      유튜브가 아닌 링크 (인스타그램 등)
    files     관련 자료 링크 → 상세 화면 My Part 아래에 보임
              [{ label: "촬영 타임테이블", url: "https://..." }, { label: "콘티", url: "https://..." }] 처럼 적기
+   focus     담당 업무 한 줄 요약 (예: "연출 설계 및 현장·후반 작업 지원") → My Part 맨 위에 굵게
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
    credits   함께한 사람들 (예: "Director 홍길동 · Edit 김OO · DI 이OO")
              → 상세 화면에 작게 표시. 내가 하지 않은 파트를 분명히 해 줌
@@ -123,7 +124,13 @@ window.SITE = {
       client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       files: [],
-      tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
+      focus: "연출 설계 및 현장·후반 작업 지원",
+      tasks: [
+        "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
+        "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
+        "촬영 소스 확보를 위한 현장 스크립터 및 동선 정리",
+        "후반 작업 결과물 검토·피드백을 통한 편집 보조"
+      ], credits: "", desc: "", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
     }
   ],
 
