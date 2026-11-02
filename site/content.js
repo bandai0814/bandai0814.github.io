@@ -83,6 +83,13 @@ window.SITE = {
   /* ── Selected Work ①: 클라이언트 작업 (경력기술서에서 '상업 작업'으로 묶임) ── */
   commercial: [
     {
+      title: "죽은 연인에게로",
+      client: "데이먼스 이어", format: "Concert Film", role: "AD · Camera Op.",
+      period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E",
+      files: [],
+      tasks: [], credits: "", desc: "", result: "", stills: []
+    },
+    {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Advertisement", role: "AD · PD",
       period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
@@ -166,7 +173,6 @@ window.SITE = {
 
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
-    { year: "2026", title: "[데이먼스 이어]  죽은 연인에게로", format: "Concert Film", role: "AD · PD · B CAM", wip: true },
     { year: "2026", title: "[LG전자]  BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
     { year: "2026", title: "레드아카데미", format: "AI Cinematic Drama", role: "제작", yt: "4peMRX9iVMI" },
     { year: "2026", title: "[ILLIT]  ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "기획 · 연출 보조", yt: "-YuHyTD3a3s" },

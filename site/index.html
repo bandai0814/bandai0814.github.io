@@ -745,8 +745,9 @@ function portfolioPage(p) {
     const main = imageOf(p);
     const restSt = st.map(srcOf).filter(s => s && s !== main).slice(0, 4);
     const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean).slice(0, 3);
-    const rest = restSt.length ? restSt : (extra.length ? extra : [null, null, null]);
-    media = `${pImg(main, "p-main", "대표 이미지", !p.thumb && p.thumbZoom)}<div class="p-row" style="grid-template-columns:repeat(${rest.length},minmax(0,1fr))">${rest.map((s, i) => pImg(s, "p-sm", "Still 0" + (i + 2))).join("")}</div>`;
+    const rest = restSt.length ? restSt : extra;
+    /* 스틸컷이 없으면 대표 이미지만 (빈 자리 칸은 만들지 않음) */
+    media = `${pImg(main, "p-main", "대표 이미지", !p.thumb && p.thumbZoom)}${rest.length ? `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${rest.map(s => pImg(s, "p-sm", "")).join("")}</div>` : ""}`;
   }
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}</div></div></article>`;
 }
