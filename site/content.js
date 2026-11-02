@@ -135,6 +135,7 @@ window.SITE = {
       period: "2024.09 – 2026.06", year: "2024 – 2026",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
+      // 순서 = 상세 화면 위쪽 작품 목록 순서 (최신 연도가 왼쪽)
       // feature: true = 메인 작업 (포트폴리오 PDF에서 위 줄에 크게), 나머지는 작은 작업
       // role: 작업마다 내 역할이 다르면 여기에 적기 (상세 화면에서 작업을 고를 때 함께 보임)
       episodes: [
@@ -142,11 +143,11 @@ window.SITE = {
           stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"] },
         { title: "THIS WAS NEVER THE PLAN", format: "Cinematic Film", year: "2026", role: "", feature: true, yt: "Ghw7gJlzpe8", desc: "",
           stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"] },
+        { title: "올빼미 연맹", format: "Concept Short Film", year: "2026", role: "", yt: "MTVKRzYjjp4", desc: "", stills: [] },
         { title: "눈 감고 일하기", format: "Documentary", year: "2025", role: "", feature: true, yt: "jYrDcXYjAgI", desc: "",
           stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
         { title: "미지의 세계를 포용하며", format: "Poetic Documentary", year: "2024", role: "", feature: true, yt: "vuvPIMzL4xg", desc: "",
-          stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg"] },
-        { title: "올빼미 연맹", format: "Concept Short Film", year: "2026", role: "", yt: "MTVKRzYjjp4", desc: "", stills: [] },
+          stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] },
         { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "", stills: [] },
         { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "", stills: [] }
       ]

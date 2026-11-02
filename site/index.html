@@ -156,11 +156,11 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .part .val.cr{color:var(--muted);font-size:14px}
 .part .files{display:flex;flex-wrap:wrap;gap:6px 20px}
 .part .files a{text-decoration:underline;text-underline-offset:3px}
-/* 상세 화면: 메인 영상(오른쪽) + 옆에 세로로 쌓은 스틸컷 / 다른 편 — 메인 영상 높이를 넘지 않음 */
-.media{display:grid;grid-template-columns:var(--side-w,1fr) var(--main-w,3fr);gap:10px;align-items:stretch}
+/* 상세 화면: 메인 영상(왼쪽) + 옆에 세로로 쌓은 스틸컷 / 다른 편 — 메인 영상 높이를 넘지 않음 */
+.media{display:grid;grid-template-columns:var(--main-w,3fr) var(--side-w,1fr);gap:10px;align-items:stretch}
 .media.solo{grid-template-columns:minmax(0,1fr);max-width:800px}
 .media.solo .side{display:none}
-.side{order:-1;display:grid;gap:8px;grid-template-columns:repeat(var(--c,1),minmax(0,1fr));grid-template-rows:repeat(var(--r,1),minmax(0,1fr));min-width:0;min-height:0}
+.side{display:grid;gap:8px;grid-template-columns:repeat(var(--c,1),minmax(0,1fr));grid-template-rows:repeat(var(--r,1),minmax(0,1fr));min-width:0;min-height:0}
 .side .cell{position:relative;display:block;width:auto;aspect-ratio:auto;min-height:0;padding:0;border:0;background:var(--tile);overflow:hidden;cursor:pointer}
 .side .cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .side .cell.v img{object-fit:contain}
@@ -315,7 +315,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   .stills{gap:6px}
   .eps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .media,.media.solo{grid-template-columns:minmax(0,1fr);max-width:none}
-  .side{order:0;grid-template-rows:none;grid-template-columns:repeat(var(--mc,3),minmax(0,1fr))}
+  .side{grid-template-rows:none;grid-template-columns:repeat(var(--mc,3),minmax(0,1fr))}
   .side .cell{aspect-ratio:var(--ar,16/9)}
 }
 @media (prefers-reduced-motion: reduce){.thumb img,.index-row,.peek{transition:none}a.tile:hover img{transform:none}}
@@ -568,7 +568,7 @@ function openDetail(w) {
   eps.hidden = true; eps.innerHTML = "";
   if (w.episodes) {
     /* 편마다 스틸컷이 있으면(YeahFilms 등) 위에서 편을 고르고 옆에는 그 편의 스틸컷,
-       스틸컷 없이 영상만 여러 편이면 옆에 다른 편을 세로로 놓고 누르면 메인으로 바뀜 */
+       스틸컷 없이 영상만 여러 편이면 옆에 다른 편을 놓고 누르면 그 편의 링크(인스타그램 등)로 바로 이동 */
     if (w.episodes.some(e => e.stills && e.stills.length)) {
       eps.hidden = false;
       eps.innerHTML = w.episodes.map(ep => {
@@ -611,7 +611,8 @@ function showMedia(w, parent, others, pick) {
     const allV = others.every(([e]) => e.vertical);
     if (allV) { r = 1; c = others.length; ar = 9 / 16; } else { r = others.length; c = 1; }
     cells = others.map(([e, i]) => { const img = imageOf(e);
-      return `<button class="cell${e.vertical && !allV ? " v" : ""}" type="button" data-k="${i}" aria-label="${esc(e.title)} 보기">${img ? `<img alt="" src="${esc(img)}">` : ""}<span class="et">${esc(e.title)}</span></button>`; });
+      const href = linkOf(e);
+      return `<a class="cell${e.vertical && !allV ? " v" : ""}"${href ? ` href="${esc(href)}" target="_blank" rel="noopener"` : ""} aria-label="${esc(e.title)} ${esc(e.platform || "")}에서 보기">${img ? `<img alt="" src="${esc(img)}">` : ""}<span class="et">${esc(e.title)} ↗</span></a>`; });
   } else {
     const st = take("stills", 10);
     r = st.length > 5 ? Math.ceil(st.length / 2) : st.length; c = st.length > 5 ? 2 : 1;
@@ -624,7 +625,6 @@ function showMedia(w, parent, others, pick) {
   side.style.cssText = `--r:${r};--c:${c};--ar:${ar === 1 ? 1 : (ar > 1 ? "16/9" : "9/16")};--mc:${Math.min(cells.length, ar < 1 ? 3 : 4) || 1}`;
   side.innerHTML = cells.join("");
   noImgOnError(side);
-  side.querySelectorAll("[data-k]").forEach(b => b.addEventListener("click", () => pick(Number(b.dataset.k))));
   /* 스틸컷 아래: 비하인드 · 작업 자료 (넣은 것만) */
   const rowsOf = items => items.length <= 5 ? [items] : [items.slice(0, Math.ceil(items.length / 2)), items.slice(Math.ceil(items.length / 2))];
   const sets = [["Behind the Scenes", take("behind", 3), ""], ["Process", take("process", 3), "doc"]];
