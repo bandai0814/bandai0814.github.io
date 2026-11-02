@@ -85,9 +85,21 @@ window.SITE = {
     {
       title: "죽은 연인에게로",
       client: "데이먼스 이어", format: "Concert Film", role: "AD · Camera Op.",
-      period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E",
+      period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E", note: "공개 예정",
       files: [],
-      tasks: [], credits: "", desc: "", result: "", stills: []
+      tasks: [], credits: "", desc: "", result: "", stills: [],
+      // picker: true = 상세 화면 위쪽에 편 목록을 놓고, 누른 편이 메인 영상으로 나옴
+      // 공개되면 각 편의 yt에 영상 ID를 넣기 (비어 있으면 '공개 예정'으로 보임)
+      picker: true,
+      episodes: [
+        { title: "하이라이트 필름", feature: true, yt: "i1u8Vcy-J6E", desc: "", stills: [] },
+        { title: "라이브 · [곡명 1]", yt: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 2]", yt: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 3]", yt: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 4]", yt: "", desc: "", stills: [] },
+        { title: "라이브 · [곡명 5]", yt: "", desc: "", stills: [] },
+        { title: "풀 라이브 아카이빙", yt: "", desc: "", stills: [] }
+      ]
     },
     {
       title: "HS접근성 프로젝트",

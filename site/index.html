@@ -577,11 +577,11 @@ function openDetail(w) {
   if (w.episodes) {
     /* 편마다 스틸컷이 있으면(YeahFilms 등) 위에서 편을 고르고 옆에는 그 편의 스틸컷,
        스틸컷 없이 영상만 여러 편이면 옆에 다른 편을 놓고 누르면 그 편의 링크(인스타그램 등)로 바로 이동 */
-    if (w.episodes.some(e => e.stills && e.stills.length)) {
+    if (w.picker || w.episodes.some(e => e.stills && e.stills.length)) {
       eps.hidden = false;
       eps.innerHTML = w.episodes.map(ep => {
         const img = imageOf(ep);
-        return `<button class="ep" type="button" aria-pressed="false"><div class="thumb${ep.vertical ? " v" : ""}"><span class="ph">${esc(ep.platform || ep.format || "")}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span>${ep.role || ep.year ? `<span class="er">${esc(join([ep.role, ep.year]))}</span>` : ""}</button>`;
+        return `<button class="ep" type="button" aria-pressed="false"><div class="thumb${ep.vertical ? " v" : ""}"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || ep.format || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span>${ep.role || ep.year ? `<span class="er">${esc(join([ep.role, ep.year]))}</span>` : ""}</button>`;
       }).join("");
       noImgOnError(eps);
       const btns = [...eps.querySelectorAll(".ep")];
@@ -726,7 +726,7 @@ function portfolioPage(p) {
   let media;
   if (p.episodes) {
     /* 다른 페이지와 같은 틀: 위쪽 큰 영역(16:9 전체 폭) + 아래 4칸 한 줄, 편 제목은 이미지 위에 */
-    const cell = (e, cls, pos) => `<div class="${cls} p-c">${imageOf(e) ? `<img alt="" src="${esc(imageOf(e))}"${pos ? ` style="object-position:${pos}"` : ""}>` : `<span class="ph-paper">${esc(e.platform || "")}</span>`}<span class="p-cap">${esc(e.title)}</span></div>`;
+    const cell = (e, cls, pos) => `<div class="${cls} p-c">${imageOf(e) ? `<img alt="" src="${esc(imageOf(e))}"${pos ? ` style="object-position:${pos}"` : ""}>` : `<span class="ph-paper">${esc((e.yt || e.href) ? (e.platform || "") : (p.note || "공개 예정"))}</span>`}<span class="p-cap">${esc(e.title)}</span></div>`;
     const row4 = (list, pos) => `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${list.map(e => cell(e, "p-sm", pos)).join("")}</div>`;
     const feats = p.episodes.filter(e => e.feature), verts = p.episodes.filter(e => e.vertical);
     if (feats.length) {
