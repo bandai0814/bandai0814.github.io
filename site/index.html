@@ -266,9 +266,9 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-main img,.p-sm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
 .p-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3mm}
 .p-eps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm 3mm}
-.p-media>.p-eps+.p-eps{margin-top:2mm}
-.p-mix{display:flex;flex-direction:column;gap:4mm}
-.p-sm.p-v{aspect-ratio:9/16}
+.p-grid{display:grid;gap:3mm}
+.p-c .p-cap{position:absolute;left:0;right:0;bottom:0;padding:5mm 2.2mm 1.6mm;font-size:7pt;font-weight:600;line-height:1.3;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.62))}
+.p-main.p-c .p-cap{font-size:8pt;padding:7mm 3mm 2.2mm}
 .p-ep{display:flex;flex-direction:column;gap:1.5mm;font-size:8pt}
 .p-ep b{font-weight:600}
 
@@ -689,7 +689,7 @@ function careerEntry(p) {
   return `<div class="c-entry">
     <div class="c-head"><b>${esc(p.title)}</b><span>${esc(p.period || p.year)}</span></div>
     <div class="c-meta">${esc(join([p.client, p.format, p.role]))}</div>
-    <dl class="c-body">${eps}<dt>담당 업무</dt><dd>${tasks}</dd>${p.credits ? `<dt>함께한 사람</dt><dd>${esc(p.credits)}</dd>` : ""}<dt>결과</dt><dd>${p.result ? esc(p.result) : todo("[result]")}</dd></dl>
+    <dl class="c-body">${eps}<dt>담당 업무</dt><dd>${tasks}</dd>${p.credits ? `<dt>함께한 사람</dt><dd>${esc(p.credits)}</dd>` : ""}</dl>
   </div>`;
 }
 function careerDoc() {
@@ -718,18 +718,19 @@ function portfolioPage(p) {
   </div>`;
   let media;
   if (p.episodes) {
-    const ep = (e, cls) => `<div class="p-ep">${pImg(imageOf(e), cls || "p-sm", e.platform)}<b>${esc(e.title)}</b></div>`;
-    const grid = (list, cls) => `<div class="p-eps" style="grid-template-columns:repeat(${list.length},minmax(0,1fr))">${list.map(e => ep(e, cls)).join("")}</div>`;
+    /* 다른 페이지와 같은 틀: 위쪽 큰 영역(16:9 전체 폭) + 아래 4칸 한 줄, 편 제목은 이미지 위에 */
+    const cell = (e, cls, pos) => `<div class="${cls} p-c">${imageOf(e) ? `<img alt="" src="${esc(imageOf(e))}"${pos ? ` style="object-position:${pos}"` : ""}>` : `<span class="ph-paper">${esc(e.platform || "")}</span>`}<span class="p-cap">${esc(e.title)}</span></div>`;
+    const row4 = (list, pos) => `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${list.map(e => cell(e, "p-sm", pos)).join("")}</div>`;
     const feats = p.episodes.filter(e => e.feature), verts = p.episodes.filter(e => e.vertical);
     if (feats.length) {
-      /* 대표 편(feature)은 위에 크게, 나머지 편은 아래 한 줄 */
-      media = grid(feats) + grid(p.episodes.filter(e => !e.feature));
+      /* 대표 편은 위 큰 영역을 2×2로 나눠 채우고, 나머지 편은 아래 한 줄 */
+      const cols = feats.length === 1 ? 1 : 2;
+      media = `<div class="p-grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${feats.map(e => cell(e, "p-sm")).join("")}</div>` + row4(p.episodes.filter(e => !e.feature));
     } else if (verts.length) {
-      /* 가로 편은 위에 크게, 세로(9:16) 편은 아래 한 줄 — 페이지 높이에 맞춰 폭 계산 */
-      const n = verts.length, W = Math.min(179, (163 + 3 * (n - 1) * 16 / (9 * n)) / (9 / 16 + 16 / (9 * n)));
-      media = `<div class="p-mix" style="width:${W.toFixed(1)}mm">${p.episodes.filter(e => !e.vertical).map(e => ep(e, "p-main")).join("")}${grid(verts, "p-sm p-v")}</div>`;
+      /* 가로 편이 위 큰 영역, 세로 숏폼은 아래 한 줄 (제목·제품이 보이는 부분으로 잘라서) */
+      media = p.episodes.filter(e => !e.vertical).map(e => cell(e, "p-main")).join("") + row4(verts, "center 30%");
     } else {
-      media = `<div class="p-eps" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => ep(e)).join("")}</div>`;
+      media = `<div class="p-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => cell(e, "p-sm")).join("")}</div>`;
     }
   } else {
     const st = p.stills || [];

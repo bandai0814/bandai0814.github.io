@@ -84,7 +84,7 @@ window.SITE = {
     {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Advertisement", role: "AD · PD",
-      period: "2026.07 – 2026.09", year: "2026",
+      period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
       episodes: [
@@ -120,7 +120,7 @@ window.SITE = {
     },
     {
       title: "제 2 미해결문제 第 2 未解決問題 : //",
-      client: "데이먼스 이어", format: "Concert Film", role: "AD · PD",
+      client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       files: [],
       tasks: [], credits: "", desc: "", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
@@ -132,7 +132,7 @@ window.SITE = {
     {
       title: "YeahFilms Originals",
       client: "YeahFilms", format: "Visual Film · Documentary", role: "제작",
-      period: "2024.09 – 2026.06", year: "2024 – 2026",
+      period: "2024.09 – 2026.06", year: "2024 – 2026", href: "https://www.youtube.com/@yeahfilm",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
       // 순서 = 상세 화면 위쪽 작품 목록 순서 (최신 연도가 왼쪽)
