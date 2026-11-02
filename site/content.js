@@ -151,7 +151,8 @@ window.SITE = {
           stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] },
         { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "",
           stills: ["images/glico-1.jpg", "images/glico-2.jpg", "images/glico-3.jpg", "images/glico-4.jpg"] },
-        { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "", stills: [] }
+        { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "",
+          stills: ["images/bighill-1.jpg", "images/bighill-2.jpg", "images/bighill-3.jpg", "images/bighill-4.jpg", "images/bighill-5.jpg"] }
       ]
     }
   ],
