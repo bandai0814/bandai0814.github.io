@@ -185,9 +185,10 @@ window.SITE = {
     { year: "2024", name: "학장상", detail: "아주대 인문대학 기초과목 우수 소논문" }
   ],
   // onSite: false 인 항목은 사이트에는 안 보이고 이력서에만 들어갑니다
+  // lang: true 인 항목은 이력서에서 '어학' 칸으로, 나머지는 '자격' 칸으로 나뉩니다 (각각 최신 연도순)
   certificates: [
-    { name: "JLPT N2 (상)", detail: "비즈니스 회화", date: "2024.08", onSite: true },
-    { name: "TOEIC (중)", detail: "일상 회화", date: "2026.05", onSite: true },
+    { name: "JLPT N2 (상)", detail: "비즈니스 회화", date: "2024.08", onSite: true, lang: true },
+    { name: "TOEIC (중)", detail: "일상 회화", date: "2026.05", onSite: true, lang: true },
     { name: "워드프로세서 1급", detail: "대한상공회의소", date: "2022.09", onSite: true },
     { name: "ITQ OA MASTER", detail: "한국생산성본부", date: "2022.10", onSite: true },
     { name: "ACA Premiere Pro", detail: "Adobe", date: "2022", onSite: true },

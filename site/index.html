@@ -657,6 +657,10 @@ const todo = t => `<span class="todo">${t}</span>`;
 const rRow = (d, main, x) => `<div class="r-row"><span class="d">${esc(d)}</span><span>${main}</span><span class="x">${esc(x || "")}</span></div>`;
 const rSec = (h, rows) => `<div class="r-sec"><h3>${h}</h3><div class="r-rows">${rows}</div></div>`;
 
+/* 자격 · 어학: 연도만, 최신 연도순 */
+const certRows = keep => S.certificates.filter(keep)
+  .map((c, i) => [c, i]).sort((a, b) => String(b[0].date).slice(0, 4) - String(a[0].date).slice(0, 4) || a[1] - b[1])
+  .map(([c]) => rRow(String(c.date).slice(0, 4), `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join("");
 function resumeDoc() {
   return `<article class="sheet">
     <div class="r-word">${esc(S.nameEn).replace(" ", "<br>")}</div>
@@ -666,10 +670,11 @@ function resumeDoc() {
       <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br>${esc(S.siteUrl)}</div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
-    ${rSec("경력", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client ? " · " + esc(p.client) : ""}`, p.format + (p.episodes ? " (" + p.episodes.length + "편)" : ""))).join(""))}
+    ${rSec("경력", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}
     ${rSec("기타 참여", S.archive.map(a => rRow(a.year, `<b>${esc(a.title.replace(/^\[[^\]]+\]\s*/, ""))}</b>${/^\[/.test(a.title) ? " · " + esc(a.title.match(/^\[([^\]]+)\]/)[1]) : ""}`, a.format)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
-    ${rSec("자격 · 어학", S.certificates.map(c => rRow(c.date, `<b>${esc(c.name)}</b>${c.detail ? " · " + esc(c.detail) : ""}`)).join(""))}
+    ${rSec("자격", certRows(c => !c.lang))}
+    ${rSec("어학", certRows(c => c.lang))}
     ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>${t.issuer ? `<span class="s">${esc(t.issuer)}</span>` : ""}`)).join("")) : ""}
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
     ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
