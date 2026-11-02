@@ -705,7 +705,6 @@ function careerDoc() {
     <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}<br>${esc(S.phone)}</div></div>
     <div class="c-group"><h3>상업 작업</h3><div>${(S.commercial || []).map(careerEntry).join("")}</div></div>
     <div class="c-group"><h3>자체 제작</h3><div>${(S.original || []).map(careerEntry).join("")}</div></div>
-    <div class="c-group c-list"><h3>기타 참여 작업</h3><div class="r-rows">${S.archive.map(a => rRow(yr(a), `<b>${esc(a.title)}</b> · ${esc(a.format)}`, a.role)).join("")}</div></div>
   </article>`;
 }
 
