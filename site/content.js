@@ -131,7 +131,7 @@ window.SITE = {
   original: [
     {
       title: "YeahFilms Originals",
-      client: "YeahFilms", format: "Short Film · Documentary", role: "제작",
+      client: "YeahFilms", format: "Visual Film · Documentary", role: "제작",
       period: "2024.09 – 2026.06", year: "2024 – 2026",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
