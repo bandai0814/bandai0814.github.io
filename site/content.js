@@ -126,7 +126,7 @@ window.SITE = {
       title: "親不孝通りノンフィクション(Haruki's version)",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
-      files: [],
+      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1yzG8hCzSPO-SP7iYkm5Hi-AlikvfhzOx" }],
       tasks: [
         "기획, 예산 관리(약 70만 엔), 콘티 작성",
         "한국 크루 5인의 후쿠오카 현지 촬영 운영, 연출 보조",
