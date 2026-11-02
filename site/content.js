@@ -83,7 +83,7 @@ window.SITE = {
   commercial: [
     {
       title: "HS접근성 프로젝트",
-      client: "LG전자", format: "Short-form", role: "AD · PD",
+      client: "LG전자", format: "Advertisement", role: "AD · PD",
       period: "2026.07 – 2026.09", year: "2026",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
