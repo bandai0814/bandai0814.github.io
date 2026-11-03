@@ -847,7 +847,18 @@ function portfolioDoc() {
     <div class="n">${esc(S.nameEn).replace(" ", "<br>")}</div>
     <div class="c"><span>${esc(S.name)}</span><span>${esc(S.role)}</span><span>${esc(S.email)}</span><span>${esc(S.siteUrl)}</span></div>
   </div></article>`;
-  return cover + works().map(portfolioPage).join("");
+  /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 페이지씩: 그 유형의 작품과 역할·업무·소개만 */
+  const pages = works().flatMap(p => {
+    const gs = filledGroups(p);
+    if (!gs.length) return [p];
+    return gs.map(([name, g]) => {
+      const eps = (p.episodes || []).filter(e => e.group === name);
+      const ys = eps.map(e => Number(e.year)).filter(Boolean);
+      const period = ys.length ? (Math.min(...ys) === Math.max(...ys) ? String(ys[0]) : Math.min(...ys) + " – " + Math.max(...ys)) : (p.period || p.year);
+      return { ...p, ...Object.fromEntries(Object.entries(g).filter(([, v]) => v && (!Array.isArray(v) || v.length))), format: name, period, episodes: eps, groups: undefined };
+    });
+  });
+  return cover + pages.map(portfolioPage).join("");
 }
 
 /* ============ 화면 전환 ============ */
