@@ -182,8 +182,12 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .side .cell .et{position:absolute;left:0;right:0;bottom:0;padding:14px 8px 6px;font-size:12px;line-height:1.3;color:#fff;text-align:left;background:linear-gradient(transparent,rgba(0,0,0,.65))}
 .side .cell:hover img{opacity:.85}
 .part.d-about:has(.d-desc:empty){display:none}
+.d-desc .dp{display:block}
+.d-desc .dp+.dp{margin-top:.55em}
+.d-desc.clamp{overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 3.4em),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 3.4em),transparent)}
+.d-more{margin-top:8px;padding:6px 0;border:0;background:none;color:var(--fg);font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
-.d-desc{margin:0;max-width:44em;font-size:15px;line-height:1.75;text-align:justify;text-justify:inter-character;white-space:pre-line}
+.d-desc{margin:0;max-width:44em;font-size:15px;line-height:1.75;text-align:justify;text-justify:inter-character}
 .d-label{margin:8px 0 0;font-size:13px;font-weight:500;color:var(--muted)}
 .stills{display:grid;gap:12px;grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}
 .gal{display:flex;flex-direction:column;gap:24px}
@@ -351,13 +355,29 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   dialog{width:100vw;max-height:100vh;height:100%}
   .d-in{padding:20px var(--gut-r) 32px var(--gut)}
   .stills{gap:6px}
-  .eps{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .eps.grouped{flex-direction:column;gap:20px}
-  .ep-group+.ep-group{border-left:0;margin-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
-  .ep-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .media,.media.solo{grid-template-columns:minmax(0,1fr);max-width:none}
-  .side{grid-template-rows:none;grid-template-columns:repeat(var(--mc,3),minmax(0,1fr))}
-  .side .cell{aspect-ratio:var(--ar,16/9)}
+  /* 휴대폰 상세: 제목 → 편 고르기 → 영상 → 스틸컷 → 역할·업무 → About */
+  .d-in{gap:20px}
+  .d-in>.d-head{order:0}
+  .d-in>#dEps{order:1}
+  .d-in>#dMedia{order:2}
+  .d-in>#dPart{order:3}
+  .d-in>.d-about{order:4}
+  .d-in>#dGal{order:5}
+  /* 편 목록 · 스틸컷은 옆으로 밀어서 보는 한 줄 */
+  .eps,.eps.grouped{display:flex;flex-direction:row;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:var(--gut);margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scrollbar-width:none}
+  .eps::-webkit-scrollbar,.side::-webkit-scrollbar{display:none}
+  .eps>.ep{flex:0 0 42vw;scroll-snap-align:start}
+  .ep-group{flex:none !important}
+  .ep-group+.ep-group{margin-left:4px;padding-left:16px}
+  .ep-row{display:flex;gap:12px}
+  .ep-row .ep{flex:0 0 42vw;scroll-snap-align:start}
+  .media,.media.solo{display:flex;flex-direction:column;gap:8px;max-width:none}
+  .player{width:100%;height:auto;aspect-ratio:auto;padding-top:56.25%}
+  .side{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:var(--gut);margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scrollbar-width:none}
+  .side .cell{flex:0 0 46vw;height:auto;aspect-ratio:var(--ar,16/9);scroll-snap-align:start}
+  .side .cell.still img{object-position:center}
+  .side[style*="9/16"] .cell{flex-basis:30vw}
+  .yr .wip,.c4 .wip{display:block}
 }
 @media (prefers-reduced-motion: reduce){.thumb img,.index-row,.peek{transition:none}a.tile:hover img{transform:none}}
 
@@ -451,7 +471,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
       <button class="d-close" id="dClose" type="button">닫기 ✕</button>
     </div>
     <div class="part" id="dPart"></div>
-    <div class="part d-about"><div class="lab">About</div><p class="val d-desc" id="dDesc"></p></div>
+    <div class="part d-about"><div class="lab">About</div><div class="val"><div class="d-desc" id="dDesc"></div><button class="d-more" id="dMore" type="button" hidden>더보기</button></div></div>
     <div class="eps" id="dEps" hidden></div>
     <div class="media" id="dMedia"><div class="player" id="dPlayer"></div><div class="side" id="dSide"></div></div>
     <div class="gal" id="dGal"></div>
@@ -495,6 +515,8 @@ const DOCS = [
 
 const lookup = ref => { const [set, i] = ref.split(":"); return S[set][i]; };
 /* 사이트에는 기간 대신 연도만, 진행 중이면 "2026 (WIP)" */
+/* 화면용: (WIP)를 따로 감싸서 휴대폰에서는 연도 아래 줄로 */
+const yrH = w => esc(w.year || "") + ((w.wip || /WIP/.test(w.period || "")) ? `<span class="wip"> (WIP)</span>` : "");
 const yr = w => (w.year || "") + ((w.wip || /WIP/.test(w.period || "")) ? " (WIP)" : "");
 /* 상업 작업 → 자체 제작 순으로 전체 작업 */
 const works = () => [...(S.commercial || []), ...(S.original || [])];
@@ -585,12 +607,12 @@ function renderSite() {
   const all = sortedWorks();
   $("indexList").innerHTML = all.map(([ref, w]) => `
     <a class="index-row tile-link" href="${esc(linkOf(w) || "#work")}" target="_blank" rel="noopener" data-ref="${ref}" data-img="${esc(imageOf(w))}">
-      <span class="c1">${esc(w.format)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${esc(yr(w))}</span>
+      <span class="c1">${esc(w.format)}</span><span class="c2">${esc(w.title)}</span><span class="c3">${esc(w.client)}</span><span class="c4">${yrH(w)}</span>
     </a>`).join("");
 
   $("archiveList").innerHTML = S.archive.map(a => {
     const href = linkOf(a);
-    return `<div class="row"><span class="yr">${esc(yr(a))}</span><span class="ti">${esc(a.title)}</span><span class="fm">${esc(a.format)}</span><span class="rl">${esc(a.role)}</span>${href ? `<a class="go u" href="${esc(href)}" target="_blank" rel="noopener">Watch ↗</a>` : `<span class="go"></span>`}</div>`;
+    return `<div class="row"><span class="yr">${yrH(a)}</span><span class="ti">${esc(a.title)}</span><span class="fm">${esc(a.format)}</span><span class="rl">${esc(a.role)}</span>${href ? `<a class="go u" href="${esc(href)}" target="_blank" rel="noopener">Watch ↗</a>` : `<span class="go"></span>`}</div>`;
   }).join("");
 
   const about = [
@@ -692,8 +714,23 @@ function renderPart(w) {
   if (files.length) rows.push(`<div class="lab">Work Sample</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
   $("dPart").innerHTML = rows.join("");
 }
+/* About이 길면 첫 문단(최대 5줄)까지만 보이고 아래 2줄은 흐리게, '더보기'로 전체 */
+function clampAbout() {
+  const el = $("dDesc"), btn = $("dMore");
+  el.classList.remove("clamp"); el.style.maxHeight = ""; btn.hidden = true;
+  const first = el.querySelector(".dp");
+  if (!first) return;
+  const lh = parseFloat(getComputedStyle(el).lineHeight) || 26;
+  const limit = Math.min(first.offsetHeight, lh * 5) + lh * 2;
+  if (el.scrollHeight > limit + lh * 1.5) {
+    el.classList.add("clamp"); el.style.maxHeight = limit + "px";
+    btn.hidden = false; btn.textContent = "더보기";
+  }
+}
 function showMedia(w, parent, others, pick) {
-  $("dDesc").textContent = w.desc || parent.desc || "";
+  const desc = w.desc || parent.desc || "";
+  $("dDesc").innerHTML = desc.split(/\n+/).filter(Boolean).map(t => `<span class="dp">${esc(t)}</span>`).join("");
+  requestAnimationFrame(clampAbout);
   dPlayer.classList.toggle("v", !!w.vertical);
   const link = linkOf(w);
   if (w.yt && !framed) {
@@ -742,6 +779,11 @@ document.addEventListener("click", e => {
   openDetail(lookup(a.dataset.ref));
 });
 $("dClose").addEventListener("click", () => dlg.close());
+$("dMore").addEventListener("click", () => {
+  const el = $("dDesc"), open = el.classList.contains("clamp");
+  if (open) { el.classList.remove("clamp"); el.style.maxHeight = ""; $("dMore").textContent = "접기"; }
+  else clampAbout();
+});
 /* 사진을 누르면 크게 보기 (옆 칸 스틸컷 · 아래 비하인드 모두)
    크게 본 상태에서 좌우 화살표 키 또는 화면 양옆 ‹ › 로 같은 묶음의 앞뒤 사진으로 넘김 */
 let lbList = [], lbAt = 0;
