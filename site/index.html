@@ -749,7 +749,7 @@ function resumeDoc() {
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("주요 작업", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}
-    ${rSec("기타 참여", S.archive.map(a => rRow(a.year, `<b>${esc(a.title.replace(/^\[[^\]]+\]\s*/, ""))}</b>${/^\[/.test(a.title) ? " · " + esc(a.title.match(/^\[([^\]]+)\]/)[1]) : ""}`, a.format)).join(""))}
+    ${rSec("기타 참여", S.archive.map(a => rRow(a.year, `<b>${esc(a.title.replace(/^\[[^\]]+\]\s*/, ""))}</b>${/^\[/.test(a.title) ? " · " + esc(a.title.match(/^\[([^\]]+)\]/)[1]) : (a.client ? " · " + esc(a.client) : "")}`, a.format)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격", certRows(c => !c.lang))}
     ${rSec("어학", certRows(c => c.lang))}
