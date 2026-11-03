@@ -192,7 +192,7 @@ window.SITE = {
   /* ── Archive: 그 밖의 참여 작업 (목록으로만 표시) ── */
   archive: [
     { year: "2026", title: "[LG전자]  BOLD MOVE 아카이빙 필름", format: "Archive Film", role: "AD · PD", wip: true },
-    { year: "2026", title: "레드아카데미", format: "AI Cinematic Drama", role: "제작", yt: "4peMRX9iVMI" },
+    { year: "2026", title: "레드아카데미", format: "AI Drama Trailer", role: "제작", yt: "4peMRX9iVMI" },
     { year: "2026", title: "[ILLIT]  ‘BREAK EVEN’ Intro Design", format: "Teasing Video", role: "기획 · 연출 보조", yt: "-YuHyTD3a3s" },
     { year: "2026", title: "[백아연]  '들어봐'", format: "M/V Jacket Photo", role: "조명팀", yt: "ClbQHNIa2PM" },
     { year: "2026", title: "[내러티브룸]  The spaghetty story", format: "Teasing Video", role: "카메라팀", href: "https://www.youtube.com/@Narrativeroom_cjy/featured" },

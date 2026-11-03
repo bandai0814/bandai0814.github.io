@@ -194,6 +194,12 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .lb img{max-width:100%;max-height:calc(100% - 40px);object-fit:contain;cursor:zoom-out}
 .lb p{margin:0;color:#D8D8D8;font-size:14px}
 .lb p:empty{display:none}
+.lb .lb-count{font-size:12px;color:#8F8F8F;font-variant-numeric:tabular-nums}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:96px;border:0;background:none;color:#F4F4F4;font:300 48px/1 var(--font);cursor:pointer;opacity:.55;transition:opacity .2s ease}
+.lb-nav:hover{opacity:1}
+.lb-nav.prev{left:max(4px, env(safe-area-inset-left, 0px))}
+.lb-nav.next{right:max(4px, env(safe-area-inset-right, 0px))}
+.lb-nav[hidden]{display:none}
 .lb-close{position:absolute;top:calc(12px + env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));min-height:44px;padding:0 4px;border:0;background:none;color:#F4F4F4;font:inherit;font-size:14px;cursor:pointer}
 
 /* ---------- document view (이력서 · 경력기술서 · 포트폴리오) ---------- */
@@ -433,8 +439,11 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 <dialog id="lightbox" aria-label="크게 보기">
   <div class="lb">
     <button class="lb-close" id="lbClose" type="button">닫기 ✕</button>
+    <button class="lb-nav prev" id="lbPrev" type="button" aria-label="이전 사진">‹</button>
     <img id="lbImg" alt="">
+    <button class="lb-nav next" id="lbNext" type="button" aria-label="다음 사진">›</button>
     <p id="lbCap"></p>
+    <p class="lb-count" id="lbCount"></p>
   </div>
 </dialog>
 
@@ -677,12 +686,38 @@ document.addEventListener("click", e => {
   openDetail(lookup(a.dataset.ref));
 });
 $("dClose").addEventListener("click", () => dlg.close());
-/* 사진을 누르면 크게 보기 (옆 칸 스틸컷 · 아래 비하인드 모두) */
+/* 사진을 누르면 크게 보기 (옆 칸 스틸컷 · 아래 비하인드 모두)
+   크게 본 상태에서 좌우 화살표 키 또는 화면 양옆 ‹ › 로 같은 묶음의 앞뒤 사진으로 넘김 */
+let lbList = [], lbAt = 0;
+const lbShow = i => {
+  lbAt = (i + lbList.length) % lbList.length;
+  const b = lbList[lbAt];
+  $("lbImg").src = b.dataset.src; $("lbCap").textContent = b.dataset.cap || "";
+  const many = lbList.length > 1;
+  $("lbPrev").hidden = $("lbNext").hidden = !many;
+  $("lbCount").textContent = many ? (lbAt + 1) + " / " + lbList.length : "";
+};
 dlg.addEventListener("click", e => {
   const b = e.target.closest(".still[data-src]");
   if (!b || typeof lb.showModal !== "function") return;
-  $("lbImg").src = b.dataset.src; $("lbCap").textContent = b.dataset.cap || "";
+  const group = b.closest(".side, .gal-set") || dlg;
+  lbList = [...group.querySelectorAll(".still[data-src]")];
+  lbShow(lbList.indexOf(b));
   lb.showModal();
+});
+$("lbPrev").addEventListener("click", e => { e.stopPropagation(); lbShow(lbAt - 1); });
+$("lbNext").addEventListener("click", e => { e.stopPropagation(); lbShow(lbAt + 1); });
+lb.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") { e.preventDefault(); lbShow(lbAt - 1); }
+  if (e.key === "ArrowRight") { e.preventDefault(); lbShow(lbAt + 1); }
+});
+/* 휴대폰: 좌우로 밀어서 넘김 */
+let lbX = null;
+lb.addEventListener("touchstart", e => { lbX = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener("touchend", e => {
+  if (lbX === null || lbList.length < 2) return;
+  const dx = e.changedTouches[0].clientX - lbX; lbX = null;
+  if (Math.abs(dx) > 40) lbShow(lbAt + (dx < 0 ? 1 : -1));
 });
 $("lbClose").addEventListener("click", () => lb.close());
 lb.addEventListener("click", e => { if (e.target === lb || e.target.id === "lbImg" || e.target.classList.contains("lb")) lb.close(); });
