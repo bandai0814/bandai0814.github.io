@@ -260,6 +260,10 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-text .part ul{margin:0;padding-left:3.5mm}
 .p-text .part .focus{margin:0 0 1mm;font-weight:600;font-size:8.5pt}
 .c-focus{display:block;font-weight:600;margin-bottom:1mm}
+.c-body.c-groups{grid-template-columns:22mm minmax(0,1fr)}
+.c-groups dt{color:var(--ink);font-weight:600}
+.c-grole{display:block;font-size:8.5pt;color:var(--ink-2)}
+.c-geps{display:block;font-size:8.5pt;color:var(--ink-2);margin-bottom:1.5mm}
 .p-text .cr{font-size:7.5pt;color:var(--ink-2)}
 .c-list .r-rows{padding-top:5mm}
 
@@ -275,6 +279,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-text .meta{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:1mm 3mm;font-size:8.5pt;margin-top:2mm}
 .p-text .meta span:nth-child(odd){color:var(--ink-2)}
 .p-media .desc:has(.todo){text-align:left}
+.p-media .desc-h{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2)}
 .p-media .desc{margin-top:4mm;font-size:9pt;line-height:1.75;text-align:justify;text-justify:inter-character;white-space:pre-line}
 .p-text .link{margin-top:auto;font-size:7.5pt;color:var(--ink-2);word-break:break-all}
 .p-media{display:flex;flex-direction:column;gap:3mm;min-width:0}
@@ -755,7 +760,23 @@ function resumeDoc() {
   </article>`;
 }
 
+/* 유형별(groups) 내용이 있는 작업: 채워진 유형만 [이름, 내용] 목록으로 */
+const filledGroups = p => Object.entries(p.groups || {}).filter(([, g]) => g && ((g.tasks || []).length || g.focus || g.desc));
+const groupEps = (p, name) => (p.episodes || []).filter(e => e.group === name).map(e => e.title).join(", ");
 function careerEntry(p) {
+  if (filledGroups(p).length) {
+    /* 유형별로: 역할 · 구성 · 담당 업무 */
+    const blocks = Object.keys(p.groups).map(name => {
+      const g = p.groups[name];
+      const has = (g.tasks || []).length;
+      return `<dt>${esc(name)}</dt><dd>${g.role ? `<span class="c-grole">${esc(g.role)}</span>` : ""}<span class="c-geps">${esc(groupEps(p, name))}</span>${has ? `${g.focus ? `<b class="c-focus">${esc(g.focus)}</b>` : ""}<ul>${g.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : todo("[담당 업무]")}</dd>`;
+    }).join("");
+    return `<div class="c-entry">
+    <div class="c-head"><b>${esc(p.title)}</b><span>${esc(p.period || p.year)}</span></div>
+    <div class="c-meta">${esc(join([p.client, p.format]))}</div>
+    <dl class="c-body c-groups">${blocks}</dl>
+  </div>`;
+  }
   const tasks = p.tasks && p.tasks.length ? `${p.focus ? `<b class="c-focus">${esc(p.focus)}</b>` : ""}<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : todo("[content.js의 tasks에 담당 업무를 적으면 여기에 들어갑니다]");
   const eps = p.episodes ? `<dt>구성</dt><dd>${esc(p.episodes.map(e => e.title).join(", "))}</dd>` : "";
   return `<div class="c-entry">
@@ -781,6 +802,7 @@ function portfolioPage(p) {
       <span>Role</span><span>${esc(p.role)}</span>
       <span>Period</span><span>${esc(p.period || p.year)}</span>
     </div>
+    ${filledGroups(p).length ? filledGroups(p).map(([name, g]) => `<div class="part"><b>${esc(name)}${g.role ? " · " + esc(g.role) : ""}</b>${g.focus ? `<p class="focus">${esc(g.focus)}</p>` : ""}${(g.tasks || []).length ? `<ul>${g.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`).join("") : ""}
     ${p.tasks && p.tasks.length ? `<div class="part"><b>My Part</b>${p.focus ? `<p class="focus">${esc(p.focus)}</p>` : ""}<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>` : ""}
     ${p.credits ? `<div class="cr">${esc(p.credits)}</div>` : ""}
     ${linkOf(p) ? `<div class="link">${esc(linkOf(p))}</div>` : ""}
@@ -812,7 +834,10 @@ function portfolioPage(p) {
     media = `${pImg(main, "p-main", "대표 이미지", !p.thumb && p.thumbZoom)}${rest.length ? `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${rest.map(s => pImg(s, "p-sm", "")).join("")}</div>` : ""}`;
   }
   /* 작업 소개는 넓은 오른쪽 칸, 이미지 아래에 */
-  const about = `<div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
+  const gDesc = filledGroups(p).filter(([, g]) => g.desc);
+  const about = gDesc.length
+    ? gDesc.map(([name, g]) => `<div class="desc">${gDesc.length > 1 || filledGroups(p).length > 1 ? `<b class="desc-h">${esc(name)}</b>` : ""}${esc(g.desc)}</div>`).join("")
+    : `<div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}${about}</div></div></article>`;
 }
 function portfolioDoc() {
