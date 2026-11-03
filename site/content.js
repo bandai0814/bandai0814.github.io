@@ -161,24 +161,29 @@ window.SITE = {
       period: "2024.09 – 2026.06", year: "2024 – 2026", href: "https://www.youtube.com/@yeahfilm",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
-      // 순서 = 상세 화면 위쪽 작품 목록 순서 (최신 연도가 왼쪽)
-      // feature: true = 메인 작업 (포트폴리오 PDF에서 위 줄에 크게), 나머지는 작은 작업
-      // role: 작업마다 내 역할이 다르면 여기에 적기 (상세 화면에서 작업을 고를 때 함께 보임)
+      // 유형별 공통 내용: 상세 화면에서 그 유형의 작품을 고르면 Role · My Part · Work Sample · About이 이 내용으로 바뀜
+      // (비워 둔 칸은 위의 작업 전체 내용이 대신 보임)
+      groups: {
+        "Visual Film": { role: "", focus: "", tasks: [], files: [], desc: "" },
+        "Documentary": { role: "", focus: "", tasks: [], files: [], desc: "" }
+      },
+      // 순서 = 상세 화면 위쪽 목록 순서 (유형별로 묶고, 각 유형 안에서 최신 연도가 왼쪽)
+      // feature: true = 포트폴리오 PDF에서 위쪽 큰 칸
       episodes: [
-        { title: "파란 열정, 구스토!", format: "Visual Film", year: "2026", role: "", feature: true, yt: "o-jsTZ3KFBQ", desc: "",
+        { title: "파란 열정, 구스토!", feature: true, group: "Visual Film", format: "Visual Film", year: "2026", yt: "o-jsTZ3KFBQ", desc: "",
           stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"] },
-        { title: "THIS WAS NEVER THE PLAN", format: "Cinematic Film", year: "2026", role: "", feature: true, yt: "Ghw7gJlzpe8", desc: "",
+        { title: "THIS WAS NEVER THE PLAN", feature: true, group: "Visual Film", format: "Cinematic Film", year: "2026", yt: "Ghw7gJlzpe8", desc: "",
           stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"] },
-        { title: "올빼미 연맹", format: "Concept Short Film", year: "2026", role: "", yt: "MTVKRzYjjp4", desc: "",
+        { title: "올빼미 연맹", group: "Visual Film", format: "Concept Short Film", year: "2026", yt: "MTVKRzYjjp4", desc: "",
           stills: ["images/owls-1.jpg", "images/owls-2.jpg", "images/owls-3.jpg", "images/owls-4.jpg", "images/owls-5.jpg", "images/owls-6.jpg", "images/owls-7.jpg", "images/owls-8.jpg"] },
-        { title: "눈 감고 일하기", format: "Documentary", year: "2025", role: "", feature: true, yt: "jYrDcXYjAgI", desc: "",
-          stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
-        { title: "미지의 세계를 포용하며", format: "Poetic Documentary", year: "2024", role: "", feature: true, yt: "vuvPIMzL4xg", desc: "",
-          stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] },
-        { title: "글리코상은 어디에", format: "Cinematic Video Essay", year: "2024", role: "", yt: "XlHidpVW4KQ", desc: "",
+        { title: "글리코상은 어디에", group: "Visual Film", format: "Cinematic Video Essay", year: "2024", yt: "XlHidpVW4KQ", desc: "",
           stills: ["images/glico-1.jpg", "images/glico-2.jpg", "images/glico-3.jpg", "images/glico-4.jpg"] },
-        { title: "Big Hill (Balming Tiger ‘big butt’)", format: "Visual Film", year: "2024", role: "", yt: "cGbtNHgaYJs", desc: "",
-          stills: ["images/bighill-1.jpg", "images/bighill-2.jpg", "images/bighill-3.jpg", "images/bighill-4.jpg", "images/bighill-5.jpg"] }
+        { title: "Big Hill (Balming Tiger ‘big butt’)", group: "Visual Film", format: "Visual Film", year: "2024", yt: "cGbtNHgaYJs", desc: "",
+          stills: ["images/bighill-1.jpg", "images/bighill-2.jpg", "images/bighill-3.jpg", "images/bighill-4.jpg", "images/bighill-5.jpg"] },
+        { title: "눈 감고 일하기", feature: true, group: "Documentary", format: "Documentary", year: "2025", yt: "jYrDcXYjAgI", desc: "",
+          stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
+        { title: "미지의 세계를 포용하며", feature: true, group: "Documentary", format: "Poetic Documentary", year: "2024", yt: "vuvPIMzL4xg", desc: "",
+          stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] }
       ]
     }
   ],

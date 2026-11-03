@@ -82,6 +82,11 @@ a.tile:hover .t{text-decoration:underline;text-underline-offset:3px;text-decorat
 
 /* 여러 편으로 된 작업: 상세 화면 안에서 편 고르기 */
 .eps{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.eps.grouped{display:flex;gap:0;align-items:stretch}
+.ep-group{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ep-group+.ep-group{border-left:1px solid var(--line);margin-left:20px;padding-left:20px}
+.ep-glabel{margin:0;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--fg)}
+.ep-row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:12px}
 .ep .er{font-size:12px;color:var(--muted)}
 .ep{display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;color:var(--fg);font:inherit;text-align:left;cursor:pointer;opacity:.45;transition:opacity .2s ease;min-width:0}
 .ep:hover,.ep[aria-pressed="true"]{opacity:1}
@@ -321,6 +326,9 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   .d-in{padding:20px var(--gut-r) 32px var(--gut)}
   .stills{gap:6px}
   .eps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .eps.grouped{flex-direction:column;gap:20px}
+  .ep-group+.ep-group{border-left:0;margin-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
+  .ep-row{grid-template-columns:repeat(2,minmax(0,1fr))}
   .media,.media.solo{grid-template-columns:minmax(0,1fr);max-width:none}
   .side{grid-template-rows:none;grid-template-columns:repeat(var(--mc,3),minmax(0,1fr))}
   .side .cell{aspect-ratio:var(--ar,16/9)}
@@ -565,14 +573,7 @@ const pic = x => !x ? null : (typeof x === "string" ? { src: x, caption: "" } : 
 function openDetail(w) {
   $("dTitle").textContent = w.title;
   $("dMeta").textContent = join([w.client, w.format, yr(w)]);
-  /* 내 역할 · 맡은 일 · 함께한 사람: 영상보다 먼저 보이게 */
-  const rows = [];
-  if (w.role) rows.push(`<div class="lab">Role</div><div class="val role">${esc(w.role)}</div>`);
-  if (w.focus || (w.tasks && w.tasks.length)) rows.push(`<div class="lab">My Part</div><div class="val">${w.focus ? `<p class="focus">${esc(w.focus)}</p>` : ""}${(w.tasks || []).length ? `<ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`);
-  if (w.credits) rows.push(`<div class="lab">Credits</div><div class="val cr">${esc(w.credits)}</div>`);
-  const files = (w.files || []).filter(f => f && f.url);
-  if (files.length) rows.push(`<div class="lab">Work Sample</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
-  $("dPart").innerHTML = rows.join("");
+  renderPart(w);
   const eps = $("dEps");
   eps.hidden = true; eps.innerHTML = "";
   if (w.episodes) {
@@ -580,14 +581,31 @@ function openDetail(w) {
        스틸컷 없이 영상만 여러 편이면 옆에 다른 편을 놓고 누르면 그 편의 링크(인스타그램 등)로 바로 이동 */
     if (w.picker || w.episodes.some(e => e.stills && e.stills.length)) {
       eps.hidden = false;
-      eps.innerHTML = w.episodes.map(ep => {
+      const btn = (ep, k) => {
         const img = imageOf(ep);
-        return `<button class="ep" type="button" aria-pressed="false"><div class="thumb${ep.vertical ? " v" : ""}"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || ep.format || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span>${ep.role || ep.year ? `<span class="er">${esc(join([ep.role, ep.year]))}</span>` : ""}</button>`;
-      }).join("");
+        return `<button class="ep" type="button" aria-pressed="false" data-k="${k}"><div class="thumb${ep.vertical ? " v" : ""}"><span class="ph">${esc((ep.yt || ep.href) ? (ep.platform || ep.format || "") : (w.note || "공개 예정"))}</span>${img ? `<img alt="" src="${esc(img)}">` : ""}</div><span class="et">${esc(ep.title)}</span>${ep.role || ep.year ? `<span class="er">${esc(join([ep.role, ep.year]))}</span>` : ""}</button>`;
+      };
+      const all = w.episodes.map((ep, k) => [ep, k]);
+      if (w.groups) {
+        /* 유형별로 묶고 사이에 구분선, 각 묶음 맨 앞 위에 유형 이름 */
+        const names = [...new Set(w.episodes.map(e => e.group || ""))];
+        eps.classList.add("grouped");
+        eps.innerHTML = names.map(n => { const list = all.filter(([e]) => (e.group || "") === n);
+          return `<div class="ep-group" style="flex:${list.length} 1 0;--n:${list.length}"><p class="ep-glabel">${esc(n)}</p><div class="ep-row">${list.map(([e, k]) => btn(e, k)).join("")}</div></div>`; }).join("");
+      } else {
+        eps.classList.remove("grouped");
+        eps.innerHTML = all.map(([e, k]) => btn(e, k)).join("");
+      }
       noImgOnError(eps);
       const btns = [...eps.querySelectorAll(".ep")];
-      const pick = k => { btns.forEach((b, n) => b.setAttribute("aria-pressed", String(n === k))); showMedia(w.episodes[k], w, null); };
-      btns.forEach((b, k) => b.addEventListener("click", () => pick(k)));
+      const pick = k => {
+        btns.forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.k) === k)));
+        const ep = w.episodes[k], grp = w.groups && w.groups[ep.group];
+        const base = grp ? { ...w, ...Object.fromEntries(Object.entries(grp).filter(([, v]) => v && (!Array.isArray(v) || v.length))) } : w;
+        if (w.groups) renderPart(base);
+        showMedia(ep, base, null);
+      };
+      btns.forEach(b => b.addEventListener("click", () => pick(Number(b.dataset.k))));
       pick(0);
     } else {
       const pick = k => showMedia(w.episodes[k], w, w.episodes.map((e, i) => [e, i]).filter(x => x[1] !== k), pick);
@@ -598,6 +616,16 @@ function openDetail(w) {
   }
   peek.classList.remove("on");
   dlg.showModal(); dlg.scrollTop = 0;
+}
+/* 내 역할 · 맡은 일 · 자료 링크: 영상보다 먼저 보이게 */
+function renderPart(w) {
+  const rows = [];
+  if (w.role) rows.push(`<div class="lab">Role</div><div class="val role">${esc(w.role)}</div>`);
+  if (w.focus || (w.tasks && w.tasks.length)) rows.push(`<div class="lab">My Part</div><div class="val">${w.focus ? `<p class="focus">${esc(w.focus)}</p>` : ""}${(w.tasks || []).length ? `<ul>${w.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`);
+  if (w.credits) rows.push(`<div class="lab">Credits</div><div class="val cr">${esc(w.credits)}</div>`);
+  const files = (w.files || []).filter(f => f && f.url);
+  if (files.length) rows.push(`<div class="lab">Work Sample</div><div class="val files">${files.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.label || "자료")} ↗</a>`).join("")}</div>`);
+  $("dPart").innerHTML = rows.join("");
 }
 function showMedia(w, parent, others, pick) {
   $("dDesc").textContent = w.desc || parent.desc || "";
