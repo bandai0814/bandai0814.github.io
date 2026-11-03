@@ -105,7 +105,7 @@ window.SITE = {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Advertisement", role: "AD · PD",
       period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
-      files: [],
+      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1NKdNdeifw8eFbBtbssWJJ6kNYiLDc8P-" }],
       tasks: [], credits: "", desc: "", result: "",
       episodes: [
         { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", vertical: false, thumb: "", desc: "", stills: [] },
@@ -165,7 +165,7 @@ window.SITE = {
       // (비워 둔 칸은 위의 작업 전체 내용이 대신 보임)
       groups: {
         "Visual Film": { role: "", focus: "", tasks: [], files: [], desc: "" },
-        "Documentary": { role: "", focus: "", tasks: [], files: [], desc: "" }
+        "Documentary": { role: "", focus: "", tasks: [], files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1g99xgJZChnfuYjSSQfOuzw-iPXywON5M" }], desc: "" }
       },
       // 순서 = 상세 화면 위쪽 목록 순서 (유형별로 묶고, 각 유형 안에서 최신 연도가 왼쪽)
       // feature: true = 포트폴리오 PDF에서 위쪽 큰 칸
