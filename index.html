@@ -837,7 +837,7 @@ function resumeDoc() {
     <div class="r-top">
       <div><div class="r-name">${esc(S.name)}</div><div class="r-sub">${esc(S.role)}</div></div>
       <div></div>
-      <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br><a class="r-site" href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Portfolio ↗</a><span class="r-url">${esc(S.siteUrl)}</span></div>
+      <div class="r-contact">${esc(S.email)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br><a class="r-site" href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Portfolio ↗</a></div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("주요 작업", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}

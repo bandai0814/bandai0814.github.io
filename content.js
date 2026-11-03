@@ -140,7 +140,7 @@ window.SITE = {
       stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
     {
-      title: "親不孝通りノンフィクション(Haruki's version)",
+      title: "親不孝通りノンフィクション",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
       files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1yzG8hCzSPO-SP7iYkm5Hi-AlikvfhzOx" }],
