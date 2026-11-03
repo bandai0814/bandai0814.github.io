@@ -63,7 +63,7 @@ window.SITE = {
   email: "bandai0814@gmail.com",
   instagram: "p_wjddn",          // @ 없이 아이디만 (사이트 상단과 이력서에 표시)
   phone: "010-2234-8889",
-  siteUrl: "bandai0814.github.io/portfolio/site",
+  siteUrl: "bandai0814.github.io",
 
   /* ── 자기소개: 이력서 PDF 맨 아래에 들어갑니다 (사이트에는 안 보임)
         문단마다 큰따옴표로 감싸고 쉼표로 구분하세요 ── */
