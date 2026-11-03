@@ -143,7 +143,7 @@ window.SITE = {
       client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       files: [{ label: "담당 작업 폴더", url: "https://fancy-stitch-21b.notion.site/2-Concert-Film-_-pre-40c3acc6dcac8072b135d05b8ff92d06" }],
-      focus: "연출 설계 및 현장·후반 작업 지원",
+      focus: "연출 설계 및 현장 운영과 후반 작업 지원",
       tasks: [
         "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
         "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
