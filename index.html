@@ -38,6 +38,10 @@ nav.main a:hover{color:var(--fg)}
 
 /* ---------- hero ---------- */
 .hero{padding-block:clamp(48px,9vw,120px) 0}
+/* 랙 포커스: 스크롤하는 동안 첫 화면을 잠깐 붙잡아 두고 초점만 이동 */
+.hero-pin.on::after{content:"";display:block;height:var(--hold,50vh)}
+.hero-pin.on .hero{position:sticky;top:var(--hdr,0px);background:var(--bg)}
+.hero-meta.rf>*{will-change:filter}
 .word .ln{display:block}
 .word .ch{display:inline-block;will-change:filter,transform}
 .word{margin:0;font-weight:700;font-size:clamp(52px,13.2vw,200px);line-height:.86;letter-spacing:-.055em;text-transform:uppercase;text-wrap:balance}
@@ -381,14 +385,14 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 </header>
 
 <main id="top">
-  <div class="hero wrap">
+  <div class="hero-pin" id="heroPin"><div class="hero wrap" id="hero">
     <h1 class="word" id="word"></h1>
     <div class="hero-meta">
       <div class="who" id="who"></div>
       <div class="say"><p id="introText"></p><p class="skills" id="skills"></p></div>
       <div class="go contact" id="contact"></div>
     </div>
-  </div>
+  </div></div>
 
   <section id="work" class="wrap">
     <div class="sec-head">
@@ -524,27 +528,47 @@ function tile(w, ref, meta, cls) {
     ${meta ? `<div class="m">${esc(meta)}</div>` : ""}</a>`;
 }
 
-/* 랙 포커스: 스크롤을 내리면 이름의 초점이 글자마다 다른 깊이로 나가고, 올리면 다시 맞음 */
+/* 랙 포커스
+   1) 들어오면 흐릿하던 이름에 1.5초 안에 초점이 맞음
+   2) 스크롤을 내리면 첫 화면은 잠깐 멈춘 채, 초점이 이름에서 아래 소개 줄로 넘어감
+   3) 다 넘어가면 첫 화면이 올라가고 작업 목록이 이어짐 (올리면 반대로) */
 function rackFocus() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const w = $("word"), chs = [...w.querySelectorAll(".ch")];
+  const w = $("word"), pin = $("heroPin"), meta = document.querySelector(".hero-meta");
+  const chs = [...w.querySelectorAll(".ch")], parts = [...meta.children];
   const depth = chs.map((_, i) => [.55, .2, .9, .35, .75, .1, .6, .95, .3, .8, .45, .15][i % 12]);
-  let ticking = false;
-  const draw = () => {
-    ticking = false;
-    const top = w.getBoundingClientRect().top + window.scrollY;
-    const p = Math.min(1, Math.max(0, window.scrollY / (top + w.offsetHeight * .9)));
-    const e = p * p * (3 - 2 * p);
+  pin.classList.add("on"); meta.classList.add("rf");
+  const setHdr = () => pin.style.setProperty("--hdr", document.querySelector("header").offsetHeight + "px");
+  setHdr();
+  const t0 = performance.now(), INTRO = 1500;
+  const ss = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
+  let raf = 0;
+  const draw = now => {
+    raf = 0;
+    const hold = pin.offsetHeight - $("hero").offsetHeight;          // 붙잡아 두는 스크롤 거리
+    const p = ss(window.scrollY / Math.max(1, hold));
+    const it = (now ?? performance.now()) - t0;
     chs.forEach((c, i) => {
       const d = depth[i];
-      c.style.filter = e ? `blur(${(e * (4 + d * 18)).toFixed(2)}px)` : "";
-      c.style.transform = e ? `translateY(${(e * (d - .5) * 36).toFixed(1)}px) scale(${(1 + e * d * .06).toFixed(3)})` : "";
-      c.style.opacity = e ? (1 - e * (.25 + d * .35)).toFixed(3) : "";
+      const intro = 1 - ss((it - d * 500) / (INTRO - 500));          // 깊이 순서대로 초점이 맞음
+      const e = Math.max(p, intro * .9);
+      c.style.filter = e > .002 ? `blur(${(e * (4 + d * 18)).toFixed(2)}px)` : "";
+      c.style.transform = e > .002 ? `translateY(${(e * (d - .5) * 30).toFixed(1)}px) scale(${(1 + e * d * .05).toFixed(3)})` : "";
+      c.style.opacity = e > .002 ? (1 - e * (.2 + d * .35)).toFixed(3) : "";
     });
+    /* 아래 소개 줄은 반대로: 처음엔 살짝 흐리다가 스크롤하면 선명해짐 */
+    const m = 1 - ss(p * 1.4);
+    parts.forEach((el, i) => {
+      const b = m * (2.2 + i * .6);
+      el.style.filter = b > .05 ? `blur(${b.toFixed(2)}px)` : "";
+      el.style.opacity = (1 - m * .45).toFixed(3);
+    });
+    if (it < INTRO + 50) raf = requestAnimationFrame(draw);
   };
-  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(draw); } }, { passive: true });
-  addEventListener("resize", draw);
-  draw();
+  const ask = () => { if (!raf) raf = requestAnimationFrame(draw); };
+  addEventListener("scroll", ask, { passive: true });
+  addEventListener("resize", () => { setHdr(); ask(); });
+  raf = requestAnimationFrame(draw);
 }
 
 function renderSite() {
