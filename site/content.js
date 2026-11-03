@@ -92,7 +92,8 @@ window.SITE = {
       // 공개되면 각 편의 yt에 영상 ID를 넣기 (비어 있으면 '공개 예정'으로 보임)
       picker: true,
       episodes: [
-        { title: "하이라이트 필름", feature: true, yt: "i1u8Vcy-J6E", desc: "", stills: [] },
+        { title: "하이라이트 필름", feature: true, yt: "i1u8Vcy-J6E", desc: "",
+          stills: ["images/lover-highlight-1.jpg", "images/lover-highlight-2.jpg", "images/lover-highlight-3.jpg", "images/lover-highlight-4.jpg"] },
         { title: "라이브 · Gertha Loew", yt: "", desc: "", stills: [] },
         { title: "라이브 · Auburn/Telepathy", yt: "", desc: "", stills: [] },
         { title: "라이브 · Erebia", yt: "", desc: "", stills: [] },
