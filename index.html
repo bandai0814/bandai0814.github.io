@@ -881,7 +881,7 @@ function careerEntry(p) {
 }
 function careerDoc() {
   return `<article class="sheet">
-    <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}<br>${esc(S.phone)}</div></div>
+    <div class="c-top"><div class="c-title">경력기술서</div><div class="c-who">${esc(S.name)} · ${esc(S.role)}<br>${esc(S.email)}</div></div>
     <div class="c-group"><h3>주요 작업</h3><div>${sortedWorks().map(([, w]) => careerEntry(w)).join("")}</div></div>
   </article>`;
 }
