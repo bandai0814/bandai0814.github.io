@@ -1,5 +1,11 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="description" content="PD · AD 박정우의 포트폴리오">
 <title>박정우 포트폴리오</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 일본어 제목용 보조 폰트 (Pretendard에 없는 가나·한자만 여기서 가져옴) -->
@@ -30,7 +36,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--fg);outline-offset:
 /* ---------- header ---------- */
 header{position:sticky;top:env(safe-area-inset-top, 0px);z-index:9;background:var(--bg)}
 header .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;align-items:center;min-height:56px;font-size:14px}
-.mark{grid-column:1 / 4;font-weight:600}
+.mark{grid-column:1 / 4;font-weight:600;white-space:nowrap}
 .h-role{grid-column:4 / 8;color:var(--muted)}
 nav.main{grid-column:8 / 13;display:flex;justify-content:flex-end;gap:28px}
 nav.main a{color:var(--muted)}
@@ -334,7 +340,8 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 }
 @media (max-width:640px){
   header .wrap{gap:12px}
-  nav.main{gap:18px}
+  nav.main{gap:14px}
+  .mark,nav.main{font-size:13px}
   .grid.two{grid-template-columns:1fr}
   .feature .thumb{aspect-ratio:16/9}
   .series-head .t,.series-head .m{grid-column:1 / 13;justify-self:start}
@@ -369,6 +376,8 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 }
 </style>
 <style id="pageRule">@page{size:A4;margin:16mm 17mm}</style>
+</head>
+<body>
 
 <header>
   <div class="wrap">
@@ -946,3 +955,5 @@ renderSite();
 route();
 })();
 </script>
+</body>
+</html>
