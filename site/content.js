@@ -109,7 +109,7 @@ window.SITE = {
       files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1NKdNdeifw8eFbBtbssWJJ6kNYiLDc8P-" }],
       focus: "기획·연출 및 제작 관리와 현장 운영",
       tasks: [
-        "BOLD MOVE 커뮤니티 참여자 중 모델 선정 및 모델·제품 특성에 맞춘 영상 톤앤매너 구성",
+        "LG전자 운영 접근성 커뮤니티 참여자 중 모델 선정 및 제품 특성에 맞춘 영상 톤앤매너 구성",
         "기획 의도·메인 카피 아이데이션, 내레이션 작성 및 AI 활용 스토리보드 제작",
         "로케이션 헌팅, 모델·스튜디오 섭외 및 음원 제작을 위한 작곡가 컨택",
         "촬영 동의서 등 제작 서류 준비 및 촬영 타임테이블 작성",
