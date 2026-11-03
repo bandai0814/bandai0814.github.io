@@ -649,8 +649,8 @@ document.addEventListener("click", e => {
   openDetail(lookup(a.dataset.ref));
 });
 $("dClose").addEventListener("click", () => dlg.close());
-/* 사진을 누르면 크게 보기 */
-$("dGal").addEventListener("click", e => {
+/* 사진을 누르면 크게 보기 (옆 칸 스틸컷 · 아래 비하인드 모두) */
+dlg.addEventListener("click", e => {
   const b = e.target.closest(".still[data-src]");
   if (!b || typeof lb.showModal !== "function") return;
   $("lbImg").src = b.dataset.src; $("lbCap").textContent = b.dataset.cap || "";
