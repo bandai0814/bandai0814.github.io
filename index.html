@@ -288,6 +288,8 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 /* 포트폴리오 */
 .p-cover{display:flex;flex-direction:column;justify-content:space-between;height:100%}
 .p-cover .k{display:flex;justify-content:space-between;font-size:9pt;color:var(--ink-2)}
+.p-cover .n.rf .ln{display:block}
+.p-cover .n.rf .ch{display:inline-block}
 .p-cover .n{font-size:68pt;font-weight:700;letter-spacing:-.055em;line-height:.86;text-transform:uppercase}
 .p-cover .c{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6mm;font-size:9pt;border-top:1pt solid var(--ink);padding-top:3mm}
 .p-cover .c span:first-child{font-weight:700}
@@ -934,11 +936,23 @@ function portfolioPage(p) {
     : `<div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}${about}</div></div></article>`;
 }
+/* 포트폴리오 표지: 초점이 막 넘어가는 순간처럼, 글자마다 다른 깊이로 흐림 */
+function rackName() {
+  const depth = [.05, .55, 0, .3,  .85, .1, .6, 0, .35,  .95, .2, .7];
+  let k = 0;
+  const [l1, ...rest] = S.nameEn.split(" ");
+  return [l1, rest.join(" ")].map(l => `<span class="ln">${[...l].map(c => {
+    if (c === " ") return " ";
+    const d = depth[k++ % depth.length];
+    const st = d > .02 ? `filter:blur(${(d * 9).toFixed(1)}px);opacity:${(1 - d * .45).toFixed(2)};transform:translateY(${((d - .5) * 10).toFixed(1)}px) scale(${(1 + d * .04).toFixed(3)})` : "";
+    return `<span class="ch"${st ? ` style="${st}"` : ""}>${esc(c)}</span>`;
+  }).join("")}</span>`).join("");
+}
 function portfolioDoc() {
   const yr = new Date().getFullYear();
   const cover = `<article class="sheet land"><div class="p-cover">
     <div class="k"><span>Portfolio</span><span>${yr}</span></div>
-    <div class="n">${esc(S.nameEn).replace(" ", "<br>")}</div>
+    <div class="n rf" aria-label="${esc(S.nameEn)}">${rackName()}</div>
     <div class="c"><span>${esc(S.name)}</span><span>${esc(S.role)}</span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)} ↗</a></div>
   </div></article>`;
   /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 페이지씩: 그 유형의 작품과 역할·업무·소개만 */
