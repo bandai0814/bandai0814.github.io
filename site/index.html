@@ -253,7 +253,8 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .c-body dd{margin:0}
 .c-body ul{margin:0;padding-left:4mm}
 .c-body li{margin-bottom:.8mm}
-.r-p{margin:0 0 2.5mm;line-height:1.75;white-space:pre-line}
+.r-p{margin:0 0 2.5mm;line-height:1.75;text-indent:1em;text-align:justify;text-justify:inter-character}
+.r-p.tight{margin-bottom:0}
 .r-p:last-child{margin-bottom:0}
 .p-text .part{display:block;font-size:8.5pt;line-height:1.6}
 .p-text .part b{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2);margin-bottom:1mm}
@@ -747,7 +748,7 @@ function resumeDoc() {
       <div class="r-contact">${esc(S.email)}<br>${esc(S.phone)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br>${esc(S.siteUrl)}</div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
-    ${rSec("경력", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}
+    ${rSec("주요 작업", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}
     ${rSec("기타 참여", S.archive.map(a => rRow(a.year, `<b>${esc(a.title.replace(/^\[[^\]]+\]\s*/, ""))}</b>${/^\[/.test(a.title) ? " · " + esc(a.title.match(/^\[([^\]]+)\]/)[1]) : ""}`, a.format)).join(""))}
     ${rSec("수상", S.awards.map(a => rRow(a.year, `<b>${esc(a.name)}</b> · ${esc(a.detail)}`)).join(""))}
     ${rSec("자격", certRows(c => !c.lang))}
@@ -755,7 +756,8 @@ function resumeDoc() {
     ${(S.training || []).length ? rSec("교육 이수", S.training.map(t => rRow(t.year, `<b>${esc(t.name)}</b>${t.issuer ? `<span class="s">${esc(t.issuer)}</span>` : ""}`)).join("")) : ""}
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
     ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
-      ? S.aboutMe.filter(Boolean).map(t => `<p class="r-p">${esc(t)}</p>`).join("")
+      ? /* 문단 안의 줄바꿈도 새 문단처럼 첫 줄 들여쓰기 (간격은 붙여서) */
+        S.aboutMe.filter(Boolean).map(t => t.split("\n").map((line, i, all) => `<p class="r-p${i < all.length - 1 ? " tight" : ""}">${esc(line)}</p>`).join("")).join("")
       : todo("[content.js의 aboutMe에 두세 문단으로 적으면 여기에 들어갑니다]"))}
   </article>`;
 }
