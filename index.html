@@ -891,7 +891,7 @@ function resumeDoc() {
     <div class="r-top">
       <div><div class="r-name">${esc(S.name)}</div><div class="r-sub">${esc(S.role)}</div></div>
       <div></div>
-      <div class="r-contact">${esc(S.email)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br><a class="r-site" href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Portfolio ↗</a></div>
+      <div class="r-contact">${esc(S.email)}${S.instagram ? "<br>@" + esc(S.instagram) : ""}<br><a class="r-site" href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a></div>
     </div>
     ${rSec("학력", S.education.map(e => rRow(e.period, `<b>${esc(e.school)}</b> ${esc(e.major)}${e.second ? "<br>복수전공 / " + esc(e.second) : ""}`, e.gpa ? "학점 " + e.gpa : "")).join(""))}
     ${rSec("주요 작업", works().map(p => rRow(p.period || p.year, `<b>${esc(p.title)}</b>${p.client && !p.title.includes(p.client) ? " · " + esc(p.client) : ""}`, p.format)).join(""))}
@@ -1012,7 +1012,7 @@ function portfolioDoc() {
   const cover = `<article class="sheet land"><div class="p-cover">
     <div class="k"><span>Portfolio</span><span>${yr}</span></div>
     <div class="n rf" aria-label="${esc(S.nameEn)}">${rackName()}</div>
-    <div class="c"><span><b>${esc(S.name)}</b><small>${esc(S.role)}</small></span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Website ↗</a>${S.workSamples ? `<a href="${esc(S.workSamples)}" target="_blank" rel="noopener">Work Samples ↗</a>` : ""}</div>
+    <div class="c"><span><b>${esc(S.name)}</b><small>${esc(S.role)}</small></span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a>${S.workSamples ? `<a href="${esc(S.workSamples)}" target="_blank" rel="noopener">Work Samples ↗</a>` : ""}</div>
   </div></article>`;
   /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 페이지씩: 그 유형의 작품과 역할·업무·소개만 */
   const pages = works().flatMap(p => {
