@@ -54,7 +54,7 @@ window.SITE = {
   name: "박 정 우",
   nameEn: "PARK JEONG WOO",
   role: "PD · AD",
-  intro: "섬세한 직감을 지닌 최고의 서포터입니다.",
+  intro: "장르가 달라도, 현장을 움직이는 근육은 같습니다.",
 
   // 내가 실제로 하는 일 → 소개 문장 아래 한 줄로 보임 (안 쓰려면 [] 로 비우기)
   skills: ["Production · Communication · AI Tools"],
