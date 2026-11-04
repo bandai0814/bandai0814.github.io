@@ -183,7 +183,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .side .cell:hover img{opacity:.85}
 .part.d-about:has(.d-desc:empty){display:none}
 .d-desc .dp{display:block}
-.d-desc .dp+.dp{margin-top:.55em}
+.d-desc .dp+.dp{margin-top:.8em}
 .d-desc.clamp{overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 3.4em),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 3.4em),transparent)}
 .d-more{margin-top:8px;padding:6px 0;border:0;background:none;color:var(--fg);font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .player .out{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tile-fg)}
@@ -300,7 +300,10 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-text .meta span:nth-child(odd){color:var(--ink-2)}
 .p-media .desc:has(.todo){text-align:left}
 .p-media .desc-h{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2)}
-.p-media .desc{margin-top:4mm;font-size:9pt;line-height:1.75;text-align:justify;text-justify:inter-character;white-space:pre-line}
+.p-media .desc{margin-top:4mm;font-size:9pt;line-height:1.75;text-align:justify;text-justify:inter-character}
+/* 문단: 빈 줄이 있든 없든 같은 간격 (줄 높이의 절반 정도 더) */
+.p-media .desc .dp{display:block}
+.p-media .desc .dp+.dp{margin-top:.8em}
 .p-text .link{margin-top:auto;font-size:7.5pt;color:var(--ink-2);word-break:break-all}
 .p-media{display:flex;flex-direction:column;gap:3mm;min-width:0}
 .p-main,.p-sm{position:relative;aspect-ratio:16/9;background:#F0F0F0;overflow:hidden}
@@ -889,6 +892,7 @@ function careerDoc() {
 }
 
 const pImg = (src, cls, label, zoom) => `<div class="${cls}">${src ? `<img alt="" src="${esc(src)}"${zoom ? ` style="transform:scale(${zoom})"` : ""}>` : `<span class="ph-paper">${esc(label)}</span>`}</div>`;
+const paras = t => String(t).split(/\n+/).filter(Boolean).map(x => `<span class="dp">${esc(x)}</span>`).join("");
 function portfolioPage(p) {
   const text = `<div class="p-text">
     <div class="ttl">${esc(p.title)}</div>
@@ -932,8 +936,8 @@ function portfolioPage(p) {
   /* 작업 소개는 넓은 오른쪽 칸, 이미지 아래에 */
   const gDesc = filledGroups(p).filter(([, g]) => g.desc);
   const about = gDesc.length
-    ? gDesc.map(([name, g]) => `<div class="desc">${gDesc.length > 1 || filledGroups(p).length > 1 ? `<b class="desc-h">${esc(name)}</b>` : ""}${esc(g.desc)}</div>`).join("")
-    : `<div class="desc">${p.desc ? esc(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
+    ? gDesc.map(([name, g]) => `<div class="desc">${gDesc.length > 1 || filledGroups(p).length > 1 ? `<b class="desc-h">${esc(name)}</b>` : ""}${paras(g.desc)}</div>`).join("")
+    : `<div class="desc">${p.desc ? paras(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
   return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}${about}</div></div></article>`;
 }
 /* 포트폴리오 표지: 초점이 막 넘어가는 순간처럼, 글자마다 다른 깊이로 흐림 */
