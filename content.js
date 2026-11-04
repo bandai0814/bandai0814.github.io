@@ -20,8 +20,8 @@
              [{ label: "담당 작업 폴더", url: "https://..." }] 처럼 적기
    focus     담당 업무 한 줄 요약 (예: "연출 설계 및 현장·후반 작업 지원") → My Part 맨 위에 굵게
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
-   credits   함께한 사람들 (예: "Director 홍길동 · Edit 김OO · DI 이OO")
-             → 상세 화면에 작게 표시. 내가 하지 않은 파트를 분명히 해 줌
+   credits   크레딧 → 사이트 상세 화면 About 아래 (접혀 있다가 '전체 크레딧'으로 펼침, PDF에는 안 들어감)
+             `역할 | 이름, 이름` 한 줄씩, [구역 이름] 으로 묶음. 내 이름은 자동으로 굵게
    desc      작업 소개 한두 줄 (줄을 바꾸려면 \n) → 사이트 상세 화면, 포트폴리오에 들어감
    result    결과 / 성과 한 줄 → 경력기술서에 들어감
    stills    스틸컷 이미지 경로 → 사이트 상세 화면 'Stills' (5장까지는 한 줄, 6~10장은 두 줄로 나눠짐)
@@ -98,7 +98,28 @@ window.SITE = {
         "셋리스트 기반 카메라 운용표 및 장비 세팅·이동 큐 설계",
         "특수효과 필터·캠코더 활용 구성, 정면 풀샷 카메라 운용"
       ],
-      credits: "", desc: "데이먼스 이어의 단독 콘서트 ‘죽은 연인에게로’를 담은 라이브 필름. 공연의 주요 순간을 압축한 하이라이트와 곡별 라이브 영상, 공연 전체를 감상할 수 있는 풀 아카이빙 영상으로 구성된다. 각 곡의 정서에 맞춰 캠코더의 거친 질감과 빛이 번지는 필터 효과 등을 활용해, 무대에서 느껴지는 기억과 그리움, 고독을 화면에도 담아내고자 했다. 본공연의 현장감을 유지하면서도 아티스트의 표정과 연주를 가까이 담기 위해 리허설 촬영을 함께 고려했다. 공연 전체의 흐름과 개별 곡의 감정이 각 영상의 목적에 맞게 살아나도록 작업 중에 있다.", result: "", stills: [],
+      credits: `[ARTIST]
+DAMONS YEAR
+[LIVE PERFORMERS]
+Band Master & Guitar | Yu Hyunjin
+Guitar | Choi Joonha
+Bass | Park Chanyoung
+Drum | Chang Jaemin
+Violin I | Kim Sangeun, Chung Yoonjung
+Violin II | Kim Yeonsong, Baik Nayoung
+Viola | Park Narae, Shin Dahae
+Cello | Melis Elgin
+[PRODUCTION]
+Label | Akashic Records
+Artist Management | MOONPICK
+Presenter | MOONPICK, Akashic Records, NOL UNIVERSE
+Organizer | MOONPICK, NOL UNIVERSE
+Concert Production Company | NOL UNIVERSE
+Concert Director | 206 Production
+[LIVE FILMING]
+Director | Jeong Yejoon (Yeahfilms)
+Assistant Directors | Park Jeongwoo, Ahn Jeongbin, Lee Yewon
+Camera Operators | Jeong Yejoon, Ahn Jeongbin, Park Jeongwoo, Lee Yewon, An Dan, Ko Byeonghak, Bang Sanghyun, Choi Jihwan`, desc: "데이먼스 이어의 단독 콘서트 ‘죽은 연인에게로’를 담은 라이브 필름. 공연의 주요 순간을 압축한 하이라이트와 곡별 라이브 영상, 공연 전체를 감상할 수 있는 풀 아카이빙 영상으로 구성된다. 각 곡의 정서에 맞춰 캠코더의 거친 질감과 빛이 번지는 필터 효과 등을 활용해, 무대에서 느껴지는 기억과 그리움, 고독을 화면에도 담아내고자 했다. 본공연의 현장감을 유지하면서도 아티스트의 표정과 연주를 가까이 담기 위해 리허설 촬영을 함께 고려했다. 공연 전체의 흐름과 개별 곡의 감정이 각 영상의 목적에 맞게 살아나도록 작업 중에 있다.", result: "", stills: [],
       // picker: true = 상세 화면 위쪽에 편 목록을 놓고, 누른 편이 메인 영상으로 나옴
       // 공개되면 각 편의 yt에 영상 ID를 넣기 (비어 있으면 '공개 예정'으로 보임)
       picker: true,
@@ -126,7 +147,30 @@ window.SITE = {
         "현장 구도 점검, 스크립터 및 촬영 시간 관리",
         "카메라 운용 보조 및 편집본 검토·피드백"
       ],
-      credits: "", desc: "일상 속 작은 불편을 덜어주는 LG전자 제품의 쓰임을 담은 숏폼 프로젝트. 컴포트 키트 ‘오늘부터 이지하게’ 시리즈 3편과 퓨리케어 AI 냉동얼음정수기편을 제작했다. 다양한 세대와 생활 방식 속에서 제품이 어떻게 편안함을 더하는지 보여주고자 했다. 컴포트 키트는 배드민턴·요리·그림 등 출연자의 취미가 자연스럽게 제품 사용으로 이어지도록 구성했다. 정수기편은 할머니와 손녀가 함께 보내는 여름방학을 배경으로, 음성인식과 레시피 출수 기능을 활용하는 모습을 따뜻하고 청량한 분위기로 담았다.\n컴포트 키트는 무더위 속 모델들의 컨디션과 촬영 진행 상황을 살피며 하루에 3편을 촬영했으며, 이 중 전자레인지 이지트레이편은 기획부터 연출까지 직접 맡았다. 별도로 촬영한 정수기편에서는 당일 설치한 제품에서 얼음이 충분히 나오지 않는 변수가 생겼다. 확보된 소량의 얼음으로도 깨끗하고 시원한 인상을 보여줄 수 있도록 현장에서 구도와 연출을 조정했다. 후반 작업에서는 생성형 AI로 필요한 연결 소스를 제작해 매끄럽지 않은 카메라 움직임을 보완하고, 앞뒤 컷이 자연스럽게 이어지도록 했다.", result: "",
+      credits: `[퓨리케어 AI 냉동얼음정수기편]
+Starring | Yoohee Jo, Seunghee Kim
+Director | Yejoon Jeong
+Assistant Director | Jeongwoo Park
+Producer | Jeongwoo Park
+Line Producer | Juyeon Lee
+Director of Photography | Yejoon Jeong
+Lighting Director | Byeonghak Go
+Art Director | Yumin Choi
+Art Crew | Minseon Kim
+Production Sound Mixer | Yewon Lee
+Sound Mixing | Byeonghak Go
+Music by | Hyeonju Na
+Edit / DI / Graphic Design | Yejoon Jeong
+[컴포트 키트 ‘오늘부터 이지하게’ 시리즈]
+Director | Yejoon Jeong
+Assistant Director | Jeongwoo Park
+Producer | Jeongwoo Park
+Director of Photography | Yejoon Jeong
+Assistant Camera | Jeongho Lee
+Lighting Director | Seokhyeon Kim
+Lighting Crew | Eunsang Yu
+Art Director | Jeongbin Ahn
+Art Crew | Yewon Lee`, desc: "일상 속 작은 불편을 덜어주는 LG전자 제품의 쓰임을 담은 숏폼 프로젝트. 컴포트 키트 ‘오늘부터 이지하게’ 시리즈 3편과 퓨리케어 AI 냉동얼음정수기편을 제작했다. 다양한 세대와 생활 방식 속에서 제품이 어떻게 편안함을 더하는지 보여주고자 했다. 컴포트 키트는 배드민턴·요리·그림 등 출연자의 취미가 자연스럽게 제품 사용으로 이어지도록 구성했다. 정수기편은 할머니와 손녀가 함께 보내는 여름방학을 배경으로, 음성인식과 레시피 출수 기능을 활용하는 모습을 따뜻하고 청량한 분위기로 담았다.\n컴포트 키트는 무더위 속 모델들의 컨디션과 촬영 진행 상황을 살피며 하루에 3편을 촬영했으며, 이 중 전자레인지 이지트레이편은 기획부터 연출까지 직접 맡았다. 별도로 촬영한 정수기편에서는 당일 설치한 제품에서 얼음이 충분히 나오지 않는 변수가 생겼다. 확보된 소량의 얼음으로도 깨끗하고 시원한 인상을 보여줄 수 있도록 현장에서 구도와 연출을 조정했다. 후반 작업에서는 생성형 AI로 필요한 연결 소스를 제작해 매끄럽지 않은 카메라 움직임을 보완하고, 앞뒤 컷이 자연스럽게 이어지도록 했다.", result: "",
       episodes: [
         { title: "퓨리케어 AI 냉동얼음정수기편", yt: "GuMLcztFD-E", platform: "YouTube", vertical: false, thumb: "", desc: "", stills: [] },
         { title: "전자레인지 이지트레이편", href: "https://www.instagram.com/reel/DczlrTuTg1z/", platform: "Instagram", vertical: true, thumb: "images/lg-microwave.jpg", desc: "", stills: [] },
@@ -147,7 +191,34 @@ window.SITE = {
         "현장 스크립터 및 필수 컷·인서트 체크, 촬영 시간 조율",
         "후반 작업 중 믹스드 미디어 아트워크 공동 제작"
       ],
-      credits: "", desc: "자신만의 보금자리를 찾아 기묘한 경연에 참가한 소녀의 이야기를 담은 아티스트 유희의 뮤직비디오. 거북이를 건네받으며 시작되는 영화적 서사에 개성 강한 인물들의 경쟁과 훌라 댄스, 엉뚱한 상황이 연출된다. 타인의 시기와 질투 속에서도 밝음을 잃지 않는 소녀의 모습을 통해, 보사노바 장르의 곡에 담긴 희망과 사랑을 유쾌하면서도 낯선 이미지로 풀어내고자 했다.\n스튜디오에서의 인트로 촬영부터 대부도의 펜션과 야외 로케까지, 서로 다른 촬영 환경에서 다채로운 장면을 담아냈다. 많은 컷과 세팅 전환을 소화하기 위해 촬영을 뒷받침하는 자료들을 더블 체크하며, 필수 컷과 인서트를 놓치지 않도록 현장을 관리했다. 이렇게 확보한 소스에 아트워크를 더해, 기획 단계에서 상상한 따뜻하면서도 기묘한 세계를 곡의 템포에 어우러지는 영상으로 완성했다.", result: "",
+      credits: `Artist | Yoohee Jo
+Olapa | Yoohee Jo
+Oddball Grandmother | Minkyung Kwon
+Taekwondo Oddball | Minjun Kang
+Oddball Chef | Daon Woo
+Oddball Laborer | Maeum Jang
+Oddball Police Officer | Seungwon Choi
+Oddball Dental Hygienist | Sinyoung Han
+Director | Yejoon Jeong
+Assistant Directors | Jeongwoo Park, Jeongho Lee
+Producer | Jeongwoo Park
+Director of Photography | Yejoon Jeong
+Assistant Camera | Jeongho Lee
+[INTRO FILM CREW]
+Art Director | Jeongbin Ahn
+Art Crew | Minseon Kim, Yewon Lee
+Lighting Director | Byeonghak Ko
+Lighting Crew | Myeongjun Choi
+Sound | Jungkee Hong
+[MUSIC VIDEO CREW]
+Art Director | Minseon Kim
+Art Crew | Yumin Choi, Euntaek Kim, Jeongbin Ahn, Yewon Lee
+Lighting Director | Jiwoong Choo
+B Camera | Jeongho Lee
+VFX | Euntaek Kim
+Editing / Color Grading / Graphic Design | Yejoon Jeong
+Mixed Media Artwork | Yejoon Jeong, Jeongwoo Park
+Behind-the-Scenes Film | Mokha Kim`, desc: "자신만의 보금자리를 찾아 기묘한 경연에 참가한 소녀의 이야기를 담은 아티스트 유희의 뮤직비디오. 거북이를 건네받으며 시작되는 영화적 서사에 개성 강한 인물들의 경쟁과 훌라 댄스, 엉뚱한 상황이 연출된다. 타인의 시기와 질투 속에서도 밝음을 잃지 않는 소녀의 모습을 통해, 보사노바 장르의 곡에 담긴 희망과 사랑을 유쾌하면서도 낯선 이미지로 풀어내고자 했다.\n스튜디오에서의 인트로 촬영부터 대부도의 펜션과 야외 로케까지, 서로 다른 촬영 환경에서 다채로운 장면을 담아냈다. 많은 컷과 세팅 전환을 소화하기 위해 촬영을 뒷받침하는 자료들을 더블 체크하며, 필수 컷과 인서트를 놓치지 않도록 현장을 관리했다. 이렇게 확보한 소스에 아트워크를 더해, 기획 단계에서 상상한 따뜻하면서도 기묘한 세계를 곡의 템포에 어우러지는 영상으로 완성했다.", result: "",
       
       stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
@@ -163,7 +234,18 @@ window.SITE = {
         "AI를 활용한 스토리보드 제작",
         "프로덕션 디자인, 로케 헌팅, 예산 관리, 현장 인력 보조 및 후반 편집 보조"
       ],
-      credits: "", desc: "후쿠오카 오야후코도리(親不孝通り)를 배경으로 한 일본 아티스트 하마노 하루키의 뮤직 비디오. 일본 매니지먼트의 의뢰를 받아 소규모 스태프와 함께 단 하루 동안 촬영했다. 예상치 못한 폭풍우와 야간 거리의 인파로 장비 운용과 촬영에 제약이 생겼지만, 남은 시간과 작품의 완성도에 필요한 필수 컷을 즉각 고려해 콘티와 촬영 순서를 재조정했다. 한·일 스태프 간 소통과 감독의 리테이크 요청을 조율하며 당일 촬영을 마무리했고, 정해진 예산과 일정 안에 작품을 완성해냈다.",
+      credits: `Starring | Haruki Hamano
+Director | Yejoon Jeong
+Assistant Director | Jeongwoo Park, Jungho Lee
+Director of Photography | Jihwan Choi
+Assistant Camera | Jungho Lee
+Lighting Director | Seokhyeon Kim
+Styling | Haruki Hamano
+Hair & Make-up | Rei Takamatsu
+Edit / DI / Title Design | Yejoon Jeong
+Producer | Natsumi Ushijima, Jeongwoo Park
+Production | YeahFilms
+Special Thanks | MUSIC BAR SIDE:K`, desc: "후쿠오카 오야후코도리(親不孝通り)를 배경으로 한 일본 아티스트 하마노 하루키의 뮤직 비디오. 일본 매니지먼트의 의뢰를 받아 소규모 스태프와 함께 단 하루 동안 촬영했다. 예상치 못한 폭풍우와 야간 거리의 인파로 장비 운용과 촬영에 제약이 생겼지만, 남은 시간과 작품의 완성도에 필요한 필수 컷을 즉각 고려해 콘티와 촬영 순서를 재조정했다. 한·일 스태프 간 소통과 감독의 리테이크 요청을 조율하며 당일 촬영을 마무리했고, 정해진 예산과 일정 안에 작품을 완성해냈다.",
       result: "아티스트 공식 뮤직비디오로 공개",
       stills: ["images/haruki-1.jpg", "images/haruki-2.jpg", "images/haruki-3.jpg", "images/haruki-4.jpg"],
       behind: [],
@@ -180,7 +262,44 @@ window.SITE = {
         "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
         "촬영 소스 확보를 위한 현장 스크립터 및 동선 정리",
         "후반 작업 결과물 검토·피드백을 통한 편집 보조"
-      ], credits: "", desc: "서소문성지 역사박물관에서 6일간 열린 싱어송라이터 데이먼스 이어의 단독 콘서트를 담은 라이브 필름. 감독 1명과 조연출 2명으로 구성된 소규모 팀으로, 매일 조금씩 달라지는 무대 상황에 맞춰 카메라 배치와 구도를 재설계하며 촬영했다. 공연 중에는 아티스트에게 가까이 접근하기 어렵고 카메라 이동 시 발생하는 소음도 고려해야 했다. 이에 클로즈업샷은 리허설에서, 와이드샷은 본공연에서 나누어 촬영하며 제한된 여건 속에서도 다양한 구도와 특수효과 컷을 확보했다.", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
+      ], credits: `[ARTIST]
+VOCAL | DAMONS YEAR
+KEYBOARD | DAMONS YEAR
+[BAND]
+BAND MASTER | YU HYUNJIN
+A. GUITAR & E. GUITAR | YU HYUNJIN
+E. GUITAR | CHOI JOONHA
+BASS | PARK CHANYOUNG
+DRUMS | CHANG JAEMIN
+VIOLIN | KIM SANGEUN, KIM YEONSONG
+VIOLA | CHOI CHANGWON
+CELLO | MELIS ELGIN
+[CONCERT PRODUCTION]
+ORGANIZER | MOONPICK, AKASHIC RECORDS
+PRESENTER | MOONPICK
+MANAGEMENT DIRECTOR | HONG DALNIM
+STAFF | LEE EDEN, WON HYERIM, LEE KYUSEON, LEE YEJI
+[SHOW PRODUCTION]
+SHOW DIRECTOR | KIM JAEWOONG (206 PRODUCTION)
+SHOW AD | JE SEUNGHEE (206 PRODUCTION)
+FOH ENGINEER | KIM HYOJIN, CHOI JINHUN (RED COMPANY)
+SOUND AD | JANG HEENA (RED COMPANY)
+LIGHTING DIRECTOR | KIM HANSUNG (LIGHT HOUSE)
+LIGHTING AD | LEE DONG HWAN (DO LITE)
+BACKLINE | SONG HYUNMIN, KIM WONCHUL, CHOI EUNIL (MUSE COMPANY)
+OPERATIONS | KIM DONGHYUN, AN MINJI, YOON JAEEUN, SHIN GAYUN (HIGHTABLE)
+[VISUALS]
+POSTER DESIGN | KIM HYUNGJUN, PARK SORIM, CHOI HAJUNE (W(N)K)
+MERCHANDISE DIRECTOR | KIM HYUNGJUN, PARK SORIM, CHOI HAJUNE (W(N)K)
+PROMOTIONAL DESIGN | KIM HYUNGJUN, PARK SORIM, CHOI HAJUNE (W(N)K)
+GOBO DESIGN | KIM HYUNGJUN, PARK SORIM, CHOI HAJUNE (W(N)K)
+PHOTO | LEE JONGSU
+[LIVE VIDEO]
+DIRECTOR | JEONG YEJUN (YEAHFILMS)
+AD | PARK JEONGWOO, LEE JUNGHO
+DOP | JEONG YEJUN
+AC | PARK JEONGWOO, LEE JUNGHO
+AUDIO MIXING | YU HYUNJIN`, desc: "서소문성지 역사박물관에서 6일간 열린 싱어송라이터 데이먼스 이어의 단독 콘서트를 담은 라이브 필름. 감독 1명과 조연출 2명으로 구성된 소규모 팀으로, 매일 조금씩 달라지는 무대 상황에 맞춰 카메라 배치와 구도를 재설계하며 촬영했다. 공연 중에는 아티스트에게 가까이 접근하기 어렵고 카메라 이동 시 발생하는 소음도 고려해야 했다. 이에 클로즈업샷은 리허설에서, 와이드샷은 본공연에서 나누어 촬영하며 제한된 여건 속에서도 다양한 구도와 특수효과 컷을 확보했다.", result: "", stills: ["images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "images/damons-unsolved2-3.jpg", "images/damons-unsolved2-4.jpg"]
     }
   ],
 
@@ -196,6 +315,8 @@ window.SITE = {
       // (비워 둔 칸은 위의 작업 전체 내용이 대신 보임)
       groups: {
         "Visual Film": {
+          credits: `Directed by | Yejoon Jeong
+Assistant Director | Jeongwoo Park, Jungho Lee`,
           role: "Co-Producer · AD",
           focus: "현장 즉흥 기획·연출 및 촬영",
           tasks: [
@@ -233,9 +354,44 @@ window.SITE = {
           stills: ["images/glico-1.jpg", "images/glico-2.jpg", "images/glico-3.jpg", "images/glico-4.jpg"] },
         { title: "Big Hill (Balming Tiger ‘big butt’)", group: "Visual Film", format: "Visual Film", year: "2024", yt: "cGbtNHgaYJs", desc: "",
           stills: ["images/bighill-1.jpg", "images/bighill-2.jpg", "images/bighill-3.jpg", "images/bighill-4.jpg", "images/bighill-5.jpg"] },
-        { title: "눈 감고 일하기", feature: true, group: "Documentary", format: "Documentary", year: "2025", yt: "jYrDcXYjAgI", desc: "",
+        { title: "눈 감고 일하기", credits: `[CAST]
+선약국 약사 | 유선미
+선약국 손님 | 배진영
+까막눈게임 참여자 | 강다연, 고은진, 권예준, 김재민, 김태욱, 김호중, 김우수, 배하은, 박태현, 신회원, 양채연, 양윤서, 오상혁, 이도연, 이소윤, 이연우, 이정호, 이주연, 이찬영, 임주현, 전재인, 정문혁, 정재인, 조유정, 주민찬, 최현서, 황서영, 황정빈
+라온어린이집 교사 | 이수연
+라온어린이집 원생 | 원생 14명
+아나운서 나레이션 | 이승민
+[PRODUCTION]
+연출 | 정예준
+조연출 | 박정우
+PD | 박정우
+카메라 | 정예준
+B CAM | 박정우
+촬영 보조 | 이정호
+조명 | 박정우, 정예준
+오디오 | 박정우, 정예준
+미술 | 정예준
+편집 | 정예준
+색감 보정 | 정예준
+스토리보드 | 박정우
+동화책 제작 | 박정우, 정예준
+타이틀 디자인 | 정예준
+[SUPPORT]
+지도 교수 | 김한상
+TA | 정재영
+감사한 분들 | 김근경, 신명희, 이영민, 이하원, 정미정, 정윤지, 조연주, 최민성
+제작 지원 | 아주대학교 RISE사업단, 경상남도거제교육지원청
+장비 제공 | WECREATE
+장소 제공 | 경기도 군포시 선약국, 경기도 수원시 아주대학교 체육관, 경상남도 사천시 라온어린이집`, feature: true, group: "Documentary", format: "Documentary", year: "2025", yt: "jYrDcXYjAgI", desc: "",
           stills: ["images/eyesclosed-1.jpg", "images/eyesclosed-2.jpg", "images/eyesclosed-3.jpg", "images/eyesclosed-4.jpg", "images/eyesclosed-5.jpg"] },
-        { title: "미지의 세계를 포용하며", feature: true, group: "Documentary", format: "Poetic Documentary", year: "2024", yt: "vuvPIMzL4xg", desc: "",
+        { title: "미지의 세계를 포용하며", credits: `기획 | 예필름
+제작 | 박정우, 정예준
+촬영 | 정예준
+드론 | 박정우
+장소 지원 | 제주도, 수원시
+번역 | 박수영
+나레이션 | 박정우, 정예준
+편집 | 정예준`, feature: true, group: "Documentary", format: "Poetic Documentary", year: "2024", yt: "vuvPIMzL4xg", desc: "",
           stills: ["images/embrace-1.jpg", "images/embrace-2.jpg", "images/embrace-3.jpg", "images/embrace-4.jpg", "images/embrace-5.jpg", "images/embrace-6.jpg", "images/embrace-7.jpg", "images/embrace-8.jpg"] }
       ]
     }
