@@ -245,9 +245,9 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .r-contact .r-url{display:block;font-size:7.5pt}
 .p-cover .c a{color:inherit}
 .r-contact{text-align:right;font-size:8.5pt;line-height:1.65;color:var(--ink-2)}
-.r-sec{break-inside:avoid;display:grid;grid-template-columns:42mm minmax(0,1fr);gap:6mm;padding-block:5mm;border-bottom:.5pt solid var(--rule)}
+.r-sec{break-inside:avoid;display:grid;grid-template-columns:42mm minmax(0,1fr);gap:6mm;padding-block:3.6mm;border-bottom:.5pt solid var(--rule)}
 .r-sec:last-child{border-bottom:0}
-.r-rows{display:flex;flex-direction:column;gap:1.8mm}
+.r-rows{display:flex;flex-direction:column;gap:1.2mm}
 .r-row{display:grid;grid-template-columns:30mm minmax(0,1fr) auto;gap:4mm;align-items:baseline}
 .r-row .d{color:var(--ink-2);font-size:8.5pt;font-variant-numeric:tabular-nums}
 .r-row .x{color:var(--ink-2);font-size:8.5pt;text-align:right}
@@ -270,7 +270,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .c-body dd{margin:0}
 .c-body ul{margin:0;padding-left:4mm}
 .c-body li{margin-bottom:.8mm}
-.r-p{margin:0 0 2.5mm;line-height:1.75;text-indent:1em;text-align:justify;text-justify:inter-character}
+.r-p{margin:0 0 2mm;line-height:1.68;break-inside:avoid;text-indent:1em;text-align:justify;text-justify:inter-character}
 .r-p.tight{margin-bottom:0}
 .r-p:last-child{margin-bottom:0}
 .p-text .part{display:block;font-size:8.5pt;line-height:1.6}
@@ -921,7 +921,14 @@ function portfolioPage(p) {
     if (feats.length) {
       /* 대표 편은 위 큰 영역을 2×2로 나눠 채우고, 나머지 편은 아래 한 줄 */
       const cols = feats.length === 1 ? 1 : 2;
-      media = `<div class="p-grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${feats.map(e => cell(e, "p-sm")).join("")}</div>` + row4(p.episodes.filter(e => !e.feature));
+      const restEps = p.episodes.filter(e => !e.feature);
+      /* 나머지 편이 아직 공개 전이면 '공개 예정' 칸 대신 대표 편의 스틸컷 */
+      const unreleased = restEps.length && restEps.every(e => !(e.yt || e.href));
+      const fStills = feats.flatMap(e => (e.stills || []).map(x => typeof x === "string" ? x : x.src)).slice(0, 4);
+      const bottom = unreleased && fStills.length
+        ? `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${fStills.map(src => pImg(src, "p-sm", "")).join("")}</div>`
+        : row4(restEps);
+      media = `<div class="p-grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${feats.map(e => cell(e, cols === 1 ? "p-main" : "p-sm")).join("")}</div>` + bottom;
     } else if (verts.length) {
       /* 가로 · 세로 편을 2×2 같은 크기 칸에: 세로 숏폼은 잘리지 않게 칸 가운데에 9:16 그대로 */
       media = `<div class="p-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => cell(e, e.vertical ? "p-sm p-fit" : "p-sm")).join("")}</div>`;

@@ -80,7 +80,7 @@ window.SITE = {
   /* ── Download 항목 옆에 들어가는 설명 ── */
   downloads: {
     resume: "전체 정보와 자기소개",
-    career: "프로젝트별 담당 업무와 주요 성과",
+    career: "프로젝트별 역할과 담당 업무",
     portfolio: "주요 작업 및 스틸컷"
   },
 
@@ -136,7 +136,7 @@ window.SITE = {
     },
     {
       title: "BOOGIENOVA",
-      client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
+      client: "Yoohee", format: "M/V", role: "AD · PD · Mixed Media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
       files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/13D7SV24WHl9zgCadTzJ4CSyVxifX7Bb_" }],
       focus: "기획·연출 및 현장 운영, 믹스드 미디어 아트워크",
