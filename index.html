@@ -245,7 +245,7 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .r-contact .r-url{display:block;font-size:7.5pt}
 .p-cover .c a{color:inherit}
 .r-contact{text-align:right;font-size:8.5pt;line-height:1.65;color:var(--ink-2)}
-.r-sec{display:grid;grid-template-columns:42mm minmax(0,1fr);gap:6mm;padding-block:5mm;border-bottom:.5pt solid var(--rule)}
+.r-sec{break-inside:avoid;display:grid;grid-template-columns:42mm minmax(0,1fr);gap:6mm;padding-block:5mm;border-bottom:.5pt solid var(--rule)}
 .r-sec:last-child{border-bottom:0}
 .r-rows{display:flex;flex-direction:column;gap:1.8mm}
 .r-row{display:grid;grid-template-columns:30mm minmax(0,1fr) auto;gap:4mm;align-items:baseline}
@@ -391,6 +391,8 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
 
 @media print{
   html,body{margin:0;padding:0}
+  :root{color-scheme:light}
+  html{background:#fff}
   body{background:#fff}
   .peek{display:none}
   body::before{display:none}
