@@ -291,11 +291,11 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .p-cover .n.rf .ln{display:block}
 .p-cover .n.rf .ch{display:inline-block}
 .p-cover .n{font-size:68pt;font-weight:700;letter-spacing:-.055em;line-height:.86;text-transform:uppercase}
-.p-cover .c{display:grid;grid-template-columns:auto 1fr auto auto;gap:6mm 12mm;font-size:9pt;border-top:1pt solid var(--ink);padding-top:3mm}
+.p-cover .c{display:flex;align-items:baseline;gap:12mm;font-size:9pt;border-top:1pt solid var(--ink);padding-top:3mm}
 .p-cover .c span:first-child b{font-weight:700}
 .p-cover .c span:first-child small{margin-left:2.5mm;font-size:9pt;color:var(--ink-2)}
 .p-cover .c a{font-weight:600}
-.p-cover .c>:nth-child(2){justify-self:start}
+.p-cover .c>:nth-child(2){margin-right:auto}
 .p-page{display:grid;grid-template-columns:78mm minmax(0,1fr);gap:10mm;height:100%}
 .p-text{display:flex;flex-direction:column;gap:3mm;min-width:0;border-top:1pt solid var(--ink);padding-top:3mm}
 .p-text .ttl{font-size:20pt;font-weight:700;letter-spacing:-.04em;line-height:1.15}
@@ -969,7 +969,7 @@ function portfolioDoc() {
   const cover = `<article class="sheet land"><div class="p-cover">
     <div class="k"><span>Portfolio</span><span>${yr}</span></div>
     <div class="n rf" aria-label="${esc(S.nameEn)}">${rackName()}</div>
-    <div class="c"><span><b>${esc(S.name)}</b><small>${esc(S.role)}</small></span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Website ↗</a>${S.workSamples ? `<a href="${esc(S.workSamples)}" target="_blank" rel="noopener">Work Samples ↗</a>` : "<span></span>"}</div>
+    <div class="c"><span><b>${esc(S.name)}</b><small>${esc(S.role)}</small></span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">Website ↗</a>${S.workSamples ? `<a href="${esc(S.workSamples)}" target="_blank" rel="noopener">Work Samples ↗</a>` : ""}</div>
   </div></article>`;
   /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 페이지씩: 그 유형의 작품과 역할·업무·소개만 */
   const pages = works().flatMap(p => {

@@ -65,7 +65,7 @@ window.SITE = {
   phone: "010-2234-8889",
   siteUrl: "bandai0814.github.io",
   // 포트폴리오 PDF 표지의 'Work Samples ↗' 링크 (직접 작업한 문서·콘티 모음 폴더)
-  workSamples: "https://drive.google.com/drive/folders/10MZGrHUYqJSBIsf7XgiM430xKjUSIoTo",
+  workSamples: "",
 
   /* ── 자기소개: 이력서 PDF 맨 아래에 들어갑니다 (사이트에는 안 보임)
         문단마다 큰따옴표로 감싸고 쉼표로 구분하세요 ── */
@@ -90,7 +90,7 @@ window.SITE = {
       title: "죽은 연인에게로",
       client: "데이먼스 이어", format: "Concert Film", role: "AD · Camera Op.",
       period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E", note: "공개 예정",
-      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1oJXGnBFsk9YAY4lFQMRBJ5XVJq4ZSnOw" }],
+      files: [],
       focus: "곡별 연출 구성 및 멀티캠 촬영 설계·운용",
       tasks: [
         "곡의 정서와 무대 연출에 맞춘 구도·카메라 무빙·컷 전환 아이데이션",
@@ -117,7 +117,7 @@ window.SITE = {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Advertisement", role: "AD · PD",
       period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
-      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1NKdNdeifw8eFbBtbssWJJ6kNYiLDc8P-" }],
+      files: [],
       focus: "기획·연출 및 제작 관리와 현장 운영",
       tasks: [
         "접근성 커뮤니티 참여자 중 모델 선정 및 제품별 영상 톤앤매너 구성",
@@ -138,7 +138,7 @@ window.SITE = {
       title: "BOOGIENOVA",
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed Media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
-      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/13D7SV24WHl9zgCadTzJ4CSyVxifX7Bb_" }],
+      files: [],
       focus: "기획·연출 및 현장 운영, 믹스드 미디어 아트워크",
       tasks: [
         "음원을 바탕으로 한 뮤직비디오 컨셉·시놉시스 아이데이션",
@@ -155,7 +155,7 @@ window.SITE = {
       title: "親不孝通りノンフィクション",
       client: "Hamano Haruki", format: "M/V", role: "AD · PD",
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
-      files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1yzG8hCzSPO-SP7iYkm5Hi-AlikvfhzOx" }],
+      files: [],
       focus: "기획·연출, 제작 관리 및 현장 운영과 일본어 커뮤니케이션",
       tasks: [
         "현지 매니지먼트와의 비즈니스 컨택 및 한·일 스태프 간 현장 통역",
@@ -173,7 +173,7 @@ window.SITE = {
       title: "제 2 미해결문제 第 2 未解決問題 : //",
       client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
-      files: [{ label: "담당 작업 폴더", url: "https://fancy-stitch-21b.notion.site/2-Concert-Film-_-pre-40c3acc6dcac8072b135d05b8ff92d06" }],
+      files: [],
       focus: "연출 설계 및 현장 운영과 후반 작업 지원",
       tasks: [
         "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
@@ -216,7 +216,7 @@ window.SITE = {
             "직접 출연 및 내레이션 작성·녹음",
             "편집본 검토·피드백"
           ],
-          files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/1g99xgJZChnfuYjSSQfOuzw-iPXywON5M" }],
+          files: [],
           desc: "일과 도전을 대하는 사람들의 태도를 통해, 무엇을 믿고 어떤 선택을 하며 살아갈지 질문하는 다큐멘터리 2편. 감독과 둘이서 기획부터 촬영, 후반 작업까지 역할을 나누며 제작했다.\n\n첫 영상 작업이었던 ‘미지의 세계를 포용하며’는 도전에 대한 생각이 다른 두 사람의 제주 여정을 서정적으로 담았다. 2박 3일의 촬영 중 예상과 다른 로케이션과 궂은 날씨, 연출 방향의 변경이 겹치면서 촬영 계획을 다시 세워야 했다. 현장에서 발견한 풍경과 장면을 바탕으로 이야기의 흐름을 재구성했고, 필요한 표현을 구현하기 위해 짐벌·드론 운용도 새롭게 익혔다. 이후 편집 과정에서 부족한 장면을 확인하고 제주와 유사한 배경의 장소를 찾아 추가 촬영했다. 다양한 구도와 시각적 표현을 시도하며, 낯선 도전을 받아들이는 작품의 주제를 제작 과정에서도 직접 경험했다.\n\n‘눈 감고 일하기’는 약사와의 사전 인터뷰에서 들은 ‘소명 의식’에 주목해 기획을 제안하며 시작했다. 효율과 성과가 우선되는 시대에 일의 의미를 돌아보고, 그 가치가 다음 세대로 이어지기를 바랐다. 이를 위해 약국 인터뷰뿐 아니라 학생들이 참여하는 실험과 어린이들에게 이야기를 전하는 장면으로 구성을 확장했다. 실험 참여자를 직접 모집하고, 다큐멘터리의 메시지를 어린이의 눈높이에 맞춘 동화책으로 제작했다. 군포의 약국부터 수원의 강당·스튜디오, 사천의 어린이집까지 여러 현장을 오가며, 추상적인 질문을 사람들의 말과 행동으로 보여줄 수 있도록 구체화했다."
         }
       },
