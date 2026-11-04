@@ -139,7 +139,16 @@ window.SITE = {
       client: "Yoohee", format: "M/V", role: "AD · PD · Mixed media Artwork",
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
       files: [{ label: "담당 작업 폴더", url: "https://drive.google.com/drive/folders/13D7SV24WHl9zgCadTzJ4CSyVxifX7Bb_" }],
-      tasks: [], credits: "", desc: "", result: "",
+      focus: "기획·연출 및 현장 운영, 믹스드 미디어 아트워크",
+      tasks: [
+        "음원을 바탕으로 한 뮤직비디오 컨셉·시놉시스 아이데이션",
+        "줄콘티 및 스토리보드 제작",
+        "로케이션 헌팅, 전체 타임테이블 구성",
+        "현장 스크립터 및 필수 컷·인서트 체크, 촬영 시간 조율",
+        "후반 작업 중 믹스드 미디어 아트워크 공동 제작"
+      ],
+      credits: "", desc: "자신만의 보금자리를 찾아 기묘한 경연에 참가한 소녀의 이야기를 담은 아티스트 유희의 뮤직비디오. 거북이를 건네받으며 시작되는 영화적 서사에 개성 강한 인물들의 경쟁과 훌라 댄스, 엉뚱한 상황이 연출된다. 타인의 시기와 질투 속에서도 밝음을 잃지 않는 소녀의 모습을 통해, 보사노바 장르의 곡에 담긴 희망과 사랑을 유쾌하면서도 낯선 이미지로 풀어내고자 했다.\n스튜디오에서의 인트로 촬영부터 대부도의 펜션과 야외 로케까지, 서로 다른 촬영 환경에서 다채로운 장면을 담아냈다. 많은 컷과 세팅 전환을 소화하기 위해 촬영을 뒷받침하는 자료들을 더블 체크하며, 필수 컷과 인서트를 놓치지 않도록 현장을 관리했다. 이렇게 확보한 소스에 아트워크를 더해, 기획 단계에서 상상한 따뜻하면서도 기묘한 세계를 곡의 템포에 어우러지는 영상으로 완성했다.", result: "",
+      
       stills: ["images/boogienova-1.jpg", "images/boogienova-2.jpg", "images/boogienova-3.jpg", "images/boogienova-4.jpg"]
     },
     {
