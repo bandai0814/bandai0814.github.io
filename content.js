@@ -254,7 +254,7 @@ Special Thanks | MUSIC BAR SIDE:K`, desc: "후쿠오카 오야후코도리(親�
       client: "데이먼스 이어", format: "Concert Film", role: "AD",
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       files: [],
-      focus: "연출 설계 및 현장 운영과 후반 작업 지원",
+      focus: "연출 설계 및 현장 운영",
       tasks: [
         "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
         "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
