@@ -283,6 +283,8 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .c-body li{margin-bottom:.8mm}
 .r-p{margin:0 0 2mm;line-height:1.68;break-inside:avoid;text-indent:1em;text-align:justify;text-justify:inter-character}
 .r-p.tight{margin-bottom:0}
+.r-ph{margin:3.2mm 0 1.2mm;font-weight:600;line-height:1.5;break-after:avoid}
+.r-ph:first-child{margin-top:0}
 .r-p:last-child{margin-bottom:0}
 .p-text .part{display:block;font-size:8.5pt;line-height:1.6}
 .p-text .part b{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2);margin-bottom:1mm}
@@ -903,7 +905,7 @@ function resumeDoc() {
     ${rSec("병역", rRow(S.military.period, esc(S.military.detail)))}
     ${rSec("자기소개", (S.aboutMe || []).filter(Boolean).length
       ? /* 문단 안의 줄바꿈도 새 문단처럼 첫 줄 들여쓰기 (간격은 붙여서) */
-        S.aboutMe.filter(Boolean).map(t => t.split("\n").map((line, i, all) => `<p class="r-p${i < all.length - 1 ? " tight" : ""}">${esc(line)}</p>`).join("")).join("")
+        S.aboutMe.filter(Boolean).map(a => { const t = typeof a === "string" ? a : (a.text || ""); const head = typeof a === "object" && a.title ? `<p class="r-ph">${esc(a.title)}</p>` : ""; return head + t.split("\n").map((line, i, all) => `<p class="r-p${i < all.length - 1 ? " tight" : ""}">${esc(line)}</p>`).join(""); }).join("")
       : todo("[content.js의 aboutMe에 두세 문단으로 적으면 여기에 들어갑니다]"))}
   </article>`;
 }
