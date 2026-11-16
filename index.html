@@ -240,9 +240,6 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .sheets{display:flex;flex-direction:column;align-items:center;gap:24px;min-width:min-content}
 
 .sheet{width:210mm;min-height:297mm;box-sizing:border-box;padding:16mm 17mm;background:var(--paper);color:var(--ink);font-size:9.5pt;line-height:1.55;letter-spacing:-.01em;box-shadow:0 1px 3px rgba(0,0,0,.14)}
-.sheet.land{width:297mm;min-height:210mm;height:210mm;padding:13mm 15mm;overflow:hidden;--paper:#0A0A0A;--ink:#F4F4F4;--ink-2:#9A9A9A;--rule:#2E2E2E;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.sheet.land .ph-paper,.sheet.land .p-main,.sheet.land .p-sm{background:#1A1A1A;color:#6A6A6A}
-.sheet.land .todo{color:#6A6A6A}
 .sheet h3{margin:0;font-size:8pt;font-weight:600;color:var(--ink)}
 .ph-paper{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#9A9A9A;background:#F0F0F0}
 .todo{color:#A0A0A0}
@@ -254,7 +251,6 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .r-sub{font-size:8.5pt;color:var(--ink-2)}
 .r-contact .r-site{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .r-contact .r-url{display:block;font-size:7.5pt}
-.p-cover .c a{color:inherit}
 .r-contact{text-align:right;font-size:8.5pt;line-height:1.65;color:var(--ink-2)}
 .r-sec{break-inside:avoid;display:grid;grid-template-columns:42mm minmax(0,1fr);gap:6mm;padding-block:3.6mm;border-bottom:.5pt solid var(--rule)}
 .r-sec:last-child{border-bottom:0}
@@ -286,53 +282,66 @@ dialog::backdrop{background:rgba(0,0,0,.8)}
 .r-ph{margin:3.2mm 0 1.2mm;font-weight:600;line-height:1.5;break-after:avoid}
 .r-ph:first-child{margin-top:0}
 .r-p:last-child{margin-bottom:0}
-.p-text .part{display:block;font-size:8.5pt;line-height:1.6}
-.p-text .part b{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2);margin-bottom:1mm}
-.p-text .part ul{margin:0;padding-left:3.5mm}
-.p-text .part .focus{margin:0 0 1mm;font-weight:600;font-size:8.5pt}
 .c-focus{display:block;font-weight:600;margin-bottom:1mm}
 .c-body.c-groups{grid-template-columns:22mm minmax(0,1fr)}
 .c-groups dt{color:var(--ink);font-weight:600}
 .c-grole{display:block;font-size:8.5pt;color:var(--ink-2)}
 .c-geps{display:block;font-size:8.5pt;color:var(--ink-2);margin-bottom:1.5mm}
-.p-text .cr{font-size:7.5pt;color:var(--ink-2)}
 .c-list .r-rows{padding-top:5mm}
 
-/* 포트폴리오 */
-.p-cover{display:flex;flex-direction:column;justify-content:space-between;height:100%}
-.p-cover .k{display:flex;justify-content:space-between;font-size:9pt;color:var(--ink-2)}
-.p-cover .n.rf .ln{display:block}
-.p-cover .n.rf .ch{display:inline-block}
-.p-cover .n{font-size:68pt;font-weight:700;letter-spacing:-.055em;line-height:.86;text-transform:uppercase}
-.p-cover .c{display:flex;align-items:baseline;gap:12mm;font-size:9pt;border-top:1pt solid var(--ink);padding-top:3mm}
-.p-cover .c span:first-child b{font-weight:700}
-.p-cover .c span:first-child small{margin-left:2.5mm;font-size:9pt;color:var(--ink-2)}
-.p-cover .c a{font-weight:600}
-.p-cover .c>:nth-child(2){margin-right:auto}
-.p-page{display:grid;grid-template-columns:78mm minmax(0,1fr);gap:10mm;height:100%}
-.p-text{display:flex;flex-direction:column;gap:3mm;min-width:0;border-top:1pt solid var(--ink);padding-top:3mm}
-.p-text .ttl{font-size:20pt;font-weight:700;letter-spacing:-.04em;line-height:1.15}
-.p-text .meta{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:1mm 3mm;font-size:8.5pt;margin-top:2mm}
-.p-text .meta span:nth-child(odd){color:var(--ink-2)}
-.p-media .desc:has(.todo){text-align:left}
-.p-media .desc-h{display:block;font-size:7.5pt;font-weight:600;color:var(--ink-2)}
-.p-media .desc{margin-top:4mm;font-size:9pt;line-height:1.75;text-align:justify;text-justify:inter-character}
-/* 문단: 빈 줄이 있든 없든 같은 간격 (줄 높이의 절반 정도 더) */
-.p-media .desc .dp{display:block}
-.p-media .desc .dp+.dp{margin-top:.8em}
-.p-text .link{margin-top:auto;font-size:7.5pt;color:var(--ink-2);word-break:break-all}
-.p-media{display:flex;flex-direction:column;gap:3mm;min-width:0}
-.p-main,.p-sm{position:relative;aspect-ratio:16/9;background:#F0F0F0;overflow:hidden}
-.p-main img,.p-sm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
-.p-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3mm}
-.p-eps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm 3mm}
-.p-grid{display:grid;gap:3mm}
-.sheet.land .p-fit{background:#141414}
-.p-fit img{object-fit:contain;object-position:center}
-.p-c .p-cap{position:absolute;left:0;right:0;bottom:0;padding:5mm 2.2mm 1.6mm;font-size:7pt;font-weight:600;line-height:1.3;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.62))}
-.p-main.p-c .p-cap{font-size:8pt;padding:7mm 3mm 2.2mm}
-.p-ep{display:flex;flex-direction:column;gap:1.5mm;font-size:8pt}
-.p-ep b{font-weight:600}
+/* 포트폴리오 (16:9 · 흰 바탕 · 스틸컷 중심) */
+.sheet.wide{width:320mm;height:180mm;min-height:0;padding:0;position:relative;overflow:hidden;--paper:#fff;--ink:#0A0A0A;--ink-2:#8C8C8C;--rule:#DADADA;font-size:7.5pt;line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet.wide h4{margin:0 0 2mm;font-size:6.5pt;font-weight:500;color:var(--ink-2);letter-spacing:0}
+.sheet.wide a{color:inherit}
+.w-foot{position:absolute;left:8mm;right:8mm;bottom:5.5mm;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;font-size:6pt;letter-spacing:0}
+.w-foot>:last-child{text-align:right}
+/* 표지: 왼쪽 위 이름, 왼쪽 아래 한 줄 + 연도, 오른쪽에 화면 높이를 꽉 채운 이미지 */
+.w-head{position:absolute;left:12mm;top:11mm}
+.w-head .l1,.w-head .l2{font-size:42pt;font-weight:500;letter-spacing:-.045em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.w-head .sub{margin-top:2.5mm;font-size:20pt;font-weight:300;letter-spacing:-.02em;line-height:1.1;text-transform:uppercase;white-space:nowrap}
+.w-cov{position:absolute;right:0;top:0;height:100%;display:flex;gap:1mm}
+.w-cov img{display:block;height:100%;width:auto}
+.w-base{position:absolute;left:8mm;bottom:8mm}
+.w-base p{margin:0 0 2mm;font-size:8.5pt}
+.w-base .yr{font-size:42pt;font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+/* 소개: 왼쪽 아래 사진 1장 · 가운데 위 사진 2장 · 오른쪽 정렬 글 */
+.w-ab-l{position:absolute;left:8mm;bottom:13mm;width:52mm}
+.w-ab-c{position:absolute;left:92mm;top:0;width:78mm;display:flex;flex-direction:column;gap:1mm}
+.w-ab-l img,.w-ab-c img{display:block;width:100%;height:auto}
+.w-ab-t{position:absolute;right:6mm;top:15mm;width:112mm;text-align:right;font-size:8pt;font-weight:300;line-height:1.75;word-break:keep-all}
+.w-ab-t p{margin:0 0 1.15em}
+/* 목차 */
+.w-ttl{height:28mm;flex:none;display:flex;align-items:center;justify-content:center;gap:3mm;font-size:13pt;font-weight:400;letter-spacing:-.01em}
+.w-ttl span{color:var(--ink-2)}
+.w-lists{display:grid;grid-template-columns:1fr 1fr;gap:10mm;padding:2mm 12mm 0}
+.w-li{display:grid;grid-template-columns:30mm minmax(0,1fr) 36mm 18mm;gap:3mm;align-items:baseline;padding:2.1mm 0;border-top:.5pt solid var(--rule)}
+.w-li b{font-weight:600;font-size:8pt}
+.w-li small{display:block;font-size:6.5pt;color:var(--ink-2)}
+.w-li .n,.w-li .y{font-size:6.5pt;font-variant-numeric:tabular-nums}
+.w-li .y{text-align:right}
+/* 작업 페이지: 제목 → 스틸컷(원본 화면비 그대로, 자르지 않음) → 내 역할
+   스틸컷 칸의 크기는 사진이 불러와진 뒤 justifyBands()가 화면비에 맞춰 계산 */
+.w-proj{display:flex;flex-direction:column;height:100%}
+.w-band{display:flex;flex-direction:column;gap:1mm;flex:none;margin:0 auto}
+.w-band:not(.done){flex-direction:row;flex-wrap:wrap;justify-content:center;max-height:98mm;overflow:hidden}
+.w-band:not(.done) .w-c{width:79.2mm;aspect-ratio:16/9}
+.w-row{display:flex;gap:1mm}
+.w-c{position:relative;flex:none;overflow:hidden;background:#EFEFEF}
+.w-c img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.w-cap{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:5mm 2mm 1.4mm;font-size:6pt;font-weight:500;line-height:1.3;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.w-info{display:grid;grid-template-columns:58mm minmax(0,1fr) minmax(0,1fr);gap:12mm;padding:8mm 12mm 0}
+.w-meta{display:grid;grid-template-columns:13mm minmax(0,1fr);gap:1.2mm 3mm;margin:0;align-content:start}
+.w-meta dt{color:var(--ink-2);font-size:6.5pt;padding-top:.3mm}
+.w-meta dd{margin:0;font-weight:500}
+.w-part .focus{margin:0 0 1.2mm;font-weight:600}
+.w-part ul{margin:0;padding-left:3.2mm}
+.w-about p{margin:0;line-height:1.75;word-break:keep-all}
+/* 마지막 장 */
+.w-end{position:absolute;left:8mm;bottom:9mm}
+.w-end .big{font-size:42pt;font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.w-end .sub{margin-top:2.5mm;font-size:13pt;text-transform:uppercase}
+.w-end ul{list-style:none;margin:4mm 0 0;padding:0;font-size:7pt;line-height:1.7}
+.w-end li::before{content:"* "}
 
 /* ---------- mode switching ---------- */
 body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
@@ -416,8 +425,7 @@ body.doc-mode header, body.doc-mode main, body.doc-mode footer{display:none}
   .sheets{gap:0;display:block}
   .sheet{box-shadow:none;width:auto;min-height:0;padding:0;break-after:auto}
   .sheet+.sheet{break-before:page}
-  .sheet.land{width:297mm;height:209.5mm;min-height:0;padding:13mm 15mm;overflow:hidden}
-  .sheet.land .p-cover,.sheet.land .p-page{height:100%}
+  .sheet.wide{width:320mm;height:179.6mm;min-height:0;padding:0;overflow:hidden}
 }
 </style>
 <style id="pageRule">@page{size:A4;margin:16mm 17mm}</style>
@@ -536,7 +544,7 @@ try { framed = window.self !== window.top; } catch (e) { framed = true; }
 const DOCS = [
   { id: "resume", ko: "이력서", en: "Resume", desc: (S.downloads || {}).resume || "", page: "@page{size:A4;margin:16mm 17mm}" },
   { id: "career", ko: "경력기술서", en: "Career Description", desc: (S.downloads || {}).career || "", page: "@page{size:A4;margin:16mm 17mm}" },
-  { id: "portfolio", ko: "포트폴리오", en: "Portfolio", desc: (S.downloads || {}).portfolio || "", page: "@page{size:A4 landscape;margin:0}" }
+  { id: "portfolio", ko: "포트폴리오", en: "Portfolio", desc: (S.downloads || {}).portfolio || "", page: "@page{size:320mm 180mm;margin:0}" }
 ];
 
 const lookup = ref => { const [set, i] = ref.split(":"); return S[set][i]; };
@@ -942,81 +950,96 @@ function careerDoc() {
   </article>`;
 }
 
-const pImg = (src, cls, label, zoom) => `<div class="${cls}">${src ? `<img alt="" src="${esc(src)}"${zoom ? ` style="transform:scale(${zoom})"` : ""}>` : `<span class="ph-paper">${esc(label)}</span>`}</div>`;
-const paras = t => String(t).split(/\n+/).filter(Boolean).map(x => `<span class="dp">${esc(x)}</span>`).join("");
-function portfolioPage(p) {
-  const text = `<div class="p-text">
-    <div class="ttl">${esc(p.title)}</div>
-    <div class="meta">
-      <span>Client</span><span>${esc(p.client || "YeahFilms")}</span>
-      <span>Format</span><span>${esc(p.format)}</span>
-      <span>Role</span><span>${esc(p.role)}</span>
-      <span>Period</span><span>${esc(p.period || p.year)}</span>
-    </div>
-    ${filledGroups(p).length ? filledGroups(p).map(([name, g]) => `<div class="part"><b>${esc(name)}${g.role ? " · " + esc(g.role) : ""}</b>${g.focus ? `<p class="focus">${esc(g.focus)}</p>` : ""}${(g.tasks || []).length ? `<ul>${g.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>`).join("") : ""}
-    ${p.tasks && p.tasks.length ? `<div class="part"><b>My Part</b>${p.focus ? `<p class="focus">${esc(p.focus)}</p>` : ""}<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>` : ""}
-    ${linkOf(p) ? `<div class="link">${esc(linkOf(p))}</div>` : ""}
-  </div>`;
-  let media;
-  if (p.episodes) {
-    /* 다른 페이지와 같은 틀: 위쪽 큰 영역(16:9 전체 폭) + 아래 4칸 한 줄, 편 제목은 이미지 위에 */
-    const cell = (e, cls, pos) => `<div class="${cls} p-c">${imageOf(e) ? `<img alt="" src="${esc(imageOf(e))}"${pos ? ` style="object-position:${pos}"` : ""}>` : `<span class="ph-paper">${esc((e.yt || e.href) ? (e.platform || "") : (p.note || "공개 예정"))}</span>`}<span class="p-cap">${esc(e.title)}</span></div>`;
-    const row4 = (list, pos) => `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${list.map(e => cell(e, "p-sm", pos)).join("")}</div>`;
-    const feats = p.episodes.filter(e => e.feature), verts = p.episodes.filter(e => e.vertical);
-    if (feats.length) {
-      /* 대표 편은 위 큰 영역을 2×2로 나눠 채우고, 나머지 편은 아래 한 줄 */
-      const cols = feats.length === 1 ? 1 : 2;
-      const restEps = p.episodes.filter(e => !e.feature);
-      /* 나머지 편이 아직 공개 전이면 '공개 예정' 칸 대신 대표 편의 스틸컷 */
-      const unreleased = restEps.length && restEps.every(e => !(e.yt || e.href));
-      const fStills = feats.flatMap(e => (e.stills || []).map(x => typeof x === "string" ? x : x.src)).slice(0, 4);
-      const bottom = unreleased && fStills.length
-        ? `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${fStills.map(src => pImg(src, "p-sm", "")).join("")}</div>`
-        : row4(restEps);
-      media = `<div class="p-grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${feats.map(e => cell(e, cols === 1 ? "p-main" : "p-sm")).join("")}</div>` + bottom;
-    } else if (verts.length) {
-      /* 가로 · 세로 편을 2×2 같은 크기 칸에: 세로 숏폼은 잘리지 않게 칸 가운데에 9:16 그대로 */
-      media = `<div class="p-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => cell(e, e.vertical ? "p-sm p-fit" : "p-sm")).join("")}</div>`;
-    } else {
-      media = `<div class="p-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${p.episodes.map(e => cell(e, "p-sm")).join("")}</div>`;
-    }
-  } else {
-    const st = p.stills || [];
-    const srcOf = x => pic(x) && pic(x).src;
-    const main = imageOf(p);
-    const restSt = st.map(srcOf).filter(s => s && s !== main).slice(0, 4);
-    const extra = [...(p.behind || []), ...(p.process || [])].map(srcOf).filter(Boolean).slice(0, 3);
-    const rest = restSt.length ? restSt : extra;
-    /* 스틸컷이 없으면 대표 이미지만 (빈 자리 칸은 만들지 않음) */
-    media = `${pImg(main, "p-main", "대표 이미지", !p.thumb && p.thumbZoom)}${rest.length ? `<div class="p-row" style="grid-template-columns:repeat(4,minmax(0,1fr))">${rest.map(s => pImg(s, "p-sm", "")).join("")}</div>` : ""}`;
+/* ============ 포트폴리오 PDF (16:9 · 흰 바탕) ============
+   표지 → 소개 → 목차 → 작업마다 한 장(제목 · 스틸컷 · 내 역할) → 연락처
+   글은 짧게: 작업 소개는 content.js의 brief(없으면 desc의 첫 두 문장)만 들어가고,
+   긴 소개(desc)는 사이트 상세 화면과 경력기술서에서 봅니다.
+   메인 썸네일과 스틸컷이 원본 화면비 그대로 들어갑니다(자르지 않음). */
+const srcOf = x => pic(x) && pic(x).src;
+const pad3 = n => String(n).padStart(3, "0");
+const shortLink = u => String(u).replace(/^https?:\/\/(www\.)?/, "").replace(/^youtube\.com\/watch\?v=/, "youtu.be/").replace(/\/$/, "");
+const briefOf = p => p.brief || (String(p.desc || "").split(/\n+/)[0].match(/[^.!?]+[.!?]+/g) || []).slice(0, 2).join("").trim();
+const wFoot = (no, link) => `<div class="w-foot"><span>${pad3(no)}</span><span>${esc(S.nameEn)} · ${esc(S.role)}</span><span>${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(shortLink(link))}</a>` : `<a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a>`}</span></div>`;
+const wCell = x => `<div class="w-c">${x.src ? `<img alt="" src="${esc(x.src)}">` : ""}${x.cap ? `<span class="w-cap">${esc(x.cap)}</span>` : ""}</div>`;
+
+/* 한 작업에서 넣을 이미지 고르기 (최대 8장): 메인 썸네일 → 스틸컷 (content.js에 적힌 순서대로)
+   여러 편으로 된 작업은 편마다 돌아가며 고르게 뽑고(편의 썸네일 → 그 편의 스틸컷), 각 편의 첫 장에 편 제목을 붙임
+   세로 편이 섞인 작업(LG)은 편마다 썸네일 한 장씩만 */
+function wImages(p) {
+  const uniq = a => a.filter((x, i) => x && a.indexOf(x) === i);
+  /* pdfImages를 적은 작업은 그 순서 그대로 ("thumb" = 메인 썸네일), 편에 pdfStills를 적으면 PDF에서만 그 스틸컷 */
+  if ((p.pdfImages || []).length) return uniq(p.pdfImages.map(x => x === "thumb" ? imageOf(p) : srcOf(x))).map(src => ({ src, cap: "" }));
+  const still = w => (w.pdfStills || w.stills || []).map(srcOf);
+  if (p.episodes && p.episodes.length) {
+    const flat = p.episodes.some(e => e.vertical);
+    const lists = p.episodes.map(e => uniq(flat ? [imageOf(e)] : [imageOf(e), ...still(e)]).map(src => ({ src, ep: e }))).filter(l => l.length);
+    const take = lists.map(() => 0);
+    let n = 0, moved = true;
+    while (n < 8 && moved) { moved = false; lists.forEach((l, i) => { if (n < 8 && take[i] < l.length) { take[i]++; n++; moved = true; } }); }
+    const multi = lists.length > 1;
+    const out = lists.flatMap((l, i) => l.slice(0, take[i]).map((x, k) => ({ src: x.src, cap: multi && k === 0 ? x.ep.title : "" })));
+    if (out.length) return out;
   }
-  /* 작업 소개는 넓은 오른쪽 칸, 이미지 아래에 */
-  const gDesc = filledGroups(p).filter(([, g]) => g.desc);
-  const about = gDesc.length
-    ? gDesc.map(([name, g]) => `<div class="desc">${gDesc.length > 1 || filledGroups(p).length > 1 ? `<b class="desc-h">${esc(name)}</b>` : ""}${paras(g.desc)}</div>`).join("")
-    : `<div class="desc">${p.desc ? paras(p.desc) : todo("[content.js의 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</div>`;
-  return `<article class="sheet land"><div class="p-page">${text}<div class="p-media">${media}${about}</div></div></article>`;
+  return uniq([imageOf(p), ...still(p)]).slice(0, 8).map(src => ({ src, cap: "" }));
 }
-/* 포트폴리오 표지: 초점이 막 넘어가는 순간처럼, 글자마다 다른 깊이로 흐림 */
-function rackName() {
-  const depth = [.05, .55, 0, .3,  .85, .1, .6, 0, .35,  .95, .2, .7];
-  let k = 0;
-  const [l1, ...rest] = S.nameEn.split(" ");
-  return [l1, rest.join(" ")].map(l => `<span class="ln">${[...l].map(c => {
-    if (c === " ") return " ";
-    const d = depth[k++ % depth.length];
-    const st = d > .02 ? `filter:blur(${(d * 9).toFixed(1)}px);opacity:${(1 - d * .45).toFixed(2)};transform:translateY(${((d - .5) * 10).toFixed(1)}px) scale(${(1 + d * .04).toFixed(3)})` : "";
-    return `<span class="ch"${st ? ` style="${st}"` : ""}>${esc(c)}</span>`;
-  }).join("")}</span>`).join("");
+/* 스틸컷 배치: 사진마다 원본 화면비를 지키면서 한 줄 또는 두 줄로 나눔.
+   각 줄 안에서는 높이가 같고 폭은 화면비대로. 가장 크게 보이는 나눔을 고르고,
+   높이가 MAXH를 넘으면 전체를 줄여 가운데에 둠 (단위 mm) */
+function justifyBand(band) {
+  const cells = [...band.querySelectorAll(".w-c")];
+  if (!cells.length) return;
+  const W = 320, G = 1, MAXH = 98;
+  const ars = cells.map(c => { const i = c.querySelector("img"); return i && i.naturalWidth ? i.naturalWidth / i.naturalHeight : 16 / 9; });
+  const sum = a => a.reduce((x, y) => x + y, 0);
+  let best = null;
+  const fixed = parseInt(band.dataset.first, 10);      // pdfRows를 적은 작업은 첫 줄 장수를 그대로 따름
+  for (let k = 1; k <= cells.length; k++) {           // k = 첫 줄에 놓는 장수 (전부면 한 줄)
+    if (fixed && k !== Math.min(fixed, cells.length)) continue;
+    const rows = k === cells.length ? [ars] : [ars.slice(0, k), ars.slice(k)];
+    const inv = sum(rows.map(r => 1 / sum(r))), fix = G * (rows.length - 1) - sum(rows.map(r => G * (r.length - 1) / sum(r)));
+    const w = Math.min(W, (MAXH - fix) / inv), h = w * inv + fix;
+    /* 크게 보이는 쪽을 고르되, 두 줄의 높이 차이가 크면 감점 (한 줄만 유난히 작아지지 않게) */
+    const hs = rows.map(r => (w - G * (r.length - 1)) / sum(r));
+    const score = w * h * Math.sqrt(Math.min(...hs) / Math.max(...hs));
+    if (!best || score > best.score + .01) best = { k, rows, w, h, score };
+  }
+  band.innerHTML = "";
+  let at = 0;
+  best.rows.forEach(r => {
+    const rh = (best.w - G * (r.length - 1)) / sum(r);
+    const row = document.createElement("div");
+    row.className = "w-row";
+    r.forEach(ar => { const c = cells[at++]; c.style.width = (rh * ar).toFixed(3) + "mm"; c.style.height = rh.toFixed(3) + "mm"; row.appendChild(c); });
+    band.appendChild(row);
+  });
+  band.style.width = best.w.toFixed(3) + "mm";
+  band.classList.add("done");
+}
+function justifyBands(root) {
+  root.querySelectorAll(".w-band").forEach(band => {
+    justifyBand(band);
+    band.querySelectorAll("img").forEach(i => { if (!i.complete || !i.naturalWidth) { i.addEventListener("load", () => justifyBand(band)); i.addEventListener("error", () => setTimeout(() => justifyBand(band), 0)); } });
+  });
+}
+function wProject(p, no) {
+  const client = p.client && !p.metaLabel ? p.client : "";
+  const brief = briefOf(p), imgs = wImages(p);
+  return `<article class="sheet wide"><div class="w-proj">
+    <div class="w-ttl">${esc(p.format)} &lt;${esc(p.title)}&gt;${client ? `<span>${esc(client)}</span>` : ""}</div>
+    ${imgs.length ? `<div class="w-band"${(p.pdfRows || [])[0] ? ` data-first="${Number(p.pdfRows[0])}"` : ""}>${imgs.map(wCell).join("")}</div>` : ""}
+    <div class="w-info">
+      <dl class="w-meta">
+        <dt>${esc(p.metaLabel || "Client")}</dt><dd>${esc(p.metaValue || p.client || "")}</dd>
+        <dt>Role</dt><dd>${esc(p.role)}</dd>
+        <dt>Period</dt><dd>${esc(p.period || p.year)}</dd>
+      </dl>
+      <div class="w-part"><h4>My Part</h4>${p.focus ? `<p class="focus">${esc(p.focus)}</p>` : ""}${(p.tasks || []).length ? `<ul>${p.tasks.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>
+      <div class="w-about"><h4>About</h4><p>${brief ? esc(brief) : todo("[content.js의 brief 또는 desc에 작업 소개를 적으면 여기에 들어갑니다]")}</p></div>
+    </div>
+  </div>${wFoot(no, linkOf(p))}</article>`;
 }
 function portfolioDoc() {
-  const yr = new Date().getFullYear();
-  const cover = `<article class="sheet land"><div class="p-cover">
-    <div class="k"><span>Portfolio</span><span>${yr}</span></div>
-    <div class="n rf" aria-label="${esc(S.nameEn)}">${rackName()}</div>
-    <div class="c"><span><b>${esc(S.name)}</b><small>${esc(S.role)}</small></span><span>${esc(S.email)}</span><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a>${S.workSamples ? `<a href="${esc(S.workSamples)}" target="_blank" rel="noopener">Work Samples ↗</a>` : ""}</div>
-  </div></article>`;
-  /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 페이지씩: 그 유형의 작품과 역할·업무·소개만 */
+  /* 유형별 내용이 있는 작업(YeahFilms)은 유형마다 한 장씩: 그 유형의 작품과 역할·업무·소개만 */
   const pages = works().flatMap(p => {
     const gs = filledGroups(p);
     if (!gs.length) return [p];
@@ -1024,10 +1047,59 @@ function portfolioDoc() {
       const eps = (p.episodes || []).filter(e => e.group === name);
       const ys = eps.map(e => Number(e.year)).filter(Boolean);
       const period = ys.length ? (Math.min(...ys) === Math.max(...ys) ? String(ys[0]) : Math.min(...ys) + " – " + Math.max(...ys)) : (p.period || p.year);
-      return { ...p, ...Object.fromEntries(Object.entries(g).filter(([, v]) => v && (!Array.isArray(v) || v.length))), format: name, period, episodes: eps, groups: undefined };
+      return { ...p, brief: "", ...Object.fromEntries(Object.entries(g).filter(([, v]) => v && (!Array.isArray(v) || v.length))), format: name, period, episodes: eps, groups: undefined };
     });
   });
-  return cover + pages.map(portfolioPage).join("");
+  const FIRST = 4;   // 작업 페이지가 시작되는 쪽 번호 (표지 1 · 소개 2 · 목차 3)
+  const now = new Date().getFullYear();
+  const years = works().flatMap(w => (String(w.period || "") + " " + String(w.year || "")).match(/\d{4}/g) || []).map(Number);
+  const from = years.length ? Math.min(...years) : now;
+  const yy = y => String(y).slice(-2);
+
+  /* 표지: 오른쪽 이미지는 coverImages (화면 높이에 맞춰 나란히, 자르지 않음) */
+  const cover = `<article class="sheet wide">
+    <div class="w-head"><div class="l1">${esc(S.nameEn.split(" ")[0])}</div><div class="l2">${esc(S.nameEn.split(" ").slice(1).join(" "))}</div>
+      <div class="sub">${esc(S.roleLong || S.role)}</div></div>
+    <div class="w-cov">${(S.coverImages || []).map(src => `<img alt="" src="${esc(src)}">`).join("")}</div>
+    <div class="w-base">${(S.skills || []).length ? `<p>${esc(join(S.skills))}</p>` : ""}<div class="yr">${from === now ? yy(now) : yy(from) + yy(now)}</div></div>
+  </article>`;
+
+  /* 소개: aboutImages = [왼쪽 아래, 가운데 위, 가운데 아래], 글은 portfolioAbout (문단 배열) */
+  const ai = S.aboutImages || [];
+  const im = src => src ? `<img alt="" src="${esc(src)}">` : "";
+  const intro = `<article class="sheet wide">
+    <div class="w-ab-l">${im(ai[0])}</div>
+    <div class="w-ab-c">${im(ai[1])}${im(ai[2])}</div>
+    <div class="w-ab-t">${(S.portfolioAbout || [S.intro]).map(t => `<p>${esc(t)}</p>`).join("")}</div>
+  ${wFoot(2)}</article>`;
+
+  /* 목차: 맨 앞 칸은 포맷, 연도는 월 없이. 유형이 나뉜 작업(YeahFilms)도 한 줄로 */
+  const li = (n, title, sub, role, y) => `<div class="w-li"><span class="n">${esc(n)}</span><span><b>${esc(title)}</b>${sub ? `<small>${esc(sub)}</small>` : ""}</span><span>${esc(role)}</span><span class="y">${esc(y)}</span></div>`;
+  const subOf = w => {
+    const gs = filledGroups(w);
+    if (gs.length) return "";
+    return w.metaLabel ? "" : (w.client || "");
+  };
+  const index = `<article class="sheet wide"><div class="w-proj">
+    <div class="w-ttl">Index</div>
+    <div class="w-lists">
+      <div><h4>Selected Work</h4>${works().map(w => li(filledGroups(w).length ? filledGroups(w).map(([name]) => name).join(", ") : w.format, w.title, subOf(w), w.role, yr(w))).join("")}</div>
+      <div><h4>Archive</h4>${(S.archive || []).map(a => li(a.format, a.title, a.client || "", a.role, yr(a))).join("")}</div>
+    </div>
+  </div>${wFoot(3)}</article>`;
+
+  const end = `<article class="sheet wide"><div class="w-end">
+    <div class="big">Thank you.</div>
+    <div class="sub">${esc(S.role)} | ${esc(S.nameEn)}</div>
+    <ul>
+      <li>${esc(S.email)}</li>
+      ${S.phone ? `<li>${esc(S.phone)}</li>` : ""}
+      ${S.instagram ? `<li>Instagram : @${esc(S.instagram)}</li>` : ""}
+      <li><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a></li>
+    </ul>
+  </div></article>`;
+
+  return cover + intro + index + pages.map((p, i) => wProject(p, FIRST + i)).join("") + end;
 }
 
 /* ============ 화면 전환 ============ */
@@ -1050,6 +1122,7 @@ function route() {
   document.title = S.name + "_" + doc.ko;
   $("sheets").innerHTML = doc.id === "resume" ? resumeDoc() : doc.id === "career" ? careerDoc() : portfolioDoc();
   noImgOnError($("sheets"));
+  if (doc.id === "portfolio") justifyBands($("sheets"));
   document.querySelectorAll(".doc-tabs a").forEach(a => {
     if (a.dataset.doc === doc.id) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   });

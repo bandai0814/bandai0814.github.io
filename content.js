@@ -22,12 +22,13 @@
    tasks     내가 맡은 일 → 사이트 상세 화면 맨 위 'My Part', 경력기술서에 들어감
    credits   크레딧 → 사이트 상세 화면 About 아래 (접혀 있다가 '전체 크레딧'으로 펼침, PDF에는 안 들어감)
              `역할 | 이름, 이름` 한 줄씩, [구역 이름] 으로 묶음. 내 이름은 자동으로 굵게
-   desc      작업 소개 한두 줄 (줄을 바꾸려면 \n) → 사이트 상세 화면, 포트폴리오에 들어감
+   desc      작업 소개 (줄을 바꾸려면 \n) → 사이트 상세 화면에 들어감
+   brief     포트폴리오 PDF에 들어가는 짧은 소개 (두 문장 정도). 비워두면 desc의 첫 두 문장이 대신 들어감
    result    결과 / 성과 한 줄 → 경력기술서에 들어감
    stills    스틸컷 이미지 경로 → 사이트 상세 화면 'Stills' (5장까지는 한 줄, 6~10장은 두 줄로 나눠짐)
              대표 이미지는 유튜브 썸네일이 그대로 쓰이고, 유튜브 영상이 없을 때만 첫 번째 사진이 대표가 됨
              images 폴더에 사진을 올리고 ["images/파일이름.jpg", ...] 처럼 적기
-   behind    현장 비하인드 사진 3개 → 'Behind the Scenes' 줄, 포트폴리오 PDF 아래 줄
+   behind    현장 비하인드 사진 3개 → 'Behind the Scenes' 줄
    process   내가 만든 작업 자료(콘티, 타임테이블, 기획안 캡처 등) 최대 3개 → 'Process' 줄
              설명을 붙이려면 { src: "images/haruki-conti.jpg", caption: "촬영 콘티" } 처럼 적기
              (stills, behind도 같은 방식으로 설명을 붙일 수 있음)
@@ -37,8 +38,11 @@
              인스타그램 영상은 썸네일을 자동으로 못 가져오므로 여기에 캡처 이미지를 넣어 주세요
    vertical  세로 영상이면 true → 상세 화면에서 잘리지 않고 세로로 보임
    episodes  여러 편으로 된 작업일 때 각 편의 목록 (상세 화면에서 편을 골라 볼 수 있음)
-             편에 feature: true를 붙이면 포트폴리오 PDF에서 위 줄에 크게, 나머지 편은 아래 한 줄로 배치
-             세로 편(vertical: true)은 포트폴리오 PDF에서 9:16 비율로 아래 한 줄에 배치
+             포트폴리오 PDF에서는 편마다 스틸컷을 고르게 뽑아 한 장에 최대 8장, 각 편의 첫 장에 편 제목이 붙음
+             세로 편(vertical: true)은 포트폴리오 PDF에서 세로 비율 그대로 들어감
+             편에 pdfStills: [...] 를 적으면 포트폴리오 PDF에서만 stills 대신 그 사진을 씀
+   pdfImages 포트폴리오 PDF에 넣을 사진과 순서를 직접 정할 때. "thumb"은 메인 썸네일 (예: ["images/a.jpg", "thumb", "images/b.jpg"])
+   pdfRows   그때 첫 줄에 몇 장을 놓을지 (예: [3, 2] → 윗줄 3장, 아랫줄 2장)
    thumbZoom 유튜브 썸네일 위아래에 검은 여백이 있을 때 확대해서 여백을 없앰 (예: 1.125)
 
    ── 순서 바꾸기 ─────────────────────────────────────────────
@@ -58,6 +62,23 @@ window.SITE = {
 
   // 내가 실제로 하는 일 → 소개 문장 아래 한 줄로 보임 (안 쓰려면 [] 로 비우기)
   skills: ["Production · Communication · Planning"],
+
+  /* ── 포트폴리오 PDF 전용 ──
+        roleLong       표지 이름 아래 한 줄 (skills는 표지 왼쪽 아래 연도 위에 작게 들어감)
+        coverImages    표지 오른쪽 이미지 (화면 높이에 맞춰 나란히, 자르지 않음)
+        aboutImages    2쪽 사진 3장: [왼쪽 아래, 가운데 위, 가운데 아래] (원본 화면비 그대로)
+        portfolioAbout 2쪽 오른쪽 글, 문단마다 "큰따옴표" 하나 ── */
+  roleLong: "Producer・Assistant Director",
+  coverImages: ["images/cover-conti.jpg"],
+  aboutImages: ["images/about-1.jpg", "images/about-2.jpg", "images/about-3.jpg"],
+  portfolioAbout: [
+    "안녕하세요, 생각 많은 프로듀서 박정우입니다.",
+    "저는 콘서트 라이브, 뮤직비디오, 다큐멘터리 등 다양한 비주얼 필름 작업에 서포터이자 기획자로 참여해왔습니다.",
+    "평소 주변을 주의 깊게 보고 생각을 많이 하는 성격으로, 디렉터가 원하는 바를 구현하기 위해 가능한 경우의 수를 미리 떠올리며 현장을 설계합니다. 인문학적 사유와 인간 심리에 대한 관심을 바탕으로, 보는 사람이 영상에서 감각적인 연출과 서사의 흐름을 느낄 수 있도록 고민합니다.",
+    "저는 예쁜 그림만을 추구하지 않습니다. 이 컷을 왜 찍어야 하는지를 먼저 따지고, 그 이유에 따라 우선순위를 정합니다. 그래서 제작 중 변수가 생겨도 장면의 의미를 기준으로 판단하고 현장을 운영할 수 있습니다. 또한, 좋은 푸티지를 얻는 현장은 '책임감'이 뒷받침한다고 생각합니다. 자신의 영역 너머까지 관심을 갖고 신경 쓰는 일은 자칫 참견으로 보일 수 있지만, 저는 그것이 작품에 대한 진심이라고 생각합니다. 프로듀서에게는 이 책임감이 특히 중요합니다. 감독이 미처 보지 못하는 것들을 챙기며 현장을 구성하는 역할인 만큼, 제작 과정 전체를 책임진다는 마음으로 임합니다.",
+    "제가 즐기는 것은 '반전'입니다. 필요하다면 클리셰도 의도적으로 활용하지만, 끝에는 반전을 두어 익숙함에서 벗어난 인상을 남기고자 합니다. 그러기 위해 작품을 완성하는 데 필요한 기술과 창작 도구를 거리낌 없이 경험하며, 제가 가진 감각을 넓혀가고 있습니다."
+  ],
+
 
   // 연락처: email은 사이트와 문서 모두, phone은 PDF 문서에만 들어갑니다
   email: "bandai0814@gmail.com",
@@ -92,6 +113,8 @@ window.SITE = {
       period: "2026.10 – WIP", year: "2026", yt: "i1u8Vcy-J6E", note: "공개 예정",
       files: [],
       focus: "곡별 연출 구성 및 멀티캠 촬영 설계·운용",
+      pdfImages: ["images/lover-highlight-4.jpg", "images/lover-highlight-1.jpg", "images/lover-highlight-2.jpg", "thumb", "images/lover-highlight-3.jpg"], pdfRows: [3, 2],
+      brief: "데이먼스 이어 단독 콘서트를 하이라이트·곡별 라이브·풀 아카이빙으로 담는 라이브 필름. 곡의 정서에 맞춰 캠코더의 거친 질감과 빛 번짐 필터를 쓰고, 표정과 연주를 가까이 담기 위해 리허설 촬영을 함께 설계했다.",
       tasks: [
         "곡의 정서와 무대 연출에 맞춘 구도·카메라 무빙·컷 전환 아이데이션",
         "리허설·본공연 촬영 소스 구분 및 촬영 계획 수립",
@@ -140,6 +163,7 @@ Camera Operators | Jeong Yejoon, Ahn Jeongbin, Park Jeongwoo, Lee Yewon, An Dan,
       period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
       files: [],
       focus: "기획·연출 및 제작 관리와 현장 운영",
+      brief: "컴포트 키트 시리즈 3편과 정수기편, 숏폼 4편. 무더위 속에 하루 3편을 찍어야 했고, 정수기편은 당일 설치한 제품에서 얼음이 충분히 나오지 않아 소량의 얼음으로도 시원한 인상이 나도록 현장에서 구도와 연출을 조정했다.",
       tasks: [
         "접근성 커뮤니티 참여자 중 모델 선정 및 제품별 영상 톤앤매너 구성",
         "메인 카피·내레이션 작성 및 AI 활용 스토리보드 제작",
@@ -183,6 +207,7 @@ Art Crew | Yewon Lee`, desc: "일상 속 작은 불편을 덜어주는 LG전자 
       period: "2026.07 – 2026.08", year: "2026", yt: "oEJuHemNzgI",
       files: [],
       focus: "기획·연출 및 현장 운영, 믹스드 미디어 아트워크",
+      brief: "자신만의 보금자리를 찾아 기묘한 경연에 참가한 소녀의 이야기. 스튜디오 인트로부터 대부도 펜션·야외 로케까지 많은 컷과 세팅 전환을 소화하기 위해, 촬영 자료를 더블 체크하며 필수 컷과 인서트를 놓치지 않도록 현장을 관리했다.",
       tasks: [
         "음원을 바탕으로 한 뮤직비디오 컨셉·시놉시스 아이데이션",
         "줄콘티 및 스토리보드 제작",
@@ -227,6 +252,8 @@ Behind-the-Scenes Film | Mokha Kim`, desc: "자신만의 보금자리를 찾아 
       period: "2026.06 – 2026.07", year: "2026", yt: "adbLZR_J7jg",
       files: [],
       focus: "기획·연출, 제작 관리 및 현장 운영과 일본어 커뮤니케이션",
+      pdfImages: ["images/haruki-4.jpg", "images/haruki-1.jpg", "images/haruki-2.jpg", "thumb", "images/haruki-3.jpg"], pdfRows: [2, 3],
+      brief: "일본 매니지먼트 의뢰로 후쿠오카 오야후코도리에서 단 하루 촬영한 뮤직비디오. 폭풍우와 야간 인파로 촬영에 제약이 생기자 남은 시간과 필수 컷을 기준으로 콘티와 촬영 순서를 재조정했고, 정해진 예산과 일정 안에 완성했다.",
       tasks: [
         "현지 매니지먼트와의 비즈니스 컨택 및 한·일 스태프 간 현장 통역",
         "가사 의미 해석에 따른 영상 컨셉과 무드보드, 스토리보드 제작",
@@ -255,6 +282,8 @@ Special Thanks | MUSIC BAR SIDE:K`, desc: "후쿠오카 오야후코도리(親�
       period: "2026.04 – 2026.06", year: "2026", yt: "chXvY65Dh_g",
       files: [],
       focus: "연출 설계 및 현장 운영",
+      pdfImages: ["images/damons-unsolved2-5.jpg", "images/damons-unsolved2-1.jpg", "images/damons-unsolved2-2.jpg", "thumb", "images/damons-unsolved2-4.jpg"], pdfRows: [3, 2],
+      brief: "서소문성지 역사박물관에서 6일간 열린 단독 콘서트의 라이브 필름. 감독 1명·조연출 2명의 팀으로 매일 달라지는 무대에 맞춰 카메라 배치를 재설계했고, 클로즈업은 리허설에서, 와이드는 본공연에서 나눠 찍어 제약 속에서도 다양한 구도를 확보했다.",
       tasks: [
         "아티스트 의견, 무대 연출, 음악적 톤앤매너를 고려한 영상 컨셉 및 연출 가이드라인 제작",
         "리허설/본공연 무대 연출 변경에 따른 곡별 카메라 구도·배치 설계",
@@ -305,6 +334,8 @@ AUDIO MIXING | YU HYUNJIN`, desc: "서소문성지 역사박물관에서 6일간
     {
       title: "YeahFilms Originals",
       client: "YeahFilms", format: "Visual Film · Documentary", role: "Co-Producer · AD",
+      // 포트폴리오 PDF: 클라이언트 작업이 아니므로 'Client' 칸 대신 이 이름과 내용으로 보임
+      metaLabel: "Project", metaValue: "Self-initiated · YeahFilms",
       period: "2024.09 – 2026.06", year: "2024 – 2026", href: "https://www.youtube.com/@yeahfilm",
       files: [],
       tasks: [], credits: "", desc: "", result: "",
@@ -316,6 +347,7 @@ AUDIO MIXING | YU HYUNJIN`, desc: "서소문성지 역사박물관에서 6일간
 Assistant Director | Jeongwoo Park, Jungho Lee`,
           role: "Co-Producer · AD",
           focus: "현장 즉흥 기획·연출 및 촬영",
+          brief: "도쿄·오사카·우즈베키스탄에서 카메라 한 대만 들고 촬영지와 소품, 연출을 모두 현장에서 정해 만든 오리지널 필름 5편. 즉흥으로 만든 영상도 충분한 완성도를 가질 수 있다는 것을 경험하며, 현장에 유연하게 대응하는 감각을 길렀다.",
           tasks: [
             "사전 콘티 없이 현장에서 로케이션 탐색, 컨셉 설정 및 연출 아이디어 제안",
             "음악의 무드와 템포, 레퍼런스를 바탕으로 한 카메라 구도 설계"
@@ -326,6 +358,7 @@ Assistant Director | Jeongwoo Park, Jungho Lee`,
         "Documentary": {
           role: "Co-Producer · AD",
           focus: "기획·연출, 촬영 및 프로덕션 전반",
+          brief: "일과 도전을 대하는 태도를 묻는 다큐멘터리 2편을 감독과 둘이서 기획부터 후반까지 제작했다. ‘미지의 세계를 포용하며’는 궂은 날씨와 연출 변경으로 현장에서 이야기 흐름을 재구성했고, ‘눈 감고 일하기’는 직접 기획을 제안해 실험 참여자 모집과 동화책 제작까지 맡았다.",
           tasks: [
             "B캠·짐벌·드론 촬영·조명·오디오·헤메코·미술 등 제작 실무 전반 수행",
             "스토리보드, 일러스트, 동화책 제작",
@@ -340,11 +373,11 @@ Assistant Director | Jeongwoo Park, Jungho Lee`,
       // feature: true = 포트폴리오 PDF에서 위쪽 큰 칸
       episodes: [
         { title: "파란 열정, 구스토!", feature: true, group: "Visual Film", format: "Visual Film", year: "2026", yt: "o-jsTZ3KFBQ", desc: "",
-          stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"] },
+          stills: ["images/gusto-1.jpg", "images/gusto-2.jpg", "images/gusto-3.jpg", "images/gusto-4.jpg"], pdfStills: ["images/gusto-5.jpg"] },
         { title: "THIS WAS NEVER THE PLAN", feature: true, group: "Visual Film", format: "Cinematic Film", year: "2026", yt: "Ghw7gJlzpe8", desc: "",
-          stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"] },
+          stills: ["images/neverplan-1.jpg", "images/neverplan-2.jpg", "images/neverplan-3.jpg", "images/neverplan-4.jpg"], pdfStills: ["images/neverplan-5.jpg"] },
         { title: "올빼미 연맹", group: "Visual Film", format: "Concept Short Film", year: "2026", yt: "MTVKRzYjjp4", desc: "",
-          stills: ["images/owls-1.jpg", "images/owls-2.jpg", "images/owls-3.jpg", "images/owls-4.jpg", "images/owls-5.jpg", "images/owls-6.jpg", "images/owls-7.jpg", "images/owls-8.jpg"] },
+          stills: ["images/owls-1.jpg", "images/owls-2.jpg", "images/owls-3.jpg", "images/owls-4.jpg"] },
         { title: "글리코상은 어디에", group: "Visual Film", format: "Cinematic Video Essay", year: "2024", yt: "XlHidpVW4KQ", desc: "",
           stills: ["images/glico-1.jpg", "images/glico-2.jpg", "images/glico-3.jpg", "images/glico-4.jpg"] },
         { title: "Big Hill (Balming Tiger ‘big butt’)", group: "Visual Film", format: "Visual Film", year: "2024", yt: "cGbtNHgaYJs", desc: "",
