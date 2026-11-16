@@ -1093,9 +1093,8 @@ function portfolioDoc() {
     <div class="sub">${esc(S.role)} | ${esc(S.nameEn)}</div>
     <ul>
       <li>${esc(S.email)}</li>
-      ${S.phone ? `<li>${esc(S.phone)}</li>` : ""}
+      ${S.phoneIntl || S.phone ? `<li>${esc(S.phoneIntl || S.phone)}</li>` : ""}
       ${S.instagram ? `<li>Instagram : @${esc(S.instagram)}</li>` : ""}
-      <li><a href="https://${esc(S.siteUrl)}" target="_blank" rel="noopener">${esc(S.siteUrl)}</a></li>
     </ul>
   </div></article>`;
 
