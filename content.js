@@ -163,7 +163,7 @@ Camera Operators | Jeong Yejoon, Ahn Jeongbin, Park Jeongwoo, Lee Yewon, An Dan,
     {
       title: "HS접근성 프로젝트",
       client: "LG전자", format: "Advertisement", role: "AD · PD",
-      period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/@LGElectronicsKorea",
+      period: "2026.07 – 2026.09", year: "2026", href: "https://www.youtube.com/watch?v=GuMLcztFD-E",
       files: [],
       focus: "기획·연출 및 제작 관리와 현장 운영",
       brief: "일상 속 작은 불편을 덜어주는 LG전자 제품의 쓰임을 담은 숏폼 프로젝트. 컴포트 키트 ‘오늘부터 이지하게’ 시리즈 3편과 퓨리케어 AI 냉동얼음정수기편을 제작했다. 다양한 세대와 생활 방식 속에서 제품이 어떻게 편안함을 더하는지 보여주고자 했다. 컴포트 키트는 배드민턴·요리·그림 등 출연자의 취미가 자연스럽게 제품 사용으로 이어지도록 구성했다. 정수기편은 할머니와 손녀가 함께 보내는 여름방학을 배경으로, 음성인식과 레시피 출수 기능을 활용하는 모습을 따뜻하고 청량한 분위기로 담았다.",
